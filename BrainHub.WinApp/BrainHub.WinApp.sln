@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrainHub.WinApp", "BrainHub.WinApp.csproj", "{87AC0577-934E-4637-889F-8C40425AEB6C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{87AC0577-934E-4637-889F-8C40425AEB6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87AC0577-934E-4637-889F-8C40425AEB6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87AC0577-934E-4637-889F-8C40425AEB6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87AC0577-934E-4637-889F-8C40425AEB6C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {35AB8589-0AEB-4484-BABC-EBC5E0531F90}
+	EndGlobalSection
+EndGlobal
