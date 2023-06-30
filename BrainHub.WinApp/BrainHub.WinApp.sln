@@ -5,6 +5,16 @@ VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrainHub.WinApp", "BrainHub.WinApp.csproj", "{87AC0577-934E-4637-889F-8C40425AEB6C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apresentacao", "Apresentacao", "{1A6473C7-747E-418E-A442-BF5CBEDD5268}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dominio", "Dominio", "{8D741454-EC46-4D16-A938-8B83B6DE2F79}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infraestrutura", "Infraestrutura", "{7637C142-C11F-48CC-BC5B-639E1D23BF57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrainHub.Dominio", "..\BrainHub.Dominio\BrainHub.Dominio.csproj", "{AC1A3F00-50DB-41AA-85F6-8E137EC76CEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrainHub.Dados.Arquivo", "..\BrainHub.Dados.Arquivo\BrainHub.Dados.Arquivo.csproj", "{DDD18B1E-288D-4F1A-A08D-94D65CDF73F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +25,22 @@ Global
 		{87AC0577-934E-4637-889F-8C40425AEB6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87AC0577-934E-4637-889F-8C40425AEB6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87AC0577-934E-4637-889F-8C40425AEB6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC1A3F00-50DB-41AA-85F6-8E137EC76CEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC1A3F00-50DB-41AA-85F6-8E137EC76CEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC1A3F00-50DB-41AA-85F6-8E137EC76CEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC1A3F00-50DB-41AA-85F6-8E137EC76CEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDD18B1E-288D-4F1A-A08D-94D65CDF73F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDD18B1E-288D-4F1A-A08D-94D65CDF73F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDD18B1E-288D-4F1A-A08D-94D65CDF73F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDD18B1E-288D-4F1A-A08D-94D65CDF73F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{87AC0577-934E-4637-889F-8C40425AEB6C} = {1A6473C7-747E-418E-A442-BF5CBEDD5268}
+		{AC1A3F00-50DB-41AA-85F6-8E137EC76CEE} = {8D741454-EC46-4D16-A938-8B83B6DE2F79}
+		{DDD18B1E-288D-4F1A-A08D-94D65CDF73F1} = {7637C142-C11F-48CC-BC5B-639E1D23BF57}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {35AB8589-0AEB-4484-BABC-EBC5E0531F90}
