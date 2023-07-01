@@ -1,6 +1,9 @@
 using BrainHub.Dados.Arquivo.ModuloDisciplina;
+using BrainHub.Dados.Arquivo.ModuloMateria;
 using BrainHub.Dominio.ModuloDisciplina;
+using BrainHub.Dominio.ModuloMateria;
 using BrainHub.WinApp.ModuloDisciplina;
+using BrainHub.WinApp.ModuloMateria;
 using PartyManager.WinApp.Compartilhado;
 
 namespace BrainHub.WinApp
@@ -11,6 +14,7 @@ namespace BrainHub.WinApp
         private static ContextoDados contexto = new ContextoDados(carregarDados: true);
 
         private IRepositorioDisciplina repositorioDisciplina = new RepositorioDisciplinaEmArquivo(contexto);
+        private IRepositorioMateria repositorioMateria = new RepositorioMateriaEmArquivo(contexto);
 
 
         private static TelaPrincipalForm telaPrincipal;
@@ -88,6 +92,12 @@ namespace BrainHub.WinApp
             ConfigurarTelaPrincipal(controlador);
         }
 
+        private void Materia_Click(object sender, EventArgs e)
+        {
+            controlador = new ControladorMateria(repositorioMateria);
+            ConfigurarTelaPrincipal(controlador);
+        }
+
         private void Inserir_Click(object sender, EventArgs e)
         {
             controlador.Inserir();
@@ -102,5 +112,7 @@ namespace BrainHub.WinApp
         {
             controlador.Deletar();
         }
+
+       
     }
 }

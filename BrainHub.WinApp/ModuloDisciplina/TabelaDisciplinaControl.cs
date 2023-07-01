@@ -1,6 +1,5 @@
 ﻿
 using BrainHub.Dominio.ModuloDisciplina;
-using PartyManager.WinApp.Compartilhado;
 
 namespace BrainHub.WinApp.ModuloDisciplina
 {

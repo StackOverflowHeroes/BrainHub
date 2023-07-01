@@ -1,10 +1,13 @@
 ﻿
+using BrainHub.Dominio.ModuloMateria;
+
 namespace BrainHub.Dominio.ModuloDisciplina
 {
     public class Disciplina : EntidadeBase<Disciplina>
     {
-        public string nome;
-        private List<string> materias;
+        public string nome { get; set; }
+
+        private List<Materia> materias;
 
         public Disciplina()
         {
@@ -14,7 +17,7 @@ namespace BrainHub.Dominio.ModuloDisciplina
         {
             this.id = id;
             this.nome = nome;
-            materias = new List<string>();
+            materias = new List<Materia>();
         }
 
         public override void AtualizarRegistros(Disciplina registroAtualizado)

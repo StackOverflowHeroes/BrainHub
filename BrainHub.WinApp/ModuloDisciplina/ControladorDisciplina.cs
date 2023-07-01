@@ -15,8 +15,8 @@ namespace BrainHub.WinApp.ModuloDisciplina
         }
 
         public override string ToolTipInserir => "Inserir disciplina";
-        public override string ToolTipEditar => "Editar uma disciplina";
-        public override string ToolTipDeletar => "Deletar uma disciplina";
+        public override string ToolTipEditar => "Editar disciplina";
+        public override string ToolTipDeletar => "Deletar disciplina";
 
         public override  bool InserirHabilitado { get { return true; } }
         public override  bool EditarHabilitado { get { return true; } }

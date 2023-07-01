@@ -73,26 +73,27 @@
             matériaToolStripMenuItem.Name = "matériaToolStripMenuItem";
             matériaToolStripMenuItem.ShortcutKeys = Keys.F1;
             matériaToolStripMenuItem.ShowShortcutKeys = false;
-            matériaToolStripMenuItem.Size = new Size(157, 26);
+            matériaToolStripMenuItem.Size = new Size(224, 26);
             matériaToolStripMenuItem.Text = "Matéria";
+            matériaToolStripMenuItem.Click += Materia_Click;
             // 
             // disciplinaToolStripMenuItem
             // 
             disciplinaToolStripMenuItem.Name = "disciplinaToolStripMenuItem";
-            disciplinaToolStripMenuItem.Size = new Size(157, 26);
+            disciplinaToolStripMenuItem.Size = new Size(224, 26);
             disciplinaToolStripMenuItem.Text = "Disciplina";
             disciplinaToolStripMenuItem.Click += Disciplina_Click;
             // 
             // questõesToolStripMenuItem
             // 
             questõesToolStripMenuItem.Name = "questõesToolStripMenuItem";
-            questõesToolStripMenuItem.Size = new Size(157, 26);
+            questõesToolStripMenuItem.Size = new Size(224, 26);
             questõesToolStripMenuItem.Text = "Questões";
             // 
             // testesToolStripMenuItem
             // 
             testesToolStripMenuItem.Name = "testesToolStripMenuItem";
-            testesToolStripMenuItem.Size = new Size(157, 26);
+            testesToolStripMenuItem.Size = new Size(224, 26);
             testesToolStripMenuItem.Text = "Testes";
             // 
             // StatusStripRodape

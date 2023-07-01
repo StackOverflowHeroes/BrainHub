@@ -2,6 +2,7 @@
 using System.Text.Json.Serialization;
 
 using BrainHub.Dominio.ModuloDisciplina;
+using BrainHub.Dominio.ModuloMateria;
 
 namespace BrainHub.Dados.Arquivo.Compartilhado
 {
@@ -10,9 +11,11 @@ namespace BrainHub.Dados.Arquivo.Compartilhado
         private const string CAMINHO_ARQUIVO = "Compartilhado\\BrainHub.json";
 
         public List<Disciplina> disciplinas;
+        public List<Materia> materias;
         public ContextoDados()
         {
             disciplinas = new List<Disciplina>();
+            materias = new List<Materia>();
         }
 
         public ContextoDados(bool carregarDados) : this()
@@ -43,6 +46,7 @@ namespace BrainHub.Dados.Arquivo.Compartilhado
                     ContextoDados dadosJson = JsonSerializer.Deserialize<ContextoDados>(registrosJson, configuracoes);
 
                     disciplinas = dadosJson.disciplinas;
+                    materias = dadosJson.materias;
                 }
             }
         }
