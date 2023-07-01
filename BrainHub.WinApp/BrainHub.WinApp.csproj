@@ -11,7 +11,6 @@
   <ItemGroup>
     <Folder Include="ModuloQuestao\" />
     <Folder Include="ModuloMateria\" />
-    <Folder Include="ModuloDisciplina\" />
     <Folder Include="ModuloTeste\" />
   </ItemGroup>
 

@@ -1,4 +1,4 @@
-﻿namespace PartyManager.WinApp.Compartilhado
+﻿namespace BrainHub.WinApp.Compartilhado
 {
      public static class FormExtensions
      {

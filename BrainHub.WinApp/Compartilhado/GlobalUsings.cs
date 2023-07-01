@@ -1,2 +1,1 @@
-﻿
-global using BrainHub.Dominio.Compartilhado;
+﻿global using BrainHub.WinApp.Compartilhado;
