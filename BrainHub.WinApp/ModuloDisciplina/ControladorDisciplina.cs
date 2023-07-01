@@ -39,13 +39,12 @@ namespace BrainHub.WinApp.ModuloDisciplina
         public override void Editar()
         {
             TelaDisciplinaForm TelaDisciplina = new TelaDisciplinaForm();
-            TelaDisciplina.ConfigurarTela(repositorioDisciplina.SelecionarTodos());
-
             Disciplina disciplinaSelecionada = ObterDisciplinaSelecionada();
 
             if (disciplinaSelecionada == null)
                 return;
 
+            TelaDisciplina.ConfigurarTela(repositorioDisciplina.SelecionarTodos());
             TelaDisciplina.PopularDialog(disciplinaSelecionada);
 
             if (TelaDisciplina.ShowDialog() == DialogResult.OK)

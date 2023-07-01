@@ -37,14 +37,51 @@ namespace BrainHub.WinApp.ModuloMateria
 
             CarregarRegistros();
         }
+
         public override void Editar()
         {
-            throw new NotImplementedException();
+            TelaMateriaForm TelaMateria = new TelaMateriaForm();
+            Materia materiaSelecionada = ObterMateriaSelecionada();
+
+            if (materiaSelecionada == null)
+                return;
+
+            TelaMateria.ConfigurarTela(repositorioMateria.SelecionarTodos());
+            TelaMateria.PopularComboBoxDisciplina(repositorioDisciplina.SelecionarTodos());
+            TelaMateria.PopularDialog(materiaSelecionada);
+
+            if (TelaMateria.ShowDialog() == DialogResult.OK)
+            {
+                Materia materiaEditada = TelaMateria.ObterMateria();
+                repositorioMateria.Editar(materiaEditada.id, materiaEditada);
+            }
+
+            CarregarRegistros();
         }
 
         public override void Deletar()
         {
             throw new NotImplementedException();
+        }
+
+        private Materia ObterMateriaSelecionada()
+        {
+            int id = TabelaMateria.ObterIdSelecionado();
+            Materia materiaSelecionada = repositorioMateria.SelecionarPorId(id);
+
+            if (materiaSelecionada == null)
+            {
+                MessageBox.Show($"Selecione uma disciplina primeiro!",
+                    "Exclusão de disciplinas",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
+
+                return null;
+            }
+
+            return materiaSelecionada;
+
+
         }
 
         public override void CarregarRegistros()
