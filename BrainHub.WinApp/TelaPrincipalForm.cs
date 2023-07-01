@@ -41,8 +41,8 @@ namespace BrainHub.WinApp
                 case TipoStatusEnum.Visualizando: cor = Color.Blue; break;
             }
 
-            StatusStripRodape.ForeColor = cor;
-            StatusStripRodape.Text = mensagem;
+            TextoRodape.ForeColor = cor;
+            TextoRodape.Text = mensagem;
 
         }
 
@@ -86,6 +86,11 @@ namespace BrainHub.WinApp
         {
             controlador = new ControladorDisciplina(repositorioDisciplina);
             ConfigurarTelaPrincipal(controlador);
+        }
+
+        private void Inserir_Click(object sender, EventArgs e)
+        {
+            controlador.Inserir();
         }
     }
 }

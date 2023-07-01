@@ -24,7 +24,16 @@ namespace BrainHub.WinApp.ModuloDisciplina
 
         public override void Inserir()
         {
-            throw new NotImplementedException();
+            TelaDisciplinaForm TelaDisciplina = new TelaDisciplinaForm();
+            TelaDisciplina.ConfigurarTela(repositorioDisciplina.SelecionarTodos());
+
+            if (TelaDisciplina.ShowDialog() == DialogResult.OK)
+            {
+                Disciplina novaDisciplina = TelaDisciplina.ObterDisciplina();
+                repositorioDisciplina.Inserir(novaDisciplina);
+            }
+
+                CarregarRegistros();
         }
 
         public override void Editar()
@@ -41,7 +50,7 @@ namespace BrainHub.WinApp.ModuloDisciplina
         {
             List<Disciplina> ListaCompletaDisciplina = repositorioDisciplina.SelecionarTodos();
             TabelaDisciplina.AtualizarRegistros(ListaCompletaDisciplina);
-            TelaPrincipalForm.Instancia.AtualizarRodape($"Visualizando {ListaCompletaDisciplina.Count} tema(s)", TipoStatusEnum.Visualizando);
+            TelaPrincipalForm.Instancia.AtualizarRodape($"Visualizando {ListaCompletaDisciplina.Count} disciplina(s)", TipoStatusEnum.Visualizando);
         }
 
         public override UserControl ObterListagem()
@@ -58,7 +67,7 @@ namespace BrainHub.WinApp.ModuloDisciplina
             return "Cadastro de disciplinas";
         }
 
-        private bool VerificarNomeDuplicado(string nome) { return false; }
+        
 
     }
 }

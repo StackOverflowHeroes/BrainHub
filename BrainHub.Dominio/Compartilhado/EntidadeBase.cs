@@ -7,6 +7,6 @@
 
           public abstract void AtualizarRegistros(TEntidade registroAtualizado);
 
-          public abstract string[] ValidarErros();
+          public abstract List<string> ValidarErros();
     }
 }

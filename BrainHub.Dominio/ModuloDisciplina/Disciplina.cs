@@ -6,11 +6,15 @@ namespace BrainHub.Dominio.ModuloDisciplina
         public string nome;
         private List<string> materias;
 
-        public Disciplina(int id, string nome, List<string> materias)
+        public Disciplina()
+        {
+        }
+
+        public Disciplina(int id, string nome)
         {
             this.id = id;
             this.nome = nome;
-            this.materias = new List<string>();
+            materias = new List<string>();
         }
 
         public override void AtualizarRegistros(Disciplina registroAtualizado)
@@ -18,14 +22,14 @@ namespace BrainHub.Dominio.ModuloDisciplina
             nome = registroAtualizado.nome;
         }
 
-        public override string[] ValidarErros()
+        public override List<string> ValidarErros()
         {
             List<string> ListaErros = new List<string>();
 
             if (string.IsNullOrEmpty(nome) || string.IsNullOrWhiteSpace(nome))
                 ListaErros.Add("O campo 'nome' é obrigatório");
 
-            return ListaErros.ToArray();
+            return ListaErros;
         }
     }
 }

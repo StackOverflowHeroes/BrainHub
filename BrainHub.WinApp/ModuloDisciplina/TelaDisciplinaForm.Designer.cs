@@ -29,15 +29,16 @@
         private void InitializeComponent()
         {
             botaoCancelar = new Button();
-            textBox1 = new TextBox();
+            TextBoxId = new TextBox();
             label1 = new Label();
             label2 = new Label();
-            textBox2 = new TextBox();
+            TextBoxNome = new TextBox();
             botaoGravar = new Button();
             SuspendLayout();
             // 
             // botaoCancelar
             // 
+            botaoCancelar.DialogResult = DialogResult.Cancel;
             botaoCancelar.Location = new Point(317, 204);
             botaoCancelar.Name = "botaoCancelar";
             botaoCancelar.Size = new Size(108, 46);
@@ -45,13 +46,14 @@
             botaoCancelar.Text = "Cancelar";
             botaoCancelar.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // TextBoxId
             // 
-            textBox1.Location = new Point(94, 69);
-            textBox1.Name = "textBox1";
-            textBox1.ReadOnly = true;
-            textBox1.Size = new Size(331, 27);
-            textBox1.TabIndex = 2;
+            TextBoxId.Location = new Point(94, 69);
+            TextBoxId.Name = "TextBoxId";
+            TextBoxId.ReadOnly = true;
+            TextBoxId.Size = new Size(331, 27);
+            TextBoxId.TabIndex = 2;
+            TextBoxId.Text = "0";
             // 
             // label1
             // 
@@ -71,21 +73,23 @@
             label2.TabIndex = 5;
             label2.Text = "Nome";
             // 
-            // textBox2
+            // TextBoxNome
             // 
-            textBox2.Location = new Point(94, 135);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(331, 27);
-            textBox2.TabIndex = 4;
+            TextBoxNome.Location = new Point(94, 135);
+            TextBoxNome.Name = "TextBoxNome";
+            TextBoxNome.Size = new Size(331, 27);
+            TextBoxNome.TabIndex = 4;
             // 
             // botaoGravar
             // 
+            botaoGravar.DialogResult = DialogResult.OK;
             botaoGravar.Location = new Point(193, 204);
             botaoGravar.Name = "botaoGravar";
             botaoGravar.Size = new Size(108, 46);
             botaoGravar.TabIndex = 6;
             botaoGravar.Text = "Gravar";
             botaoGravar.UseVisualStyleBackColor = true;
+            botaoGravar.Click += Gravar_Click;
             // 
             // TelaDisciplinaForm
             // 
@@ -94,9 +98,9 @@
             ClientSize = new Size(524, 326);
             Controls.Add(botaoGravar);
             Controls.Add(label2);
-            Controls.Add(textBox2);
+            Controls.Add(TextBoxNome);
             Controls.Add(label1);
-            Controls.Add(textBox1);
+            Controls.Add(TextBoxId);
             Controls.Add(botaoCancelar);
             Name = "TelaDisciplinaForm";
             Text = "TelaDisciplinaForm";
@@ -106,10 +110,10 @@
 
         #endregion
         private Button botaoCancelar;
-        private TextBox textBox1;
+        private TextBox TextBoxId;
         private Label label1;
         private Label label2;
-        private TextBox textBox2;
+        private TextBox TextBoxNome;
         private Button botaoGravar;
     }
 }

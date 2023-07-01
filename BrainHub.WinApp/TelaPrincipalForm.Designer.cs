@@ -35,7 +35,7 @@
             questõesToolStripMenuItem = new ToolStripMenuItem();
             testesToolStripMenuItem = new ToolStripMenuItem();
             StatusStripRodape = new StatusStrip();
-            toolStripStatusLabel1 = new ToolStripStatusLabel();
+            TextoRodape = new ToolStripStatusLabel();
             toolStrip1 = new ToolStrip();
             btnInserir = new ToolStripButton();
             btnEditar = new ToolStripButton();
@@ -73,43 +73,43 @@
             matériaToolStripMenuItem.Name = "matériaToolStripMenuItem";
             matériaToolStripMenuItem.ShortcutKeys = Keys.F1;
             matériaToolStripMenuItem.ShowShortcutKeys = false;
-            matériaToolStripMenuItem.Size = new Size(224, 26);
+            matériaToolStripMenuItem.Size = new Size(157, 26);
             matériaToolStripMenuItem.Text = "Matéria";
             // 
             // disciplinaToolStripMenuItem
             // 
             disciplinaToolStripMenuItem.Name = "disciplinaToolStripMenuItem";
-            disciplinaToolStripMenuItem.Size = new Size(224, 26);
+            disciplinaToolStripMenuItem.Size = new Size(157, 26);
             disciplinaToolStripMenuItem.Text = "Disciplina";
             disciplinaToolStripMenuItem.Click += Disciplina_Click;
             // 
             // questõesToolStripMenuItem
             // 
             questõesToolStripMenuItem.Name = "questõesToolStripMenuItem";
-            questõesToolStripMenuItem.Size = new Size(224, 26);
+            questõesToolStripMenuItem.Size = new Size(157, 26);
             questõesToolStripMenuItem.Text = "Questões";
             // 
             // testesToolStripMenuItem
             // 
             testesToolStripMenuItem.Name = "testesToolStripMenuItem";
-            testesToolStripMenuItem.Size = new Size(224, 26);
+            testesToolStripMenuItem.Size = new Size(157, 26);
             testesToolStripMenuItem.Text = "Testes";
             // 
             // StatusStripRodape
             // 
             StatusStripRodape.ImageScalingSize = new Size(20, 20);
-            StatusStripRodape.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1 });
+            StatusStripRodape.Items.AddRange(new ToolStripItem[] { TextoRodape });
             StatusStripRodape.Location = new Point(0, 544);
             StatusStripRodape.Name = "StatusStripRodape";
             StatusStripRodape.Size = new Size(955, 26);
             StatusStripRodape.TabIndex = 2;
             StatusStripRodape.Text = "statusStrip1";
             // 
-            // toolStripStatusLabel1
+            // TextoRodape
             // 
-            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            toolStripStatusLabel1.Size = new Size(151, 20);
-            toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            TextoRodape.Name = "TextoRodape";
+            TextoRodape.Size = new Size(49, 20);
+            TextoRodape.Text = "Status";
             // 
             // toolStrip1
             // 
@@ -133,6 +133,7 @@
             btnInserir.Size = new Size(42, 42);
             btnInserir.Text = "toolStripButton1";
             btnInserir.ToolTipText = "Inserir";
+            btnInserir.Click += Inserir_Click;
             // 
             // btnEditar
             // 
@@ -241,7 +242,7 @@
         private ToolStripMenuItem questõesToolStripMenuItem;
         private ToolStripMenuItem testesToolStripMenuItem;
         private StatusStrip StatusStripRodape;
-        private ToolStripStatusLabel toolStripStatusLabel1;
+        private ToolStripStatusLabel TextoRodape;
         private ToolStrip toolStrip1;
         private ToolStripButton btnInserir;
         private ToolStripButton btnEditar;
