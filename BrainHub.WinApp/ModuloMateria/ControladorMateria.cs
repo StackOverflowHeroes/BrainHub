@@ -61,7 +61,20 @@ namespace BrainHub.WinApp.ModuloMateria
 
         public override void Deletar()
         {
-            throw new NotImplementedException();
+            Materia materiaSelecionada = ObterMateriaSelecionada();
+
+            if (materiaSelecionada == null)
+                return;
+
+            DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir a matéria {materiaSelecionada.nome.ToUpper()}?", "Exclusão de matérias",
+             MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (opcaoEscolhida == DialogResult.OK)
+            {
+                repositorioMateria.Deletar(materiaSelecionada);
+            }
+
+            CarregarRegistros();
         }
 
         private Materia ObterMateriaSelecionada()
