@@ -1,6 +1,3 @@
-using System.Threading.Tasks;
-using BrainHub.WinApp.Compartilhado;
-using PartyManager.Dados.Arquivo.Compartilhado;
 using PartyManager.WinApp.Compartilhado;
 
 namespace BrainHub.WinApp
@@ -8,6 +5,8 @@ namespace BrainHub.WinApp
     public partial class TelaPrincipalForm : Form
     {
         private ControladorBase controlador;
+
+
         private static ContextoDados contexto = new ContextoDados(carregarDados: true);
 
         private static TelaPrincipalForm telaPrincipal;

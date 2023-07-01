@@ -1,4 +1,4 @@
-﻿namespace PartyManager.Dominio.Compartilhado
+﻿namespace BrainHub.Dominio.Compartilhado
 {
     public interface IRepositorioBase<T>
     {    
@@ -8,6 +8,5 @@
         public List<T> SelecionarTodos();
         public T SelecionarPorId(int id);
         public void AtualizarContador();
-        protected abstract List<T> ObterRegistros();
     }
 }

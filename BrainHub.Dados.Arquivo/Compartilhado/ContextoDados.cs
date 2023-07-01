@@ -1,16 +1,18 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace PartyManager.Dados.Arquivo.Compartilhado
+using BrainHub.Dominio.ModuloDisciplina;
+
+namespace BrainHub.Dados.Arquivo.Compartilhado
 {
     public class ContextoDados
     {
         private const string CAMINHO_ARQUIVO = "Compartilhado\\BrainHub.json";
 
-        // listas das entidades;
+        public List<Disciplina> disciplinas;
         public ContextoDados()
         {
-            //instancias das listas das entidades
+            disciplinas = new List<Disciplina>();
         }
 
         public ContextoDados(bool carregarDados) : this()
@@ -40,7 +42,7 @@ namespace PartyManager.Dados.Arquivo.Compartilhado
                 {
                     ContextoDados dadosJson = JsonSerializer.Deserialize<ContextoDados>(registrosJson, configuracoes);
 
-                   // atribuindo as listas nas listas das entidades;
+                    disciplinas = dadosJson.disciplinas;
                 }
             }
         }

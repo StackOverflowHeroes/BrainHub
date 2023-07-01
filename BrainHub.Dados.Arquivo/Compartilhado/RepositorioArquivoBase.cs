@@ -1,6 +1,6 @@
 ﻿
 
-namespace PartyManager.Dados.Arquivo.Compartilhado
+namespace BrainHub.Dados.Arquivo.Compartilhado
 {
      public abstract class RepositorioArquivoBase<TEntidade> where TEntidade : EntidadeBase<TEntidade>
      {
