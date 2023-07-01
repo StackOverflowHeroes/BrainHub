@@ -1,49 +1,52 @@
 ﻿namespace PartyManager.WinApp.Compartilhado
 {
-     public static class GridExtensions
-     {
-          public static void ConfigurarGridSomenteLeitura(this DataGridView grid)
-          {
-               grid.AllowUserToAddRows = false;
-               grid.AllowUserToDeleteRows = false;
+    public static class GridExtensions
+    {
+        public static void ConfigurarGridSomenteLeitura(this DataGridView grid)
+        {
+            grid.AllowUserToAddRows = false;
+            grid.AllowUserToDeleteRows = false;
 
-               grid.BorderStyle = BorderStyle.None;
-               grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-               grid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            grid.RowHeadersVisible = false;
 
-               grid.MultiSelect = false;
-               grid.ReadOnly = true;
 
-               grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-               grid.AutoGenerateColumns = false;
+            grid.BorderStyle = BorderStyle.None;
+            grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            grid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 
-               grid.AllowUserToResizeRows = false;
-          }
+            grid.MultiSelect = false;
+            grid.ReadOnly = true;
 
-          public static void ConfigurarGridZebrado(this DataGridView grid)
-          {
-               Font font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            grid.AutoGenerateColumns = false;
 
-               DataGridViewCellStyle linhaEscura = new DataGridViewCellStyle
-               {
-                    BackColor = Color.LightGray,
-                    Font = font,
-                    ForeColor = Color.Black,
-                    SelectionBackColor = Color.LightYellow,
-                    SelectionForeColor = Color.Black
-               };
+            grid.AllowUserToResizeRows = false;
+        }
 
-               grid.AlternatingRowsDefaultCellStyle = linhaEscura;
+        public static void ConfigurarGridZebrado(this DataGridView grid)
+        {
+            Font font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
 
-               DataGridViewCellStyle linhaClara = new DataGridViewCellStyle
-               {
-                    BackColor = Color.White,
-                    Font = font,
-                    SelectionBackColor = Color.LightYellow,
-                    SelectionForeColor = Color.Black
-               };
+            DataGridViewCellStyle linhaEscura = new DataGridViewCellStyle
+            {
+                BackColor = Color.LightGray,
+                Font = font,
+                ForeColor = Color.Black,
+                SelectionBackColor = Color.LightYellow,
+                SelectionForeColor = Color.Black
+            };
 
-               grid.RowsDefaultCellStyle = linhaClara;
-          }
-     }
+            grid.AlternatingRowsDefaultCellStyle = linhaEscura;
+
+            DataGridViewCellStyle linhaClara = new DataGridViewCellStyle
+            {
+                BackColor = Color.White,
+                Font = font,
+                SelectionBackColor = Color.LightYellow,
+                SelectionForeColor = Color.Black
+            };
+
+            grid.RowsDefaultCellStyle = linhaClara;
+        }
+    }
 }

@@ -1,9 +1,18 @@
 ﻿
+using BrainHub.Dominio.ModuloDisciplina;
+using PartyManager.WinApp.Compartilhado;
+
 namespace BrainHub.WinApp.ModuloDisciplina
 {
     public class ControladorDisciplina : ControladorBase
     {
         private TabelaDisciplinaControl TabelaDisciplina;
+        private IRepositorioDisciplina repositorioDisciplina;
+
+        public ControladorDisciplina(IRepositorioDisciplina repositorioDisciplina)
+        {
+            this.repositorioDisciplina = repositorioDisciplina;
+        }
 
         public override string ToolTipInserir => "Inserir disciplina";
         public override string ToolTipEditar => "Editar uma disciplina";
@@ -30,7 +39,9 @@ namespace BrainHub.WinApp.ModuloDisciplina
 
         public override void CarregarRegistros()
         {
-            
+            List<Disciplina> ListaCompletaDisciplina = repositorioDisciplina.SelecionarTodos();
+            TabelaDisciplina.AtualizarRegistros(ListaCompletaDisciplina);
+            TelaPrincipalForm.Instancia.AtualizarRodape($"Visualizando {ListaCompletaDisciplina.Count} tema(s)", TipoStatusEnum.Visualizando);
         }
 
         public override UserControl ObterListagem()

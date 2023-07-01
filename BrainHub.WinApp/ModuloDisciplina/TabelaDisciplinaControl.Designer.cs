@@ -28,34 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Grid = new DataGridView();
-            ((System.ComponentModel.ISupportInitialize)Grid).BeginInit();
+            TabelaDisciplina = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)TabelaDisciplina).BeginInit();
             SuspendLayout();
             // 
-            // Grid
+            // TabelaDisciplina
             // 
-            Grid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            Grid.Dock = DockStyle.Fill;
-            Grid.Location = new Point(0, 0);
-            Grid.Name = "Grid";
-            Grid.RowHeadersWidth = 51;
-            Grid.RowTemplate.Height = 29;
-            Grid.Size = new Size(738, 450);
-            Grid.TabIndex = 0;
+            TabelaDisciplina.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            TabelaDisciplina.Dock = DockStyle.Fill;
+            TabelaDisciplina.Location = new Point(0, 0);
+            TabelaDisciplina.Name = "TabelaDisciplina";
+            TabelaDisciplina.RowHeadersWidth = 51;
+            TabelaDisciplina.RowTemplate.Height = 29;
+            TabelaDisciplina.Size = new Size(738, 450);
+            TabelaDisciplina.TabIndex = 0;
             // 
             // TabelaDisciplinaControl
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(Grid);
+            Controls.Add(TabelaDisciplina);
             Name = "TabelaDisciplinaControl";
             Size = new Size(738, 450);
-            ((System.ComponentModel.ISupportInitialize)Grid).EndInit();
+            ((System.ComponentModel.ISupportInitialize)TabelaDisciplina).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private DataGridView Grid;
+        private DataGridView TabelaDisciplina;
     }
 }

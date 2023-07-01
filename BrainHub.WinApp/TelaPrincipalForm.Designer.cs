@@ -81,6 +81,7 @@
             disciplinaToolStripMenuItem.Name = "disciplinaToolStripMenuItem";
             disciplinaToolStripMenuItem.Size = new Size(224, 26);
             disciplinaToolStripMenuItem.Text = "Disciplina";
+            disciplinaToolStripMenuItem.Click += Disciplina_Click;
             // 
             // questõesToolStripMenuItem
             // 

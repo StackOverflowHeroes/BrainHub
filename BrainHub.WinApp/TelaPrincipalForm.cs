@@ -1,3 +1,6 @@
+using BrainHub.Dados.Arquivo.ModuloDisciplina;
+using BrainHub.Dominio.ModuloDisciplina;
+using BrainHub.WinApp.ModuloDisciplina;
 using PartyManager.WinApp.Compartilhado;
 
 namespace BrainHub.WinApp
@@ -5,12 +8,12 @@ namespace BrainHub.WinApp
     public partial class TelaPrincipalForm : Form
     {
         private ControladorBase controlador;
-
-
         private static ContextoDados contexto = new ContextoDados(carregarDados: true);
 
-        private static TelaPrincipalForm telaPrincipal;
+        private IRepositorioDisciplina repositorioDisciplina = new RepositorioDisciplinaEmArquivo(contexto);
 
+
+        private static TelaPrincipalForm telaPrincipal;
         public static TelaPrincipalForm Instancia
         {
             get
@@ -72,5 +75,17 @@ namespace BrainHub.WinApp
             btnDeletar.Enabled = controlador.DeletarHabilitado;
         }
 
+        private void ConfigurarTelaPrincipal(ControladorBase controladorBase)
+        {
+            tslTipoCadastros.Text = controlador.ObterTipoCadastro();
+            ConfigurarBarraFerramentas(controladorBase);
+            ConfigurarListas(controladorBase);
+        }
+
+        private void Disciplina_Click(object sender, EventArgs e)
+        {
+            controlador = new ControladorDisciplina(repositorioDisciplina);
+            ConfigurarTelaPrincipal(controlador);
+        }
     }
 }
