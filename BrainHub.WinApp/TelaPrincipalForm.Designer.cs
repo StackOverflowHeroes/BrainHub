@@ -147,6 +147,7 @@
             btnEditar.Size = new Size(42, 42);
             btnEditar.Text = "toolStripButton1";
             btnEditar.ToolTipText = "Editar";
+            btnEditar.Click += Editar_Click;
             // 
             // btnDeletar
             // 
@@ -160,6 +161,7 @@
             btnDeletar.Size = new Size(42, 42);
             btnDeletar.Text = "toolStripButton1";
             btnDeletar.ToolTipText = "Deletar";
+            btnDeletar.Click += Deletar_Click;
             // 
             // toolStripSeparator1
             // 

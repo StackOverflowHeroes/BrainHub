@@ -92,5 +92,15 @@ namespace BrainHub.WinApp
         {
             controlador.Inserir();
         }
+
+        private void Editar_Click(object sender, EventArgs e)
+        {
+            controlador.Editar();
+        }
+
+        private void Deletar_Click(object sender, EventArgs e)
+        {
+            controlador.Deletar();
+        }
     }
 }
