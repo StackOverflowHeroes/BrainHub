@@ -7,19 +7,21 @@ namespace BrainHub.WinApp.Compartilhado
         public abstract string ToolTipInserir { get; }
         public abstract string ToolTipEditar { get; }
         public abstract string ToolTipDeletar { get; }
-        public virtual bool InserirHabilitado { get; }
-        public virtual bool EditarHabilitado { get; }
-        public virtual bool DeletarHabilitado { get; }
+        public virtual bool InserirHabilitado { get { return false; } }
+        public virtual bool EditarHabilitado { get { return false; } }
+        public virtual bool DeletarHabilitado { get { return false; } }
 
         public abstract void Inserir();
 
         public abstract void Editar();
 
         public abstract void Deletar();
-        
+
+        public abstract void CarregarRegistros();
 
         public abstract UserControl ObterListagem();
 
         public abstract string ObterTipoCadastro();
+
     }
 }
