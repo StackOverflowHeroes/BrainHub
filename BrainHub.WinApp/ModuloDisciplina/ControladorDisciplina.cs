@@ -1,5 +1,6 @@
 ﻿
 using BrainHub.Dominio.ModuloDisciplina;
+using BrainHub.Dominio.ModuloMateria;
 using PartyManager.WinApp.Compartilhado;
 
 namespace BrainHub.WinApp.ModuloDisciplina
@@ -60,7 +61,7 @@ namespace BrainHub.WinApp.ModuloDisciplina
         {
             Disciplina disciplinaSelecionada = ObterDisciplinaSelecionada();
 
-            if (disciplinaSelecionada == null)
+            if (disciplinaSelecionada == null || !ValidarSeEhPossivelExcluir(disciplinaSelecionada))
                 return;
 
             DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir a disciplina {disciplinaSelecionada.nome.ToUpper()}?", "Exclusão de disciplinas",
@@ -72,6 +73,19 @@ namespace BrainHub.WinApp.ModuloDisciplina
             }
 
             CarregarRegistros();
+        }
+
+        private bool ValidarSeEhPossivelExcluir(Disciplina disciplinaSelecionada)
+        {
+            bool EhPossivelExcluir = true;
+
+            if (disciplinaSelecionada.materias.Count > 0)
+            {
+                MessageBox.Show("Não é possível excluir uma disciplina com matérias cadastradas");
+                EhPossivelExcluir = false;
+            }
+
+            return EhPossivelExcluir;
         }
 
         private Disciplina ObterDisciplinaSelecionada()

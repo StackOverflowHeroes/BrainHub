@@ -7,7 +7,7 @@ namespace BrainHub.Dominio.ModuloDisciplina
     {
         public string nome { get; set; }
 
-        private List<Materia> materias;
+        public List<Materia> materias = new List<Materia>();
 
         public Disciplina()
         {
@@ -17,7 +17,6 @@ namespace BrainHub.Dominio.ModuloDisciplina
         {
             this.id = id;
             this.nome = nome;
-            materias = new List<Materia>();
         }
 
         public override void AtualizarRegistros(Disciplina registroAtualizado)
@@ -33,6 +32,11 @@ namespace BrainHub.Dominio.ModuloDisciplina
                 ListaErros.Add("O campo 'nome' é obrigatório");
 
             return ListaErros;
+        }
+
+        public void AdicionarMateria(Materia novaMateria)
+        {
+            materias.Add(novaMateria);
         }
     }
 }

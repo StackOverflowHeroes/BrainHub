@@ -33,6 +33,7 @@ namespace BrainHub.WinApp.ModuloMateria
             {
                 Materia novaMateria = TelaMateria.ObterMateria();
                 repositorioMateria.Inserir(novaMateria);
+                AdicionarMateriaNaDisciplina(novaMateria);
             }
 
             CarregarRegistros();
@@ -63,7 +64,7 @@ namespace BrainHub.WinApp.ModuloMateria
         {
             Materia materiaSelecionada = ObterMateriaSelecionada();
 
-            if (materiaSelecionada == null)
+            if (materiaSelecionada == null || !ValidarSeEhPossivelExcluir(materiaSelecionada))
                 return;
 
             DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir a matéria {materiaSelecionada.nome.ToUpper()}?", "Exclusão de matérias",
@@ -75,6 +76,25 @@ namespace BrainHub.WinApp.ModuloMateria
             }
 
             CarregarRegistros();
+        }
+
+        private bool ValidarSeEhPossivelExcluir(Materia materiaSelecionada)
+        {
+            bool EhPossivelExcluir = true;
+
+            //if (materiaSelecionada.questoes.Count > 0)
+            //{
+            //    MessageBox.Show("Não é possível excluir uma matéria com questões cadastradas");
+            //    EhPossivelExcluir = false;
+            //}
+
+            return EhPossivelExcluir;
+        }
+
+        private void AdicionarMateriaNaDisciplina(Materia novaMateria)
+        {
+            Disciplina disciplina = novaMateria.disciplina;
+            disciplina.AdicionarMateria(novaMateria);
         }
 
         private Materia ObterMateriaSelecionada()

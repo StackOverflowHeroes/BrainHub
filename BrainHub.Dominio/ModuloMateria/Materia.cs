@@ -8,6 +8,7 @@ namespace BrainHub.Dominio.ModuloMateria
         public string nome;
         public Disciplina disciplina;
         public SerieEnum serie;
+        //public List<Questao> questoes;
 
         public Materia()
         {
@@ -19,6 +20,7 @@ namespace BrainHub.Dominio.ModuloMateria
             this.nome = nome;
             this.disciplina = disciplina;
             this.serie = serie;
+            //questoes = new List<Questoes>();
         }
 
         public override void AtualizarRegistros(Materia registroAtualizado)
