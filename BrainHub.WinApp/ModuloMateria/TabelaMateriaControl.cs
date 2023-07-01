@@ -1,4 +1,5 @@
-﻿using BrainHub.Dominio.ModuloMateria;
+﻿using BrainHub.Dominio.Compartilhado;
+using BrainHub.Dominio.ModuloMateria;
 
 namespace BrainHub.WinApp.ModuloMateria
 {
@@ -19,8 +20,13 @@ namespace BrainHub.WinApp.ModuloMateria
             foreach (Materia registro in ListaCompletaDMateria)
             {
                 string nomeDisciplina = registro.disciplina.nome.ToUpper();
+                string serie = "";
 
-                TabelaMateria.Rows.Add(registro.id, registro.nome.ToUpper(), nomeDisciplina, registro.serie);
+                if (registro.serie == SerieEnum.primeiraSerie)
+                    serie = "1ª série";
+                else serie = "2ª série";
+
+                TabelaMateria.Rows.Add(registro.id, registro.nome.ToUpper(), nomeDisciplina, serie);
             }
         }
 

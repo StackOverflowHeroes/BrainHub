@@ -66,6 +66,14 @@ namespace BrainHub.WinApp.ModuloMateria
 
         }
 
+        public void PopularComboBoxDisciplina(List<Disciplina> ListaCompletaDisciplina)
+        {
+            foreach (Disciplina item in ListaCompletaDisciplina)
+            {
+                ComboBoxDisciplina.Items.Add(item);
+            }
+        }
+
         public void ConfigurarTela(List<Materia> ListaCompleta)
         {
             ListaCompletaMateria = ListaCompleta;

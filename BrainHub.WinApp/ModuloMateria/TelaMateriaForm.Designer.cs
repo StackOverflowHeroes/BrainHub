@@ -51,6 +51,7 @@
             botaoGravar.TabIndex = 12;
             botaoGravar.Text = "Gravar";
             botaoGravar.UseVisualStyleBackColor = true;
+            botaoGravar.Click += Gravar_Click;
             // 
             // label2
             // 

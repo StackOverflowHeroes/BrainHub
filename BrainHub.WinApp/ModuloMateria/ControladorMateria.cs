@@ -1,6 +1,5 @@
 ﻿using BrainHub.Dominio.ModuloDisciplina;
 using BrainHub.Dominio.ModuloMateria;
-using BrainHub.WinApp.ModuloDisciplina;
 using PartyManager.WinApp.Compartilhado;
 
 namespace BrainHub.WinApp.ModuloMateria
@@ -9,10 +8,12 @@ namespace BrainHub.WinApp.ModuloMateria
     {
         private TabelaMateriaControl TabelaMateria;
         private IRepositorioMateria repositorioMateria;
+        private IRepositorioDisciplina repositorioDisciplina;
 
-        public ControladorMateria(IRepositorioMateria repositorioMateria)
+        public ControladorMateria(IRepositorioMateria repositorioMateria, IRepositorioDisciplina repositorioDisciplina)
         {
             this.repositorioMateria = repositorioMateria;
+            this.repositorioDisciplina = repositorioDisciplina;
         }
 
         public override string ToolTipInserir => "Inserir matéria";
@@ -21,11 +22,24 @@ namespace BrainHub.WinApp.ModuloMateria
         public override bool InserirHabilitado { get { return true; } }
         public override bool EditarHabilitado { get { return true; } }
         public override bool DeletarHabilitado { get { return true; } }
-        public override void CarregarRegistros()
+        
+        public override void Inserir()
         {
-            List<Materia> ListaCompletaMateria = repositorioMateria.SelecionarTodos();
-            TabelaMateria.AtualizarRegistros(ListaCompletaMateria);
-            TelaPrincipalForm.Instancia.AtualizarRodape($"Visualizando {ListaCompletaMateria.Count} matéria(s)", TipoStatusEnum.Visualizando);
+            TelaMateriaForm TelaMateria = new TelaMateriaForm();
+            TelaMateria.PopularComboBoxDisciplina(repositorioDisciplina.SelecionarTodos());
+            TelaMateria.ConfigurarTela(repositorioMateria.SelecionarTodos());
+
+            if (TelaMateria.ShowDialog() == DialogResult.OK)
+            {
+                Materia novaMateria = TelaMateria.ObterMateria();
+                repositorioMateria.Inserir(novaMateria);
+            }
+
+            CarregarRegistros();
+        }
+        public override void Editar()
+        {
+            throw new NotImplementedException();
         }
 
         public override void Deletar()
@@ -33,14 +47,11 @@ namespace BrainHub.WinApp.ModuloMateria
             throw new NotImplementedException();
         }
 
-        public override void Editar()
+        public override void CarregarRegistros()
         {
-            throw new NotImplementedException();
-        }
-
-        public override void Inserir()
-        {
-            throw new NotImplementedException();
+            List<Materia> ListaCompletaMateria = repositorioMateria.SelecionarTodos();
+            TabelaMateria.AtualizarRegistros(ListaCompletaMateria);
+            TelaPrincipalForm.Instancia.AtualizarRodape($"Visualizando {ListaCompletaMateria.Count} matéria(s)", TipoStatusEnum.Visualizando);
         }
 
         public override UserControl ObterListagem()

@@ -47,7 +47,7 @@ namespace BrainHub.WinApp.ModuloDisciplina
         {
             TextBoxId.Text = disciplina.id.ToString();
             TextBoxNome.Text = disciplina.nome.ToString();
-        }
+        }     
 
         public void ConfigurarTela(List<Disciplina> ListaCompleta)
         {
