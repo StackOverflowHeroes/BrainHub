@@ -32,7 +32,7 @@ namespace BrainHub.WinApp.ModuloDisciplina
 
             List<string> ListaErros = novaDisciplina.ValidarErros();
 
-            if (VerificarNomeDuplicado(novaDisciplina.nome))
+            if (VerificarNomeDuplicado(novaDisciplina.nome, novaDisciplina.id))
                 ListaErros.Add("Não é possível cadastrar uma disciplina duas vezes");
 
             if (ListaErros.Count > 0)
@@ -54,9 +54,9 @@ namespace BrainHub.WinApp.ModuloDisciplina
             ListaCompletaDisciplina = ListaCompleta;
         }
 
-        private bool VerificarNomeDuplicado(string nome)
+        private bool VerificarNomeDuplicado(string nome, int id)
         {
-            bool NomeDuplicado = ListaCompletaDisciplina.Any(disciplina => disciplina.nome.ToLower() == nome.ToLower());
+            bool NomeDuplicado = ListaCompletaDisciplina.Any(disciplina => disciplina.nome.ToLower() == nome.ToLower() && disciplina.id != id);
 
             if (NomeDuplicado)
                 return true;
