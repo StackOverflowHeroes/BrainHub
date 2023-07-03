@@ -14,8 +14,4 @@
     <ProjectReference Include="..\BrainHub.Dominio\BrainHub.Dominio.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ModuloMateria\" />
-  </ItemGroup>
-
 </Project>

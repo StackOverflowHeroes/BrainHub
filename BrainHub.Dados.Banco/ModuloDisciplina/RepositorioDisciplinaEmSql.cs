@@ -3,7 +3,7 @@ using BrainHub.Dominio.ModuloDisciplina;
 
 namespace BrainHub.Dados.Banco.ModuloDisciplina
 {
-    public class RepositorioDisciplinaEmSql : RepositorioSqlBase<Disciplina, MapeadorDisciplina>
+    public class RepositorioDisciplinaEmSql : RepositorioSqlBase<Disciplina, MapeadorDisciplina>, IRepositorioDisciplina
     {
         protected override string sqlInserir => throw new NotImplementedException();
 

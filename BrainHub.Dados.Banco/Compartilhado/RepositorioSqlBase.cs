@@ -48,7 +48,7 @@ namespace BrainHub.Dados.Banco.Compartilhado
             conexaoComBanco.Close();
         }
 
-        public virtual void Excluir(T registroSelecionado)
+        public virtual void Deletar(T registroSelecionado)
         {
             SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
             conexaoComBanco.Open();

@@ -7,6 +7,5 @@
         public void Deletar(T registro);
         public List<T> SelecionarTodos();
         public T SelecionarPorId(int id);
-        public void AtualizarContador();
     }
 }

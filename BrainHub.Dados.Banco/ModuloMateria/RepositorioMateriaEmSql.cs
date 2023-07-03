@@ -3,7 +3,7 @@ using BrainHub.Dominio.ModuloMateria;
 
 namespace BrainHub.Dados.Banco.ModuloMateria
 {
-    public class RepositorioMateriaEmSql : RepositorioSqlBase<Materia, MapeadorMateria>
+    public class RepositorioMateriaEmSql : RepositorioSqlBase<Materia, MapeadorMateria>, IRepositorioMateria
     {
         protected override string sqlInserir => throw new NotImplementedException();
 
