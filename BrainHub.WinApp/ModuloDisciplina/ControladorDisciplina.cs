@@ -92,7 +92,7 @@ namespace BrainHub.WinApp.ModuloDisciplina
 
                if (disciplinaSelecionada.materias.Count > 0)
                {
-                    MessageBox.Show("Não é possível excluir uma disciplina com matérias cadastradas");
+                    MessageBox.Show($"Não é possível excluir uma disciplina com matérias cadastradas", "Exclusão de Disciplina", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     EhPossivelExcluir = false;
                }
 

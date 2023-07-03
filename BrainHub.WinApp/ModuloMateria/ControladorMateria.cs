@@ -47,6 +47,7 @@ namespace BrainHub.WinApp.ModuloMateria
           public override void Editar()
           {
                TelaMateriaForm TelaMateria = new TelaMateriaForm();
+               TelaMateria.Text = "Edição de Matéria";
                Materia materiaSelecionada = ObterMateriaSelecionada();
 
                if (materiaSelecionada == null)
@@ -117,8 +118,8 @@ namespace BrainHub.WinApp.ModuloMateria
 
                if (materiaSelecionada == null)
                {
-                    MessageBox.Show($"Selecione uma disciplina primeiro!",
-                        "Exclusão de disciplinas",
+                    MessageBox.Show($"Selecione uma matéria primeiro!",
+                        "Seleção de matérias",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Exclamation);
 

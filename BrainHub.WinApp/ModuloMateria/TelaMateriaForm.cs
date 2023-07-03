@@ -6,87 +6,87 @@ using PartyManager.WinApp.Compartilhado;
 
 namespace BrainHub.WinApp.ModuloMateria
 {
-    public partial class TelaMateriaForm : Form
-    {
-        private List<Materia> ListaCompletaMateria;
-        public TelaMateriaForm()
-        {
-            InitializeComponent();
-            this.ConfigurarDialog();
-        }
+     public partial class TelaMateriaForm : Form
+     {
+          private List<Materia> ListaCompletaMateria;
+          public TelaMateriaForm()
+          {
+               InitializeComponent();
+               this.ConfigurarDialog();
+          }
 
-        public Materia ObterMateria()
-        {
-            int id = Convert.ToInt32(TextBoxId.Text);
-            string nome = TextBoxNome.Text;
-            Disciplina disciplina = ComboBoxDisciplina.SelectedItem as Disciplina;
-            SerieEnum serie = ObterSerieDaMateria();
+          public Materia ObterMateria()
+          {
+               int id = Convert.ToInt32(TextBoxId.Text);
+               string nome = TextBoxNome.Text;
+               Disciplina disciplina = ComboBoxDisciplina.SelectedItem as Disciplina;
+               SerieEnum serie = ObterSerieDaMateria();
 
-            Materia materia = new Materia(id, nome, disciplina, serie);
+               Materia materia = new Materia(id, nome, disciplina, serie);
 
-            if (id > 0)
-                materia.id = id;
+               if (id > 0)
+                    materia.id = id;
 
-            return materia;
-        }
+               return materia;
+          }
 
-        private SerieEnum ObterSerieDaMateria()
-        {
-            if (RadioButtonPrimeiraSerie.Checked)
-                return SerieEnum.primeiraSerie;
-            else return SerieEnum.segundaSerie;
-        }
+          private SerieEnum ObterSerieDaMateria()
+          {
+               if (RadioButtonPrimeiraSerie.Checked)
+                    return SerieEnum.primeiraSerie;
+               else return SerieEnum.segundaSerie;
+          }
 
-        private void Gravar_Click(object sender, EventArgs e)
-        {
-            Materia novaMateria = ObterMateria();
+          private void Gravar_Click(object sender, EventArgs e)
+          {
+               Materia novaMateria = ObterMateria();
 
-            List<string> ListaErros = novaMateria.ValidarErros();
+               List<string> ListaErros = novaMateria.ValidarErros();
 
-            if (VerificarNomeDuplicado(novaMateria.nome, novaMateria.id))
-                ListaErros.Add("Não é possível cadastrar uma disciplina duas vezes");
+               if (VerificarNomeDuplicado(novaMateria.nome, novaMateria.id))
+                    ListaErros.Add("Não é possível cadastrar uma disciplina duas vezes");
 
-            if (ListaErros.Count > 0)
-            {
-                TelaPrincipalForm.Instancia.AtualizarRodape(ListaErros[0], TipoStatusEnum.Erro);
-                DialogResult = DialogResult.None;
-            }
+               if (ListaErros.Count > 0)
+               {
+                    TelaPrincipalForm.Instancia.AtualizarRodape(ListaErros[0], TipoStatusEnum.Erro);
+                    DialogResult = DialogResult.None;
+               }
 
-        }
+          }
 
-        public void PopularDialog(Materia materia)
-        {
-            TextBoxId.Text = materia.id.ToString();
-            TextBoxNome.Text = materia.nome;
-            ComboBoxDisciplina.SelectedItem = materia.disciplina;
+          public void PopularDialog(Materia materia)
+          {
+               TextBoxId.Text = materia.id.ToString();
+               TextBoxNome.Text = materia.nome;
+               ComboBoxDisciplina.SelectedItem = materia.disciplina;
 
-            if (materia.serie == SerieEnum.primeiraSerie)
-                RadioButtonPrimeiraSerie.Checked = true;
-            else RadioButtonSegundaSerie.Checked = false;
+               if (materia.serie == SerieEnum.primeiraSerie)
+                    RadioButtonPrimeiraSerie.Checked = true;
+               else RadioButtonSegundaSerie.Checked = false;
 
-        }
+          }
 
-        public void PopularComboBoxDisciplina(List<Disciplina> ListaCompletaDisciplina)
-        {
-            foreach (Disciplina item in ListaCompletaDisciplina)
-            {
-                ComboBoxDisciplina.Items.Add(item);
-            }
-        }
+          public void PopularComboBoxDisciplina(List<Disciplina> ListaCompletaDisciplina)
+          {
+               foreach (Disciplina item in ListaCompletaDisciplina)
+               {
+                    ComboBoxDisciplina.Items.Add(item);
+               }
+          }
 
-        public void ConfigurarTela(List<Materia> ListaCompleta)
-        {
-            ListaCompletaMateria = ListaCompleta;
-        }
+          public void ConfigurarTela(List<Materia> ListaCompleta)
+          {
+               ListaCompletaMateria = ListaCompleta;
+          }
 
-        private bool VerificarNomeDuplicado(string nome, int id)
-        {
-            bool NomeDuplicado = ListaCompletaMateria.Any(materia => materia.nome.ToLower() == nome.ToLower() && materia.id != id);
+          private bool VerificarNomeDuplicado(string nome, int id)
+          {
+               bool NomeDuplicado = ListaCompletaMateria.Any(materia => materia.nome.ToLower() == nome.ToLower() && materia.id != id);
 
-            if (NomeDuplicado)
-                return true;
-            else
-                return false;
-        }
-    }
+               if (NomeDuplicado)
+                    return true;
+               else
+                    return false;
+          }
+     }
 }
