@@ -5,114 +5,132 @@ using BrainHub.Dominio.ModuloMateria;
 using BrainHub.WinApp.ModuloDisciplina;
 using BrainHub.WinApp.ModuloMateria;
 using PartyManager.WinApp.Compartilhado;
+using System.Threading.Tasks;
 
 namespace BrainHub.WinApp
 {
-    public partial class TelaPrincipalForm : Form
-    {
-        private ControladorBase controlador;
-        private static ContextoDados contexto = new ContextoDados(carregarDados: true);
+     public partial class TelaPrincipalForm : Form
+     {
+          private ControladorBase controlador;
+          private int contadorTemporizador = 5;
+          private static ContextoDados contexto = new ContextoDados(carregarDados: true);
 
-        private IRepositorioDisciplina repositorioDisciplina = new RepositorioDisciplinaEmArquivo(contexto);
-        private IRepositorioMateria repositorioMateria = new RepositorioMateriaEmArquivo(contexto);
+          private IRepositorioDisciplina repositorioDisciplina = new RepositorioDisciplinaEmArquivo(contexto);
+          private IRepositorioMateria repositorioMateria = new RepositorioMateriaEmArquivo(contexto);
 
 
-        private static TelaPrincipalForm telaPrincipal;
-        public static TelaPrincipalForm Instancia
-        {
-            get
-            {
-                if (telaPrincipal == null)
-                    telaPrincipal = new TelaPrincipalForm();
+          private static TelaPrincipalForm telaPrincipal;
+          public static TelaPrincipalForm Instancia
+          {
+               get
+               {
+                    if (telaPrincipal == null)
+                         telaPrincipal = new TelaPrincipalForm();
 
-                return telaPrincipal;
-            }
-        }
+                    return telaPrincipal;
+               }
+          }
 
-        public TelaPrincipalForm()
-        {
-            InitializeComponent();
-        }
+          public TelaPrincipalForm()
+          {
+               InitializeComponent();
+               temporizador.Interval = 1000;
+               temporizador.Tick += Timer_tick;
+               telaPrincipal = this;
+          }
 
-        public void AtualizarRodape(string mensagem, TipoStatusEnum tipoStatus)
-        {
-            Color cor = default;
-            switch (tipoStatus)
-            {
-                case TipoStatusEnum.Nenhum: break;
-                case TipoStatusEnum.Erro: cor = Color.Red; break;
-                case TipoStatusEnum.Sucesso: cor = Color.Green; break;
-                case TipoStatusEnum.Visualizando: cor = Color.Blue; break;
-            }
+          public void AtualizarRodape(string mensagem, TipoStatusEnum tipoStatus)
+          {
+               contadorTemporizador = 5;
+               Color cor = default;
 
-            TextoRodape.ForeColor = cor;
-            TextoRodape.Text = mensagem;
+               switch (tipoStatus)
+               {
+                    case TipoStatusEnum.Nenhum: break;
+                    case TipoStatusEnum.Erro: cor = Color.Red; break;
+                    case TipoStatusEnum.Sucesso: cor = Color.Green; break;
+                    case TipoStatusEnum.Visualizando: cor = Color.Blue; break;
+               }
 
-        }
+               TextoRodape.ForeColor = cor;
+               TextoRodape.Text = mensagem;
 
-        private void ConfigurarToolTips(ControladorBase controlador)
-        {
-            btnInserir.ToolTipText = controlador.ToolTipInserir;
-            btnEditar.ToolTipText = controlador.ToolTipEditar;
-            btnDeletar.ToolTipText = controlador.ToolTipDeletar;
-        }
+               if (tipoStatus != TipoStatusEnum.Visualizando)
+                    temporizador.Start();
+          }
 
-        private void ConfigurarBarraFerramentas(ControladorBase controlador)
-        {
-            toolStrip1.Enabled = true;
-            ConfigurarToolTips(controlador);
-            ConfigurarEstadosBotoes(controlador);
-        }
+          private void Timer_tick(object? sender, EventArgs e)
+          {
+               contadorTemporizador--;
 
-        private void ConfigurarListas(ControladorBase controladorBase)
-        {
-            UserControl listas = controladorBase.ObterListagem();
-            listas.Dock = DockStyle.Fill;
-            panelRegistros.Controls.Clear();
-            panelRegistros.Controls.Add(listas);
-        }
+               if (contadorTemporizador == 0)
+               {
+                    TextoRodape.ForeColor = default;
+                    TextoRodape.Text = "Status";
+                    temporizador.Stop();
+               }
+          }
+          private void ConfigurarToolTips(ControladorBase controlador)
+          {
+               btnInserir.ToolTipText = controlador.ToolTipInserir;
+               btnEditar.ToolTipText = controlador.ToolTipEditar;
+               btnDeletar.ToolTipText = controlador.ToolTipDeletar;
+          }
 
-        private void ConfigurarEstadosBotoes(ControladorBase controlador)
-        {
-            btnInserir.Enabled = controlador.InserirHabilitado;
-            btnEditar.Enabled = controlador.EditarHabilitado;
-            btnDeletar.Enabled = controlador.DeletarHabilitado;
-        }
+          private void ConfigurarBarraFerramentas(ControladorBase controlador)
+          {
+               toolStrip1.Enabled = true;
+               ConfigurarToolTips(controlador);
+               ConfigurarEstadosBotoes(controlador);
+          }
 
-        private void ConfigurarTelaPrincipal(ControladorBase controladorBase)
-        {
-            tslTipoCadastros.Text = controlador.ObterTipoCadastro();
-            ConfigurarBarraFerramentas(controladorBase);
-            ConfigurarListas(controladorBase);
-        }
+          private void ConfigurarListas(ControladorBase controladorBase)
+          {
+               UserControl listas = controladorBase.ObterListagem();
+               listas.Dock = DockStyle.Fill;
+               panelRegistros.Controls.Clear();
+               panelRegistros.Controls.Add(listas);
+          }
 
-        private void Disciplina_Click(object sender, EventArgs e)
-        {
-            controlador = new ControladorDisciplina(repositorioDisciplina);
-            ConfigurarTelaPrincipal(controlador);
-        }
+          private void ConfigurarEstadosBotoes(ControladorBase controlador)
+          {
+               btnInserir.Enabled = controlador.InserirHabilitado;
+               btnEditar.Enabled = controlador.EditarHabilitado;
+               btnDeletar.Enabled = controlador.DeletarHabilitado;
+          }
 
-        private void Materia_Click(object sender, EventArgs e)
-        {
-            controlador = new ControladorMateria(repositorioMateria, repositorioDisciplina);
-            ConfigurarTelaPrincipal(controlador);
-        }
+          private void ConfigurarTelaPrincipal(ControladorBase controladorBase)
+          {
+               tslTipoCadastros.Text = controlador.ObterTipoCadastro();
+               ConfigurarBarraFerramentas(controladorBase);
+               ConfigurarListas(controladorBase);
+          }
 
-        private void Inserir_Click(object sender, EventArgs e)
-        {
-            controlador.Inserir();
-        }
+          private void Disciplina_Click(object sender, EventArgs e)
+          {
+               controlador = new ControladorDisciplina(repositorioDisciplina);
+               ConfigurarTelaPrincipal(controlador);
+          }
 
-        private void Editar_Click(object sender, EventArgs e)
-        {
-            controlador.Editar();
-        }
+          private void Materia_Click(object sender, EventArgs e)
+          {
+               controlador = new ControladorMateria(repositorioMateria, repositorioDisciplina);
+               ConfigurarTelaPrincipal(controlador);
+          }
 
-        private void Deletar_Click(object sender, EventArgs e)
-        {
-            controlador.Deletar();
-        }
+          private void Inserir_Click(object sender, EventArgs e)
+          {
+               controlador.Inserir();
+          }
 
-       
-    }
+          private void Editar_Click(object sender, EventArgs e)
+          {
+               controlador.Editar();
+          }
+
+          private void Deletar_Click(object sender, EventArgs e)
+          {
+               controlador.Deletar();
+          }
+     }
 }
