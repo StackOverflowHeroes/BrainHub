@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BrainHub.Dados.Arquivo\BrainHub.Dados.Arquivo.csproj" />
+    <ProjectReference Include="..\BrainHub.Dados.Banco\BrainHub.Dados.Banco.csproj" />
     <ProjectReference Include="..\BrainHub.Dominio\BrainHub.Dominio.csproj" />
   </ItemGroup>
 
