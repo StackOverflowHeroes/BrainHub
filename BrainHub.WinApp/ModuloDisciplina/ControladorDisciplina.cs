@@ -107,7 +107,7 @@ namespace BrainHub.WinApp.ModuloDisciplina
                if (disciplinaSelecionada == null)
                {
                     MessageBox.Show($"Selecione uma disciplina primeiro!",
-                        "Exclusão de disciplinas",
+                        "Seleção de disciplinas",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Exclamation);
 
