@@ -1,6 +1,5 @@
 ﻿
 using BrainHub.Dominio.Compartilhado;
-using Microsoft.Data.SqlClient;
 
 namespace BrainHub.Dados.Banco.Compartilhado
 {
