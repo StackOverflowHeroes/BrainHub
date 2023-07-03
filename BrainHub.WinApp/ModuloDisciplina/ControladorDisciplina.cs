@@ -43,6 +43,7 @@ namespace BrainHub.WinApp.ModuloDisciplina
           public override void Editar()
           {
                TelaDisciplinaForm TelaDisciplina = new TelaDisciplinaForm();
+               TelaDisciplina.Text = "Edição de Disciplina";
                Disciplina disciplinaSelecionada = ObterDisciplinaSelecionada();
 
                if (disciplinaSelecionada == null)
@@ -71,7 +72,7 @@ namespace BrainHub.WinApp.ModuloDisciplina
                if (disciplinaSelecionada == null || !ValidarSeEhPossivelExcluir(disciplinaSelecionada))
                     return;
 
-               DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir a disciplina {disciplinaSelecionada.nome.ToUpper()}?", "Exclusão de disciplinas",
+               DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir a disciplina {disciplinaSelecionada.nome.ToUpper()}?", "Exclusão de Disciplina",
                 MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 
                if (opcaoEscolhida == DialogResult.OK)
