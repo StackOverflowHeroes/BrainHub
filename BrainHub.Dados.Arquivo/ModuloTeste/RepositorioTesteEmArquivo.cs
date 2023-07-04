@@ -1,5 +1,6 @@
 ﻿using BrainHub.Dados.Arquivo.Compartilhado;
 using BrainHub.Dominio.ModuloDisciplina;
+using BrainHub.Dominio.ModuloTeste;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,17 +9,16 @@ using System.Threading.Tasks;
 
 namespace BrainHub.Dados.Arquivo.ModuloTeste
 {
-    internal class RepositorioTesteEmArquivo /*: RepositorioArquivoBase<Teste>, IRepositorioTeste*/
+    public class RepositorioTesteEmArquivo : RepositorioArquivoBase<Teste>, IRepositorioTeste
     {
-        //public RepositorioTesteEmArquivo(ContextoDados contexto) : base(contexto)
-        //{
+        public RepositorioTesteEmArquivo(ContextoDados contexto) : base(contexto)
+        {
+        }
 
-        //}
-
-        //protected override List<Teste> ObterRegistros()
-        //{
-        //    return contextoDados.testes;
-        //}
+        protected override List<Teste> ObterRegistros()
+        {
+            return contextoDados.testes;
+        }
     }
 }
 

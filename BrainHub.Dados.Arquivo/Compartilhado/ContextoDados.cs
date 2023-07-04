@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 
 using BrainHub.Dominio.ModuloDisciplina;
 using BrainHub.Dominio.ModuloMateria;
+using BrainHub.Dominio.ModuloTeste;
 
 namespace BrainHub.Dados.Arquivo.Compartilhado
 {
@@ -12,12 +13,12 @@ namespace BrainHub.Dados.Arquivo.Compartilhado
 
         public List<Disciplina> disciplinas;
         public List<Materia> materias;
-        //public List<Teste> testes;
+        public List<Teste> testes;
         public ContextoDados()
         {
             disciplinas = new List<Disciplina>();
             materias = new List<Materia>();
-            //testes = new List<Teste>();
+            testes = new List<Teste>();
         }
 
         public ContextoDados(bool carregarDados) : this()
@@ -49,7 +50,7 @@ namespace BrainHub.Dados.Arquivo.Compartilhado
 
                     disciplinas = dadosJson.disciplinas;
                     materias = dadosJson.materias;
-                    //testes = dadosJson.testes;
+                    testes = dadosJson.testes;
                 }
             }
         }

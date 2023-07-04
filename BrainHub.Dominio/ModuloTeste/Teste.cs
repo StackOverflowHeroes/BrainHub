@@ -11,19 +11,22 @@ namespace BrainHub.Dominio.ModuloTeste
         public Disciplina disciplina { get; set; }
         public Materia materia { get; set; }
         public SerieEnum serie;
+        public DateTime data;
 
         public Teste()
         {
 
         }
 
-        public Teste(string nome, int numeroQuestoes, Disciplina disciplina, Materia materia, SerieEnum serie)
+        public Teste(int id, string nome, int numeroQuestoes, Disciplina disciplina, Materia materia, SerieEnum serie, DateTime data)
         {
+            this.id = id;
             this.nome = nome;
             this.numeroQuestoes = numeroQuestoes;
             this.disciplina = disciplina;
             this.materia = materia;
             this.serie = serie;
+            this.data = data;
         }
 
         public override void AtualizarRegistros(Teste registroAtualizado)
@@ -33,6 +36,7 @@ namespace BrainHub.Dominio.ModuloTeste
             disciplina = registroAtualizado.disciplina;
             materia = registroAtualizado.materia;
             serie = registroAtualizado.serie;
+            data = registroAtualizado.data;
         }
 
         public override List<string> ValidarErros()

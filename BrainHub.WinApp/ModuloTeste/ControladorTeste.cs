@@ -16,7 +16,7 @@ namespace BrainHub.WinApp.ModuloTeste
         private IRepositorioMateria repositorioMateria;
         private IRepositorioDisciplina repositorioDisciplina;
         private IRepositorioTeste repositorioTeste;
-        //private TabelaTesteControl TabelaTeste;
+        private TabelaTesteControl TabelaTeste;
 
         public ControladorTeste(IRepositorioMateria repositorioMateria, IRepositorioDisciplina repositorioDisciplina, IRepositorioTeste repositorioTeste)
         {
@@ -34,7 +34,9 @@ namespace BrainHub.WinApp.ModuloTeste
 
         public override void CarregarRegistros()
         {
-            throw new NotImplementedException();
+            List<Teste> testes = repositorioTeste.SelecionarTodos();
+            TabelaTeste.AtualizarRegistros(testes);
+            TelaPrincipalForm.Instancia.AtualizarRodape($"Visualizando {testes.Count} teste(s)", TipoStatusEnum.Visualizando);
         }
 
         public override void Deletar()
@@ -54,12 +56,16 @@ namespace BrainHub.WinApp.ModuloTeste
 
         public override UserControl ObterListagem()
         {
-            throw new NotImplementedException();
+            if (TabelaTeste == null)
+                TabelaTeste = new TabelaTesteControl();
+
+            CarregarRegistros();
+            return TabelaTeste;
         }
 
         public override string ObterTipoCadastro()
         {
-            return "Cadastro de matérias";
+            return "Cadastro de testes";
         }
     }
 }
