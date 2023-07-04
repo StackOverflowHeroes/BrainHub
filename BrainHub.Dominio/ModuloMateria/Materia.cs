@@ -1,5 +1,6 @@
 ﻿
 using BrainHub.Dominio.ModuloDisciplina;
+using BrainHub.Dominio.ModuloQuestao;
 
 namespace BrainHub.Dominio.ModuloMateria
 {
@@ -8,20 +9,34 @@ namespace BrainHub.Dominio.ModuloMateria
         public string nome;
         public Disciplina disciplina;
         public SerieEnum serie;
-        //public List<Questao> questoes;
+          public List<Questao> questoes;
 
-        public Materia()
+          public Materia()
         {
         }
 
-        public Materia(int id, string nome, Disciplina disciplina, SerieEnum serie)
+          public override string ToString()
+          {
+               string nomeSerie;
+
+               if (serie == SerieEnum.primeiraSerie)
+                    nomeSerie = "1ª Série";
+
+               else
+                    nomeSerie = "2ª Série";
+
+               return $"{nome}, {nomeSerie}";
+          }
+
+
+          public Materia(int id, string nome, Disciplina disciplina, SerieEnum serie)
         {
             this.id = id;
             this.nome = nome;
             this.disciplina = disciplina;
             this.serie = serie;
-            //questoes = new List<Questoes>();
-        }
+            questoes = new List<Questao>();
+          }
 
         public override void AtualizarRegistros(Materia registroAtualizado)
         {
