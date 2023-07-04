@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace BrainHub.Dados.Arquivo.ModuloTeste
 {
-    internal class RepositorioTesteEmArquivo : RepositorioArquivoBase<Teste>, IRepositorioTeste
+    internal class RepositorioTesteEmArquivo /*: RepositorioArquivoBase<Teste>, IRepositorioTeste*/
     {
-        public RepositorioTesteEmArquivo(ContextoDados contexto) : base(contexto)
-        {
+        //public RepositorioTesteEmArquivo(ContextoDados contexto) : base(contexto)
+        //{
 
-        }
+        //}
 
-        protected override List<Teste> ObterRegistros()
-        {
-            return contextoDados.testes;
-        }
+        //protected override List<Teste> ObterRegistros()
+        //{
+        //    return contextoDados.testes;
+        //}
     }
 }
 
