@@ -28,35 +28,40 @@
         /// </summary>
         private void InitializeComponent()
         {
-            ComboBoxDisciplina = new ComboBox();
+            cbBoxDisciplina = new ComboBox();
             label3 = new Label();
             botaoGravar = new Button();
             label2 = new Label();
             TextBoxNome = new TextBox();
-            label1 = new Label();
-            TextBoxId = new TextBox();
             botaoCancelar = new Button();
-            RadioButtonPrimeiraSerie = new RadioButton();
+            cbBoxMateria = new ComboBox();
+            label1 = new Label();
+            numericUpDown1 = new NumericUpDown();
+            label4 = new Label();
+            checkBox1 = new CheckBox();
+            checkBox2 = new CheckBox();
             groupBox1 = new GroupBox();
-            RadioButtonSegundaSerie = new RadioButton();
+            btnSortear = new Button();
+            listBox1 = new ListBox();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
-            // ComboBoxDisciplina
+            // cbBoxDisciplina
             // 
-            ComboBoxDisciplina.DisplayMember = "nome";
-            ComboBoxDisciplina.DropDownStyle = ComboBoxStyle.DropDownList;
-            ComboBoxDisciplina.FormattingEnabled = true;
-            ComboBoxDisciplina.Location = new Point(253, 198);
-            ComboBoxDisciplina.Margin = new Padding(3, 2, 3, 2);
-            ComboBoxDisciplina.Name = "ComboBoxDisciplina";
-            ComboBoxDisciplina.Size = new Size(294, 23);
-            ComboBoxDisciplina.TabIndex = 24;
+            cbBoxDisciplina.DisplayMember = "nome";
+            cbBoxDisciplina.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbBoxDisciplina.FormattingEnabled = true;
+            cbBoxDisciplina.Location = new Point(55, 105);
+            cbBoxDisciplina.Margin = new Padding(3, 2, 3, 2);
+            cbBoxDisciplina.Name = "cbBoxDisciplina";
+            cbBoxDisciplina.Size = new Size(294, 23);
+            cbBoxDisciplina.TabIndex = 24;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(253, 181);
+            label3.Location = new Point(55, 83);
             label3.Name = "label3";
             label3.Size = new Size(58, 15);
             label3.TabIndex = 23;
@@ -65,7 +70,7 @@
             // botaoGravar
             // 
             botaoGravar.DialogResult = DialogResult.OK;
-            botaoGravar.Location = new Point(343, 335);
+            botaoGravar.Location = new Point(304, 490);
             botaoGravar.Margin = new Padding(3, 2, 3, 2);
             botaoGravar.Name = "botaoGravar";
             botaoGravar.Size = new Size(94, 34);
@@ -76,7 +81,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(253, 133);
+            label2.Location = new Point(55, 40);
             label2.Name = "label2";
             label2.Size = new Size(40, 15);
             label2.TabIndex = 21;
@@ -84,35 +89,16 @@
             // 
             // TextBoxNome
             // 
-            TextBoxNome.Location = new Point(253, 151);
+            TextBoxNome.Location = new Point(55, 58);
             TextBoxNome.Margin = new Padding(3, 2, 3, 2);
             TextBoxNome.Name = "TextBoxNome";
-            TextBoxNome.Size = new Size(294, 23);
+            TextBoxNome.Size = new Size(443, 23);
             TextBoxNome.TabIndex = 20;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(253, 82);
-            label1.Name = "label1";
-            label1.Size = new Size(17, 15);
-            label1.TabIndex = 19;
-            label1.Text = "Id";
-            // 
-            // TextBoxId
-            // 
-            TextBoxId.Location = new Point(253, 99);
-            TextBoxId.Margin = new Padding(3, 2, 3, 2);
-            TextBoxId.Name = "TextBoxId";
-            TextBoxId.ReadOnly = true;
-            TextBoxId.Size = new Size(294, 23);
-            TextBoxId.TabIndex = 18;
-            TextBoxId.Text = "0";
             // 
             // botaoCancelar
             // 
             botaoCancelar.DialogResult = DialogResult.Cancel;
-            botaoCancelar.Location = new Point(451, 335);
+            botaoCancelar.Location = new Point(404, 490);
             botaoCancelar.Margin = new Padding(3, 2, 3, 2);
             botaoCancelar.Name = "botaoCancelar";
             botaoCancelar.Size = new Size(94, 34);
@@ -120,77 +106,133 @@
             botaoCancelar.Text = "Cancelar";
             botaoCancelar.UseVisualStyleBackColor = true;
             // 
-            // RadioButtonPrimeiraSerie
+            // cbBoxMateria
             // 
-            RadioButtonPrimeiraSerie.AutoSize = true;
-            RadioButtonPrimeiraSerie.Location = new Point(24, 27);
-            RadioButtonPrimeiraSerie.Margin = new Padding(3, 2, 3, 2);
-            RadioButtonPrimeiraSerie.Name = "RadioButtonPrimeiraSerie";
-            RadioButtonPrimeiraSerie.Size = new Size(69, 19);
-            RadioButtonPrimeiraSerie.TabIndex = 15;
-            RadioButtonPrimeiraSerie.TabStop = true;
-            RadioButtonPrimeiraSerie.Text = "Primeira";
-            RadioButtonPrimeiraSerie.UseVisualStyleBackColor = true;
+            cbBoxMateria.DisplayMember = "nome";
+            cbBoxMateria.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbBoxMateria.FormattingEnabled = true;
+            cbBoxMateria.Location = new Point(55, 172);
+            cbBoxMateria.Margin = new Padding(3, 2, 3, 2);
+            cbBoxMateria.Name = "cbBoxMateria";
+            cbBoxMateria.Size = new Size(294, 23);
+            cbBoxMateria.TabIndex = 27;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(55, 155);
+            label1.Name = "label1";
+            label1.Size = new Size(47, 15);
+            label1.TabIndex = 26;
+            label1.Text = "Matéria";
+            // 
+            // numericUpDown1
+            // 
+            numericUpDown1.Location = new Point(355, 106);
+            numericUpDown1.Name = "numericUpDown1";
+            numericUpDown1.Size = new Size(76, 23);
+            numericUpDown1.TabIndex = 28;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(349, 83);
+            label4.Name = "label4";
+            label4.Size = new Size(82, 15);
+            label4.TabIndex = 29;
+            label4.Text = "Qtd. Questões";
+            // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(355, 172);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(143, 19);
+            checkBox1.TabIndex = 31;
+            checkBox1.Text = "Prova de Recuperação";
+            checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            checkBox2.AutoSize = true;
+            checkBox2.Location = new Point(55, 133);
+            checkBox2.Name = "checkBox2";
+            checkBox2.Size = new Size(83, 19);
+            checkBox2.TabIndex = 32;
+            checkBox2.Text = "checkBox2";
+            checkBox2.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(RadioButtonSegundaSerie);
-            groupBox1.Controls.Add(RadioButtonPrimeiraSerie);
-            groupBox1.Location = new Point(253, 224);
-            groupBox1.Margin = new Padding(3, 2, 3, 2);
+            groupBox1.Controls.Add(listBox1);
+            groupBox1.Location = new Point(55, 227);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(3, 2, 3, 2);
-            groupBox1.Size = new Size(294, 94);
-            groupBox1.TabIndex = 25;
+            groupBox1.Size = new Size(443, 199);
+            groupBox1.TabIndex = 33;
             groupBox1.TabStop = false;
-            groupBox1.Text = "Série";
+            groupBox1.Text = "Questões Selecionadas";
             // 
-            // RadioButtonSegundaSerie
+            // btnSortear
             // 
-            RadioButtonSegundaSerie.AutoSize = true;
-            RadioButtonSegundaSerie.Location = new Point(24, 50);
-            RadioButtonSegundaSerie.Margin = new Padding(3, 2, 3, 2);
-            RadioButtonSegundaSerie.Name = "RadioButtonSegundaSerie";
-            RadioButtonSegundaSerie.Size = new Size(71, 19);
-            RadioButtonSegundaSerie.TabIndex = 16;
-            RadioButtonSegundaSerie.TabStop = true;
-            RadioButtonSegundaSerie.Text = "Segunda";
-            RadioButtonSegundaSerie.UseVisualStyleBackColor = true;
+            btnSortear.Location = new Point(55, 483);
+            btnSortear.Name = "btnSortear";
+            btnSortear.Size = new Size(104, 41);
+            btnSortear.TabIndex = 0;
+            btnSortear.Text = "Sortear Questões";
+            btnSortear.UseVisualStyleBackColor = true;
+            // 
+            // listBox1
+            // 
+            listBox1.FormattingEnabled = true;
+            listBox1.ItemHeight = 15;
+            listBox1.Location = new Point(0, 39);
+            listBox1.Name = "listBox1";
+            listBox1.Size = new Size(443, 154);
+            listBox1.TabIndex = 0;
             // 
             // TelaTesteForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(709, 421);
-            Controls.Add(ComboBoxDisciplina);
+            ClientSize = new Size(585, 543);
+            Controls.Add(btnSortear);
+            Controls.Add(groupBox1);
+            Controls.Add(checkBox2);
+            Controls.Add(checkBox1);
+            Controls.Add(label4);
+            Controls.Add(numericUpDown1);
+            Controls.Add(cbBoxMateria);
+            Controls.Add(label1);
+            Controls.Add(cbBoxDisciplina);
             Controls.Add(label3);
             Controls.Add(botaoGravar);
             Controls.Add(label2);
             Controls.Add(TextBoxNome);
-            Controls.Add(label1);
-            Controls.Add(TextBoxId);
             Controls.Add(botaoCancelar);
-            Controls.Add(groupBox1);
             Name = "TelaTesteForm";
-            Text = "TelaTesteForm";
+            Text = "Cadastro de Testes";
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private ComboBox ComboBoxDisciplina;
+        private ComboBox cbBoxDisciplina;
         private Label label3;
         private Button botaoGravar;
         private Label label2;
         private TextBox TextBoxNome;
-        private Label label1;
-        private TextBox TextBoxId;
         private Button botaoCancelar;
-        private RadioButton RadioButtonPrimeiraSerie;
+        private ComboBox cbBoxMateria;
+        private Label label1;
+        private NumericUpDown numericUpDown1;
+        private Label label4;
+        private CheckBox checkBox1;
+        private CheckBox checkBox2;
         private GroupBox groupBox1;
-        private RadioButton RadioButtonSegundaSerie;
+        private Button btnSortear;
+        private ListBox listBox1;
     }
 }
