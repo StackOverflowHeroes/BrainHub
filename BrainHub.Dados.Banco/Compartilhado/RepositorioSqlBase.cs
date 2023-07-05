@@ -8,7 +8,7 @@ namespace BrainHub.Dados.Banco.Compartilhado
         where TMapeador : MapeadorBase<T>, new()
     {
 
-        protected const string enderecoBanco = @"";
+        protected const string enderecoBanco = @"Data Source=(LocalDb)\MSSqlLocalDb;Initial Catalog=BrainHubDb;Integrated Security=True";
         protected abstract string sqlInserir { get; }
         protected abstract string sqlEditar { get; }
         protected abstract string sqlExcluir { get; }
