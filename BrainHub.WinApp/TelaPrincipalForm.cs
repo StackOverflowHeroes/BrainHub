@@ -133,7 +133,7 @@ namespace BrainHub.WinApp
 
           private void Teste_Click(object sender, EventArgs e)
           {
-               controlador = new ControladorTeste(repositorioMateria, repositorioDisciplina, repositorioTeste);
+               controlador = new ControladorTeste(repositorioMateria, repositorioDisciplina, repositorioTeste, repositorioQuestao);
                ConfigurarTelaPrincipal(controlador);
           }
           private void Inserir_Click(object sender, EventArgs e)

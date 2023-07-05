@@ -1,6 +1,7 @@
 ﻿
 using BrainHub.Dominio.ModuloDisciplina;
 using BrainHub.Dominio.ModuloMateria;
+using BrainHub.Dominio.ModuloQuestao;
 
 namespace BrainHub.Dominio.ModuloTeste
 {
@@ -10,6 +11,7 @@ namespace BrainHub.Dominio.ModuloTeste
         public int numeroQuestoes;
         public Disciplina disciplina { get; set; }
         public Materia materia { get; set; }
+        public List<Questao> questoes;
         public SerieEnum serie;
         public DateTime data;
 
@@ -27,6 +29,7 @@ namespace BrainHub.Dominio.ModuloTeste
             this.materia = materia;
             this.serie = serie;
             this.data = data;
+            questoes = new List<Questao>();
         }
 
         public override void AtualizarRegistros(Teste registroAtualizado)
