@@ -11,7 +11,7 @@ namespace BrainHub.Dados.Banco.ModuloDisciplina
 
         protected override string sqlEditar => @"UPDATE [TBDisciplina] 
 													SET 
-														[NOME] = @NOME,
+														[NOME] = @NOME
 													WHERE 
 														[ID] = @ID";
 
@@ -20,12 +20,12 @@ namespace BrainHub.Dados.Banco.ModuloDisciplina
 
         protected override string sqlSelecionarTodos => @"SELECT 
 	                                                        [id] AS DISCIPLINA_ID,
-	                                                        [NOME] AS DISCIPLINA_ID
+	                                                        [NOME] AS DISCIPLINA_NOME
 	                                                    FROM [TBDisciplina];";
 
         protected override string sqlSelecionarPorId => @"SELECT 
 															[ID]   AS  DISCIPLINA_ID 
-														   ,[NOME] AS  DISCIPLINA_ID
+														   ,[NOME] AS  DISCIPLINA_NOME
 														FROM 
 															[TBDisciplina] 
 														WHERE 

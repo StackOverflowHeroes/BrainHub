@@ -13,8 +13,8 @@ namespace BrainHub.Dados.Banco.ModuloDisciplina
 
         public override Disciplina ConverterRegistro(SqlDataReader leitorRegistros)
         {
-            int id = Convert.ToInt32(leitorRegistros["CLIENTE_ID"]);
-            string nome = Convert.ToString(leitorRegistros["CLIENTE_NOME"]);
+            int id = Convert.ToInt32(leitorRegistros["DISCIPLINA_ID"]);
+            string nome = Convert.ToString(leitorRegistros["DISCIPLINA_NOME"]);
 
             return new Disciplina(id, nome);
         }

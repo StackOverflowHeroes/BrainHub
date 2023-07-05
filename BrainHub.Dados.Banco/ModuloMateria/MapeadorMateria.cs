@@ -11,6 +11,8 @@ namespace BrainHub.Dados.Banco.ModuloMateria
         {
             comando.Parameters.AddWithValue("ID", registro.id);
             comando.Parameters.AddWithValue("NOME", registro.nome);
+            comando.Parameters.AddWithValue("SERIE", registro.serie);
+            comando.Parameters.AddWithValue("DISCIPLINA_ID", registro.disciplina.id);
         }
 
         public override Materia ConverterRegistro(SqlDataReader leitorRegistros)

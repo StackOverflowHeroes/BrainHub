@@ -5,7 +5,7 @@ namespace BrainHub.Dados.Banco.ModuloMateria
 {
     public class RepositorioMateriaEmSql : RepositorioSqlBase<Materia, MapeadorMateria>, IRepositorioMateria
     {
-        protected override string sqlInserir => @"INSERT INTO [TBMateria] ( [NOME], [SERIE], [DISCIPLINA] ) VALUES ('@NOME', '@SERIE', '@DISCIPLINA_ID');  SELECT SCOPE_IDENTITY();";
+        protected override string sqlInserir => @"INSERT INTO [TBMateria] ( [NOME], [SERIE], [DISCIPLINA_ID] ) VALUES (@NOME, @SERIE, @DISCIPLINA_ID);  SELECT SCOPE_IDENTITY();";
 
         protected override string sqlEditar => @"UPDATE TBMateria SET 
                                                                 [NOME] = @NOME, 
