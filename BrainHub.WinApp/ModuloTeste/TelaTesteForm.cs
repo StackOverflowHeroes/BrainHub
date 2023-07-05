@@ -75,8 +75,9 @@ namespace BrainHub.WinApp.ModuloTeste
         {
             int id = 0;
             string nome = TextBoxNome.Text;
-            Materia materia = (Materia)cbBoxMateria.SelectedItem;
+            string numeroQuestoes = numericQuestoes.Value.ToString();
             Disciplina disciplina = (Disciplina)cbBoxDisciplina.SelectedItem;
+            Materia materia = (Materia)cbBoxMateria.SelectedItem;
             DateTime data = DateTime.Now;
             Teste teste = new Teste();
 
