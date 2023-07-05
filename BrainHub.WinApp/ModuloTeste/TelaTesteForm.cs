@@ -3,6 +3,7 @@ using BrainHub.Dominio.ModuloDisciplina;
 using BrainHub.Dominio.ModuloMateria;
 using BrainHub.Dominio.ModuloQuestao;
 using BrainHub.Dominio.ModuloTeste;
+using PartyManager.WinApp.Compartilhado;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -55,18 +56,18 @@ namespace BrainHub.WinApp.ModuloTeste
             TextBoxNome.Text = testeSelecionado.nome;
             cbBoxDisciplina.SelectedItem = testeSelecionado.disciplina;
             cbBoxMateria.SelectedItem = testeSelecionado.materia;
-            //checkBoxRecuperacao.Checked = testeSelecionado.
+            //listBoxQuestoes.Items = testeSelecionado.questoes;
         }
 
         private void checkBoxRecuperacao_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxRecuperacao.Checked)
+            if (checkBoxRecuperacao.Checked == false)
             {
-                cbBoxMateria.Enabled = true;
+                cbBoxMateria.Enabled = false;
             }
             else
             {
-                cbBoxMateria.Enabled = false;
+                cbBoxMateria.Enabled = true;
             }
         }
 
@@ -86,6 +87,26 @@ namespace BrainHub.WinApp.ModuloTeste
                 teste.id = id;
 
             return teste;
+        }
+
+        private void TelaTesteForm_Load(object sender, EventArgs e)
+        {
+            cbBoxMateria.Enabled = false;
+        }
+
+        private void botaoGravar_Click(object sender, EventArgs e)
+        {
+            Teste teste = ObterTeste();
+            List<string> ListaErros = teste.ValidarErros();
+
+            if (listBoxQuestoes.Items.Count < 1)
+                ListaErros.Add("Número mínimo de questões é 1!");
+
+            if (ListaErros.Count > 0)
+            {
+                TelaPrincipalForm.Instancia.AtualizarRodape(ListaErros[0], TipoStatusEnum.Erro);
+                DialogResult = DialogResult.None;
+            }
         }
     }
 }

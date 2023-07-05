@@ -76,6 +76,7 @@
             botaoGravar.TabIndex = 22;
             botaoGravar.Text = "Gravar";
             botaoGravar.UseVisualStyleBackColor = true;
+            botaoGravar.Click += botaoGravar_Click;
             // 
             // label2
             // 
@@ -202,6 +203,7 @@
             Controls.Add(botaoCancelar);
             Name = "TelaTesteForm";
             Text = "Cadastro de Testes";
+            Load += TelaTesteForm_Load;
             ((System.ComponentModel.ISupportInitialize)numericQuestoes).EndInit();
             groupBox1.ResumeLayout(false);
             ResumeLayout(false);
