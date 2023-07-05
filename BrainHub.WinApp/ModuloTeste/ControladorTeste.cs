@@ -54,7 +54,39 @@ namespace BrainHub.WinApp.ModuloTeste
 
         public override void Editar()
         {
-            throw new NotImplementedException();
+            Teste testeSelecionado = ObterTesteSelecionado();
+            if(testeSelecionado == null)
+            {
+                MessageBox.Show($"Selecione um teste primeiro!",
+                        "Edição de testes",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Exclamation);
+                return;
+            }
+            List<Materia> materias = repositorioMateria.SelecionarTodos();
+            List<Disciplina> disciplinas = repositorioDisciplina.SelecionarTodos();
+            List<Questao> questoes = repositorioQuestao.SelecionarTodos();
+
+            TelaTesteForm telaTeste = new TelaTesteForm(materias, disciplinas, questoes);
+            telaTeste.Text = "Edição de testes";
+            telaTeste.ConfigurarTela(testeSelecionado);
+            DialogResult opcaoEscolhida = telaTeste.ShowDialog();
+            if (opcaoEscolhida == DialogResult.OK)
+            {
+                Teste teste = telaTeste.ObterTeste();
+                repositorioTeste.Editar(teste.id, teste);
+            }
+            CarregarRegistros();
+            if(opcaoEscolhida == DialogResult.OK)
+            {
+                TelaPrincipalForm.Instancia.AtualizarRodape($"Teste editado com sucesso!", TipoStatusEnum.Sucesso);
+            }
+        }
+
+        private Teste ObterTesteSelecionado()
+        {
+            int id = TabelaTeste.ObterIdSelecionado();
+            return repositorioTeste.SelecionarPorId(id);
         }
 
         public override void Inserir()
