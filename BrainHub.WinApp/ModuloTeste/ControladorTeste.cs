@@ -20,8 +20,8 @@ namespace BrainHub.WinApp.ModuloTeste
         private IRepositorioQuestao repositorioQuestao;
         private IRepositorioDisciplina repositorioDisciplina;
         private IRepositorioTeste repositorioTeste;
-        
-        
+
+
 
         public ControladorTeste(IRepositorioMateria repositorioMateria, IRepositorioDisciplina repositorioDisciplina, IRepositorioTeste repositorioTeste, IRepositorioQuestao repositorioQuestao)
         {
@@ -38,7 +38,7 @@ namespace BrainHub.WinApp.ModuloTeste
         public override bool EditarHabilitado { get { return true; } }
         public override bool DeletarHabilitado { get { return true; } }
 
-        
+
 
         public override void CarregarRegistros()
         {
@@ -49,16 +49,32 @@ namespace BrainHub.WinApp.ModuloTeste
 
         public override void Deletar()
         {
-            throw new NotImplementedException();
+            Teste testeSelecionado = ObterTesteSelecionado();
+            if (testeSelecionado == null)
+            {
+                MessageBox.Show($"Selecione um teste primeiro!",
+                        "Exclusão de Testes",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Exclamation);
+                return;
+            }
+            DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir o teste {testeSelecionado}?", "Exclusão de Testes",
+                MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (opcaoEscolhida == DialogResult.OK)
+                repositorioTeste.Deletar(testeSelecionado);
+            
+            CarregarRegistros();
+            if (opcaoEscolhida == DialogResult.OK)
+                TelaPrincipalForm.Instancia.AtualizarRodape($"Teste deletado com sucesso!", TipoStatusEnum.Sucesso);
         }
 
         public override void Editar()
         {
             Teste testeSelecionado = ObterTesteSelecionado();
-            if(testeSelecionado == null)
+            if (testeSelecionado == null)
             {
                 MessageBox.Show($"Selecione um teste primeiro!",
-                        "Edição de testes",
+                        "Edição de Testes",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Exclamation);
                 return;
@@ -68,7 +84,7 @@ namespace BrainHub.WinApp.ModuloTeste
             List<Questao> questoes = repositorioQuestao.SelecionarTodos();
 
             TelaTesteForm telaTeste = new TelaTesteForm(materias, disciplinas, questoes);
-            telaTeste.Text = "Edição de testes";
+            telaTeste.Text = "Edição de Testes";
             telaTeste.ConfigurarTela(testeSelecionado);
             DialogResult opcaoEscolhida = telaTeste.ShowDialog();
             if (opcaoEscolhida == DialogResult.OK)
@@ -77,7 +93,7 @@ namespace BrainHub.WinApp.ModuloTeste
                 repositorioTeste.Editar(teste.id, teste);
             }
             CarregarRegistros();
-            if(opcaoEscolhida == DialogResult.OK)
+            if (opcaoEscolhida == DialogResult.OK)
             {
                 TelaPrincipalForm.Instancia.AtualizarRodape($"Teste editado com sucesso!", TipoStatusEnum.Sucesso);
             }
