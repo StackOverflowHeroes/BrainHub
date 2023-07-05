@@ -26,7 +26,6 @@ namespace BrainHub.Dominio.ModuloQuestao
 
           public override void AtualizarRegistros(Questao registroAtualizado)
           {
-               id = registroAtualizado.id;
                enunciado = registroAtualizado.enunciado;
                alternativas = registroAtualizado.alternativas;
           }
@@ -51,5 +50,14 @@ namespace BrainHub.Dominio.ModuloQuestao
 
                return erros;
           }
+
+          //public override bool Equals(object? obj)
+          //{
+          //     return obj is Questao questao &&
+          //            id == questao.id &&
+          //            enunciado == questao.enunciado &&
+          //            EqualityComparer<Materia>.Default.Equals(materia, questao.materia) &&
+          //            EqualityComparer<List<Alternativa>>.Default.Equals(alternativas, questao.alternativas);
+          //}
      }
 }

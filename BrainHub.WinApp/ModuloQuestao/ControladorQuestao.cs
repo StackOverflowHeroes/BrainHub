@@ -1,5 +1,7 @@
-﻿using BrainHub.Dominio.ModuloMateria;
+﻿using BrainHub.Dominio.ModuloDisciplina;
+using BrainHub.Dominio.ModuloMateria;
 using BrainHub.Dominio.ModuloQuestao;
+using BrainHub.WinApp.ModuloMateria;
 using PartyManager.WinApp.Compartilhado;
 using System;
 using System.Collections.Generic;
@@ -37,7 +39,7 @@ namespace BrainHub.WinApp.ModuloQuestao
           {
                TelaQuestaoForm TelaQuestao = new TelaQuestaoForm();
                TelaQuestao.PopularComboBoxMateria(repositorioMateria.SelecionarTodos());
-               TelaQuestao.ConfigurarTela(repositorioQuestao.SelecionarTodos());
+              
 
                DialogResult opcaoEscolhida = TelaQuestao.ShowDialog();
 
@@ -54,7 +56,28 @@ namespace BrainHub.WinApp.ModuloQuestao
           }
           public override void Editar()
           {
-               throw new NotImplementedException();
+               TelaQuestaoForm TelaQuestao = new TelaQuestaoForm();
+               TelaQuestao.Text = "Edição de Questão";
+               Questao questaoSelecionada = ObterQuestaoSelecionada();
+
+               if (questaoSelecionada == null)
+                    return;
+
+               TelaQuestao.ConfigurarTela(questaoSelecionada);
+               TelaQuestao.PopularComboBoxMateria(repositorioMateria.SelecionarTodos());
+               TelaQuestao.PegarListaQuestoes(repositorioQuestao.SelecionarTodos());
+               DialogResult opcaoEscolhida = TelaQuestao.ShowDialog();
+
+               if (opcaoEscolhida == DialogResult.OK)
+               {
+                    Questao questaoEditada = TelaQuestao.ObterQuestao();
+                    repositorioQuestao.Editar(questaoEditada.id, questaoEditada);
+               }
+
+               CarregarRegistros();
+
+               if (opcaoEscolhida == DialogResult.OK)
+                    TelaPrincipalForm.Instancia.AtualizarRodape("Matéria editada com sucesso!", TipoStatusEnum.Sucesso);
           }
           public override void Deletar()
           {
@@ -74,11 +97,31 @@ namespace BrainHub.WinApp.ModuloQuestao
           {
                List<Questao> ListaCompletaQuestao = repositorioQuestao.SelecionarTodos();
                TabelaQuestao.AtualizarRegistros(ListaCompletaQuestao);
-               TelaPrincipalForm.Instancia.AtualizarRodape($"Visualizando {ListaCompletaQuestao.Count} matéria(s)", TipoStatusEnum.Visualizando);
+               TelaPrincipalForm.Instancia.AtualizarRodape($"Visualizando {ListaCompletaQuestao.Count} questão(ões)", TipoStatusEnum.Visualizando);
           }
           public override string ObterTipoCadastro()
           {
                return "Cadastro de questões";
+          }
+
+          private Questao ObterQuestaoSelecionada()
+          {
+               int id = TabelaQuestao.ObterIdSelecionado();
+               Questao questaoSelecionada = repositorioQuestao.SelecionarPorId(id);
+
+               if (questaoSelecionada == null)
+               {
+                    MessageBox.Show($"Selecione uma questão primeiro!",
+                        "Seleção de questões",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Exclamation);
+
+                    return null;
+               }
+
+               return questaoSelecionada;
+
+
           }
      }
 }
