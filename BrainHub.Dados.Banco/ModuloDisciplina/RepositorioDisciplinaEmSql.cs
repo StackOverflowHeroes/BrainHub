@@ -47,6 +47,20 @@ namespace BrainHub.Dados.Banco.ModuloDisciplina
             return disciplina;
         }
 
+        public List<Disciplina> SelecionarTodos(bool carregarAlugueis = false)
+        {
+            List<Disciplina> disciplinas = base.SelecionarTodos();
+
+            foreach (Disciplina disciplina in disciplinas)
+            {
+                if (disciplina != null)
+                    CarregarMaterias(disciplina);
+            }
+
+            return disciplinas;
+
+        }
+
         private void CarregarMaterias(Disciplina disciplina)
         {
             SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
