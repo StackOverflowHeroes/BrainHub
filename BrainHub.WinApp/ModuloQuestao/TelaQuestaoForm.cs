@@ -18,6 +18,7 @@ namespace BrainHub.WinApp.ModuloQuestao
      public partial class TelaQuestaoForm : Form
      {
           private List<Questao> ListaCompletaQuestao;
+          private string resposta = " ";
 
           public TelaQuestaoForm()
           {
@@ -27,12 +28,17 @@ namespace BrainHub.WinApp.ModuloQuestao
 
           public Questao ObterQuestao()
           {
+               int id = Convert.ToInt32(TextBoxId.Text);
                string enunciado = TextBoxEnunciado.Text;
-               Materia materia = ComboBoxMateria.SelectedItem as Materia;
+               Materia? materia = ComboBoxMateria.SelectedItem as Materia;
                List<Alternativa> alternativas = ObterListaAlternativas();
                DefinirAlternativaCorreta(alternativas);
-               Questao questao = new Questao(enunciado, materia, alternativas);
+               Questao questao = new Questao(enunciado, materia, alternativas, id);
 
+               if (id > 0)
+                    questao.id = id;
+
+               questao.resposta = resposta;
                return questao;
           }
 
@@ -88,7 +94,18 @@ namespace BrainHub.WinApp.ModuloQuestao
                {
                     TelaPrincipalForm.Instancia.AtualizarRodape(ListaErros[0], TipoStatusEnum.Erro);
                     DialogResult = DialogResult.None;
+               }      
+               
+               foreach(Alternativa alternativa in novaQuestao.alternativas)
+               {
+                    if (alternativa.alternativaCorreta)
+                         resposta = alternativa.letraAlternativa;
                }
+          }
+
+          public void PegarListaQuestoes(List<Questao> listaQuestoes)
+          {
+               ListaCompletaQuestao = listaQuestoes;
           }
 
           private void VerificarErros(Questao novaQuestao, List<string> ListaErros)
@@ -139,7 +156,7 @@ namespace BrainHub.WinApp.ModuloQuestao
                     TelaPrincipalForm.Instancia.AtualizarRodape("Insira no máximo quatro alternativas!", TipoStatusEnum.Erro);
                     return;
                }
-                    
+
                TextBoxResposta.Clear();
                CLBoxAlternativa.Items.Add(alternativa);
           }
@@ -176,6 +193,7 @@ namespace BrainHub.WinApp.ModuloQuestao
 
           public void ConfigurarTela(Questao questao)
           {
+               TextBoxId.Text = questao.id.ToString();
                TextBoxEnunciado.Text = questao.enunciado;
                ComboBoxMateria.SelectedItem = questao.materia;
 
@@ -193,11 +211,6 @@ namespace BrainHub.WinApp.ModuloQuestao
 
                     contador++;
                }
-          }
-
-          public void PegarListaQuestoes(List<Questao> questoes)
-          {
-               ListaCompletaQuestao = questoes;
           }
 
           private bool VerificarNomeDuplicado(string nome, int id)

@@ -17,8 +17,6 @@ namespace BrainHub.WinApp.ModuloQuestao
           private IRepositorioMateria repositorioMateria;
           private IRepositorioQuestao repositorioQuestao;
 
-
-
           public ControladorQuestao(IRepositorioMateria repositorioMateria, IRepositorioQuestao repositorioQuestao)
           {
                this.repositorioMateria = repositorioMateria;
@@ -39,13 +37,13 @@ namespace BrainHub.WinApp.ModuloQuestao
           {
                TelaQuestaoForm TelaQuestao = new TelaQuestaoForm();
                TelaQuestao.PopularComboBoxMateria(repositorioMateria.SelecionarTodos());
-              
+               TelaQuestao.PegarListaQuestoes(repositorioQuestao.SelecionarTodos());
 
                DialogResult opcaoEscolhida = TelaQuestao.ShowDialog();
 
                if (opcaoEscolhida == DialogResult.OK)
                {
-                    Questao novaQuestao = TelaQuestao.ObterQuestao();
+                    Questao novaQuestao = TelaQuestao.ObterQuestao();                    
                     repositorioQuestao.Inserir(novaQuestao);
                }
 
@@ -63,8 +61,8 @@ namespace BrainHub.WinApp.ModuloQuestao
                if (questaoSelecionada == null)
                     return;
 
-               TelaQuestao.ConfigurarTela(questaoSelecionada);
                TelaQuestao.PopularComboBoxMateria(repositorioMateria.SelecionarTodos());
+               TelaQuestao.ConfigurarTela(questaoSelecionada);
                TelaQuestao.PegarListaQuestoes(repositorioQuestao.SelecionarTodos());
                DialogResult opcaoEscolhida = TelaQuestao.ShowDialog();
 

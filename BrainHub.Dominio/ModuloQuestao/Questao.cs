@@ -11,23 +11,27 @@ namespace BrainHub.Dominio.ModuloQuestao
      {
           public string enunciado;
           public Materia materia;
+          public string resposta { get; set; }
           public List<Alternativa> alternativas { get; set; }
 
           public Questao()
           {
 
           }
-          public Questao(string enunciado, Materia materia, List<Alternativa> alternativas)
+          public Questao(string enunciado, Materia materia, List<Alternativa> alternativas, int id)
           {
                this.enunciado = enunciado;
                this.materia = materia;
                this.alternativas = alternativas;
+               this.id = id;
           }
 
           public override void AtualizarRegistros(Questao registroAtualizado)
           {
                enunciado = registroAtualizado.enunciado;
                alternativas = registroAtualizado.alternativas;
+               materia = registroAtualizado.materia;
+               resposta = registroAtualizado.resposta;
           }
 
           public override string ToString()
@@ -50,14 +54,5 @@ namespace BrainHub.Dominio.ModuloQuestao
 
                return erros;
           }
-
-          //public override bool Equals(object? obj)
-          //{
-          //     return obj is Questao questao &&
-          //            id == questao.id &&
-          //            enunciado == questao.enunciado &&
-          //            EqualityComparer<Materia>.Default.Equals(materia, questao.materia) &&
-          //            EqualityComparer<List<Alternativa>>.Default.Equals(alternativas, questao.alternativas);
-          //}
      }
 }
