@@ -2,6 +2,8 @@ using BrainHub.Dados.Arquivo.ModuloDisciplina;
 using BrainHub.Dados.Arquivo.ModuloMateria;
 using BrainHub.Dados.Arquivo.ModuloQuestao;
 using BrainHub.Dados.Arquivo.ModuloTeste;
+using BrainHub.Dados.Banco.ModuloDisciplina;
+using BrainHub.Dados.Banco.ModuloMateria;
 using BrainHub.Dominio.ModuloDisciplina;
 using BrainHub.Dominio.ModuloMateria;
 using BrainHub.Dominio.ModuloQuestao;
