@@ -108,7 +108,7 @@ namespace BrainHub.WinApp.ModuloQuestao
 
                foreach (Teste teste in listaTeste)
                {
-                    if (teste.questoes.Contains(questaoSelecionada))
+                    if (teste.listaQuestoes.Contains(questaoSelecionada))
                     {
                          MessageBox.Show($"Não é possível excluir uma questão sendo utilizada em um teste!", "Exclusão de questões", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                          return EhPossivelExcluir = false;

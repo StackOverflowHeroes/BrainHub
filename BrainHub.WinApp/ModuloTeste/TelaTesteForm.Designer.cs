@@ -42,6 +42,8 @@
             groupBox1 = new GroupBox();
             listBoxQuestoes = new ListBox();
             btnSortear = new Button();
+            label5 = new Label();
+            tbId = new TextBox();
             ((System.ComponentModel.ISupportInitialize)numericQuestoes).BeginInit();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -51,7 +53,7 @@
             cbBoxDisciplina.DisplayMember = "nome";
             cbBoxDisciplina.DropDownStyle = ComboBoxStyle.DropDownList;
             cbBoxDisciplina.FormattingEnabled = true;
-            cbBoxDisciplina.Location = new Point(55, 103);
+            cbBoxDisciplina.Location = new Point(52, 115);
             cbBoxDisciplina.Margin = new Padding(3, 2, 3, 2);
             cbBoxDisciplina.Name = "cbBoxDisciplina";
             cbBoxDisciplina.Size = new Size(294, 23);
@@ -60,7 +62,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(55, 86);
+            label3.Location = new Point(52, 98);
             label3.Name = "label3";
             label3.Size = new Size(58, 15);
             label3.TabIndex = 23;
@@ -69,7 +71,7 @@
             // botaoGravar
             // 
             botaoGravar.DialogResult = DialogResult.OK;
-            botaoGravar.Location = new Point(304, 468);
+            botaoGravar.Location = new Point(301, 480);
             botaoGravar.Margin = new Padding(3, 2, 3, 2);
             botaoGravar.Name = "botaoGravar";
             botaoGravar.Size = new Size(94, 34);
@@ -81,7 +83,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(55, 43);
+            label2.Location = new Point(52, 55);
             label2.Name = "label2";
             label2.Size = new Size(40, 15);
             label2.TabIndex = 21;
@@ -89,7 +91,7 @@
             // 
             // TextBoxNome
             // 
-            TextBoxNome.Location = new Point(55, 61);
+            TextBoxNome.Location = new Point(52, 73);
             TextBoxNome.Margin = new Padding(3, 2, 3, 2);
             TextBoxNome.Name = "TextBoxNome";
             TextBoxNome.Size = new Size(443, 23);
@@ -98,7 +100,7 @@
             // botaoCancelar
             // 
             botaoCancelar.DialogResult = DialogResult.Cancel;
-            botaoCancelar.Location = new Point(404, 468);
+            botaoCancelar.Location = new Point(401, 480);
             botaoCancelar.Margin = new Padding(3, 2, 3, 2);
             botaoCancelar.Name = "botaoCancelar";
             botaoCancelar.Size = new Size(94, 34);
@@ -111,16 +113,17 @@
             cbBoxMateria.DisplayMember = "nome";
             cbBoxMateria.DropDownStyle = ComboBoxStyle.DropDownList;
             cbBoxMateria.FormattingEnabled = true;
-            cbBoxMateria.Location = new Point(55, 145);
+            cbBoxMateria.Location = new Point(52, 157);
             cbBoxMateria.Margin = new Padding(3, 2, 3, 2);
             cbBoxMateria.Name = "cbBoxMateria";
             cbBoxMateria.Size = new Size(294, 23);
             cbBoxMateria.TabIndex = 27;
+            cbBoxMateria.SelectedIndexChanged += cbBoxMateria_SelectedIndexChanged;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(55, 128);
+            label1.Location = new Point(52, 140);
             label1.Name = "label1";
             label1.Size = new Size(47, 15);
             label1.TabIndex = 26;
@@ -128,9 +131,10 @@
             // 
             // numericQuestoes
             // 
-            numericQuestoes.Location = new Point(355, 104);
+            numericQuestoes.Location = new Point(352, 116);
             numericQuestoes.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             numericQuestoes.Name = "numericQuestoes";
+            numericQuestoes.ReadOnly = true;
             numericQuestoes.Size = new Size(76, 23);
             numericQuestoes.TabIndex = 28;
             numericQuestoes.Value = new decimal(new int[] { 1, 0, 0, 0 });
@@ -138,7 +142,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(349, 86);
+            label4.Location = new Point(346, 98);
             label4.Name = "label4";
             label4.Size = new Size(82, 15);
             label4.TabIndex = 29;
@@ -147,7 +151,7 @@
             // checkBoxRecuperacao
             // 
             checkBoxRecuperacao.AutoSize = true;
-            checkBoxRecuperacao.Location = new Point(355, 145);
+            checkBoxRecuperacao.Location = new Point(352, 157);
             checkBoxRecuperacao.Name = "checkBoxRecuperacao";
             checkBoxRecuperacao.Size = new Size(143, 19);
             checkBoxRecuperacao.TabIndex = 31;
@@ -158,7 +162,7 @@
             // groupBox1
             // 
             groupBox1.Controls.Add(listBoxQuestoes);
-            groupBox1.Location = new Point(55, 199);
+            groupBox1.Location = new Point(52, 211);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(443, 227);
             groupBox1.TabIndex = 33;
@@ -176,18 +180,40 @@
             // 
             // btnSortear
             // 
-            btnSortear.Location = new Point(55, 461);
+            btnSortear.Location = new Point(52, 473);
             btnSortear.Name = "btnSortear";
             btnSortear.Size = new Size(104, 41);
             btnSortear.TabIndex = 0;
             btnSortear.Text = "Sortear Questões";
             btnSortear.UseVisualStyleBackColor = true;
+            btnSortear.Click += btnSortear_Click;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(52, 13);
+            label5.Name = "label5";
+            label5.Size = new Size(17, 15);
+            label5.TabIndex = 35;
+            label5.Text = "Id";
+            // 
+            // tbId
+            // 
+            tbId.Location = new Point(52, 30);
+            tbId.Margin = new Padding(3, 2, 3, 2);
+            tbId.Name = "tbId";
+            tbId.ReadOnly = true;
+            tbId.Size = new Size(443, 23);
+            tbId.TabIndex = 34;
+            tbId.Text = "0";
             // 
             // TelaTesteForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(554, 543);
+            Controls.Add(label5);
+            Controls.Add(tbId);
             Controls.Add(btnSortear);
             Controls.Add(groupBox1);
             Controls.Add(checkBoxRecuperacao);
@@ -227,5 +253,7 @@
         private GroupBox groupBox1;
         private Button btnSortear;
         private ListBox listBoxQuestoes;
+        private Label label5;
+        private TextBox tbId;
     }
 }

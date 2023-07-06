@@ -19,13 +19,16 @@ namespace BrainHub.WinApp.ModuloTeste
 {
     public partial class TelaTesteForm : Form
     {
+        private List<Teste> listaTestes;
+        private List<Questao> questaoDisponivel;
+
         public TelaTesteForm(List<Materia> materias, List<Disciplina> disciplinas, List<Questao> questoes)
         {
             InitializeComponent();
             this.ConfigurarDialog();
             CarregarMateria(materias);
             CarregarDisciplina(disciplinas);
-            CarregarQuestoes(questoes);
+            this.questaoDisponivel = questoes;
         }
 
         public void CarregarQuestoes(List<Questao> questoes)
@@ -53,10 +56,11 @@ namespace BrainHub.WinApp.ModuloTeste
         }
         public void ConfigurarTela(Teste testeSelecionado)
         {
+            tbId.Text = testeSelecionado.id.ToString();
             TextBoxNome.Text = testeSelecionado.nome;
+            numericQuestoes.Text = testeSelecionado.listaQuestoes.ToString();
             cbBoxDisciplina.SelectedItem = testeSelecionado.disciplina;
             cbBoxMateria.SelectedItem = testeSelecionado.materia;
-            //listBoxQuestoes.Items = testeSelecionado.questoes;
         }
 
         private void checkBoxRecuperacao_CheckedChanged(object sender, EventArgs e)
@@ -73,23 +77,28 @@ namespace BrainHub.WinApp.ModuloTeste
 
         public Teste ObterTeste()
         {
-            int id = 0;
+            int id = Convert.ToInt32(tbId.Text);
             string nome = TextBoxNome.Text;
-            string numeroQuestoes = numericQuestoes.Value.ToString();
+            int numeroQuestoes = int.Parse(numericQuestoes.Text);
+            bool recuperacao = checkBoxRecuperacao.Checked;
             Disciplina disciplina = (Disciplina)cbBoxDisciplina.SelectedItem;
             Materia materia = (Materia)cbBoxMateria.SelectedItem;
+            List<Questao> listaQuestoes = new List<Questao>();
+
+            foreach (var item in listBoxQuestoes.Items)
+            {
+                Questao questao = item as Questao;
+
+                listaQuestoes.Add(questao);
+            }
             DateTime data = DateTime.Now;
-            Teste teste = new Teste();
-
-
-
+            Teste teste = new Teste(nome, numeroQuestoes, disciplina, materia, listaQuestoes, recuperacao, data);
 
             if (id > 0)
                 teste.id = id;
 
             return teste;
         }
-
         private void TelaTesteForm_Load(object sender, EventArgs e)
         {
             cbBoxMateria.Enabled = false;
@@ -109,5 +118,80 @@ namespace BrainHub.WinApp.ModuloTeste
                 DialogResult = DialogResult.None;
             }
         }
+        private void SelecionarQuestao(int quantidade)
+        {
+            if (questaoDisponivel.Count >= quantidade)
+            {
+                List<Questao> questoesSorteadas = SortearQuestao(questaoDisponivel, quantidade);
+                questoesSorteadas.ForEach(s => listBoxQuestoes.Items.Add(s.enunciado));
+
+                if (questaoDisponivel.Count == 0)
+                    MessageBox.Show("Todas as questões já foram selecionadas.");
+            }
+            else
+            {
+                MessageBox.Show("Número de questões excede a quantidade cadastrada.");
+            }
+        }
+
+        private void btnSortear_Click(object sender, EventArgs e)
+        {
+
+            listBoxQuestoes.Items.Clear();
+            int quantidade = int.Parse(numericQuestoes.Text);
+            if (cbBoxDisciplina.SelectedItem != null)
+            {
+
+                Disciplina disciplinaSelecionada = (Disciplina)cbBoxDisciplina.SelectedItem;
+                SelecionarQuestao(quantidade);
+            }
+            else if (cbBoxMateria.SelectedItem != null)
+            {
+                Materia materiaSelecionada = (Materia)cbBoxMateria.SelectedItem;
+                SelecionarQuestao(quantidade);
+            }
+            else
+            {
+                MessageBox.Show("Selecione uma disciplina primeiro.");
+            }
+        }
+
+        private List<Questao> SortearQuestao(List<Questao> questaoDisponivel, int quantidade)
+        {
+            List<Questao> questoesSorteadas = new List<Questao>();
+
+            Random random = new Random();
+            List<Questao> listaCopia = new List<Questao>(questaoDisponivel);
+
+            for (int i = 0; i < quantidade; i++)
+            {
+                int index = random.Next(listaCopia.Count);
+                questoesSorteadas.Add(listaCopia[index]);
+                listaCopia.RemoveAt(index);
+            }
+
+            return questoesSorteadas;
+        }
+
+        private void cbBoxMateria_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            AtualizarSelecao();
+        }
+        private void AtualizarSelecao()
+        {
+            listBoxQuestoes.Items.Clear();
+
+            Materia materiaSelecionada = (Materia)cbBoxMateria.SelectedItem;
+
+            if (materiaSelecionada != null)
+            {
+                List<Questao> questoesFiltradas = questaoDisponivel
+                    .Where(q => q.materia == materiaSelecionada)
+                    .ToList();
+
+                questoesFiltradas.ForEach(q => listBoxQuestoes.Items.Add(q.enunciado));
+            }
+        }
+
     }
 }
