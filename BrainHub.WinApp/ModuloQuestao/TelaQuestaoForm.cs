@@ -33,13 +33,13 @@ namespace BrainHub.WinApp.ModuloQuestao
                Materia? materia = ComboBoxMateria.SelectedItem as Materia;
                List<Alternativa> alternativas = ObterListaAlternativas();
                DefinirAlternativaCorreta(alternativas);
-               Questao questao = new Questao(enunciado, materia, alternativas, id);
+               Questao questao = new Questao(enunciado, materia, id);
 
                if (id > 0)
                     questao.id = id;
 
-               questao.resposta = resposta;
-               questao.materia.questoes.Add(questao);
+               questao.alternativas.AddRange(alternativas);
+               questao.resposta = resposta;              
                return questao;
           }
 
@@ -102,6 +102,9 @@ namespace BrainHub.WinApp.ModuloQuestao
                     if (alternativa.alternativaCorreta)
                          resposta = alternativa.letraAlternativa;
                }
+
+               if(ListaErros.Count == 0)
+               novaQuestao.materia.questoes.Add(novaQuestao);
           }
 
           public void PegarListaQuestoes(List<Questao> listaQuestoes)

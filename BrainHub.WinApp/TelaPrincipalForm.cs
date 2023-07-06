@@ -129,7 +129,7 @@ namespace BrainHub.WinApp
 
           private void Questao_Click(object sender, EventArgs e)
           {
-               controlador = new ControladorQuestao(repositorioMateria, repositorioQuestao);
+               controlador = new ControladorQuestao(repositorioMateria, repositorioQuestao, repositorioTeste);
                ConfigurarTelaPrincipal(controlador);
           }
 

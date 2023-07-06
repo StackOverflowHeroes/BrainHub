@@ -18,12 +18,12 @@ namespace BrainHub.Dominio.ModuloQuestao
           {
 
           }
-          public Questao(string enunciado, Materia materia, List<Alternativa> alternativas, int id)
+          public Questao(string enunciado, Materia materia, int id)
           {
                this.enunciado = enunciado;
                this.materia = materia;
-               this.alternativas = alternativas;
                this.id = id;
+               alternativas = new List<Alternativa>();
           }
 
           public override void AtualizarRegistros(Questao registroAtualizado)

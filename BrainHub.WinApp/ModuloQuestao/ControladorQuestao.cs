@@ -1,6 +1,7 @@
 ﻿using BrainHub.Dominio.ModuloDisciplina;
 using BrainHub.Dominio.ModuloMateria;
 using BrainHub.Dominio.ModuloQuestao;
+using BrainHub.Dominio.ModuloTeste;
 using BrainHub.WinApp.ModuloMateria;
 using PartyManager.WinApp.Compartilhado;
 using System;
@@ -16,11 +17,13 @@ namespace BrainHub.WinApp.ModuloQuestao
           private TabelaQuestaoControl TabelaQuestao;
           private IRepositorioMateria repositorioMateria;
           private IRepositorioQuestao repositorioQuestao;
+          private IRepositorioTeste repositorioTeste;
 
-          public ControladorQuestao(IRepositorioMateria repositorioMateria, IRepositorioQuestao repositorioQuestao)
+          public ControladorQuestao(IRepositorioMateria repositorioMateria, IRepositorioQuestao repositorioQuestao, IRepositorioTeste repositorioTeste)
           {
                this.repositorioMateria = repositorioMateria;
                this.repositorioQuestao = repositorioQuestao;
+               this.repositorioTeste = repositorioTeste;
           }
 
           public override string ToolTipInserir => "Inserir questão";
@@ -44,7 +47,7 @@ namespace BrainHub.WinApp.ModuloQuestao
                if (opcaoEscolhida == DialogResult.OK)
                {
                     Questao novaQuestao = TelaQuestao.ObterQuestao();
-                    repositorioQuestao.Inserir(novaQuestao);                   
+                    repositorioQuestao.Inserir(novaQuestao);
                }
 
                CarregarRegistros();
@@ -101,11 +104,17 @@ namespace BrainHub.WinApp.ModuloQuestao
           {
                bool EhPossivelExcluir = true;
 
-               if (questaoSelecionada.materia != null)
+               List<Teste> listaTeste = repositorioTeste.SelecionarTodos();
+
+               foreach (Teste teste in listaTeste)
                {
-                    MessageBox.Show($"Não é possível excluir uma questão com uma matéria selecionada!","Exclusão de questões",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
-                    EhPossivelExcluir = false;
-               }
+                    if (teste.questoes.Contains(questaoSelecionada))
+                    {
+                         MessageBox.Show($"Não é possível excluir uma questão sendo utilizada em um teste!", "Exclusão de questões", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                         return EhPossivelExcluir = false;
+                    }
+
+               }             
 
                return EhPossivelExcluir;
           }
