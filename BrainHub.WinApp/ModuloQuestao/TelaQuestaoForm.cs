@@ -151,7 +151,7 @@ namespace BrainHub.WinApp.ModuloQuestao
 
                DefinirLetraAlternativas(alternativa);
 
-               if (CLBoxAlternativa.Items.Count > 4)
+               if (CLBoxAlternativa.Items.Count >= 4)
                {
                     TelaPrincipalForm.Instancia.AtualizarRodape("Insira no máximo quatro alternativas!", TipoStatusEnum.Erro);
                     return;
