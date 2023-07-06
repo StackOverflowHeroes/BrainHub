@@ -34,8 +34,8 @@ namespace BrainHub.WinApp.ModuloMateria
                if (opcaoEscolhida == DialogResult.OK)
                {
                     Materia novaMateria = TelaMateria.ObterMateria();
-                    repositorioMateria.Inserir(novaMateria);
                     AdicionarMateriaNaDisciplina(novaMateria);
+                    repositorioMateria.Inserir(novaMateria);
                }
 
                CarregarRegistros();

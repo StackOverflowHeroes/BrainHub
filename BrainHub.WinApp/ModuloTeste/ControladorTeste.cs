@@ -58,7 +58,7 @@ namespace BrainHub.WinApp.ModuloTeste
                         MessageBoxIcon.Exclamation);
                 return;
             }
-            DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir o teste {testeSelecionado}?", "Exclusão de Testes",
+            DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir o teste {testeSelecionado.nome}?", "Exclusão de Testes",
                 MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (opcaoEscolhida == DialogResult.OK)
                 repositorioTeste.Deletar(testeSelecionado);
@@ -79,11 +79,10 @@ namespace BrainHub.WinApp.ModuloTeste
                         MessageBoxIcon.Exclamation);
                 return;
             }
-            List<Materia> materias = repositorioMateria.SelecionarTodos();
             List<Disciplina> disciplinas = repositorioDisciplina.SelecionarTodos();
             List<Questao> questoes = repositorioQuestao.SelecionarTodos();
 
-            TelaTesteForm telaTeste = new TelaTesteForm(materias, disciplinas, questoes);
+            TelaTesteForm telaTeste = new TelaTesteForm(disciplinas, questoes);
             telaTeste.Text = "Edição de Testes";
             telaTeste.ConfigurarTela(testeSelecionado);
             DialogResult opcaoEscolhida = telaTeste.ShowDialog();
@@ -108,19 +107,15 @@ namespace BrainHub.WinApp.ModuloTeste
         public override void Inserir()
         {
             List<Disciplina> disciplinas = repositorioDisciplina.SelecionarTodos();
-            List<Materia> materias = repositorioMateria.SelecionarTodos();
             List<Questao> questoes = repositorioQuestao.SelecionarTodos();
 
-            TelaTesteForm telaTeste = new TelaTesteForm(materias, disciplinas, questoes);
-            //telaTeste.CarregarMateria(repositorioMateria.SelecionarTodos());
-            //telaTeste.CarregarDisciplina(repositorioDisciplina.SelecionarTodos());
-            //telaTeste.CarregarQuestoes(repositorioQuestao.SelecionarTodos());
+            TelaTesteForm telaTeste = new TelaTesteForm(disciplinas, questoes);
+           
             DialogResult opcaoEscolhida = telaTeste.ShowDialog();
             if (opcaoEscolhida == DialogResult.OK)
             {
                 Teste novoTeste = telaTeste.ObterTeste();
                 repositorioTeste.Inserir(novoTeste);
-                novoTeste.AtualizarRegistros(novoTeste);
             }
 
             CarregarRegistros();
