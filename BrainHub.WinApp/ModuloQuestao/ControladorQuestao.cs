@@ -43,8 +43,8 @@ namespace BrainHub.WinApp.ModuloQuestao
 
                if (opcaoEscolhida == DialogResult.OK)
                {
-                    Questao novaQuestao = TelaQuestao.ObterQuestao();                    
-                    repositorioQuestao.Inserir(novaQuestao);
+                    Questao novaQuestao = TelaQuestao.ObterQuestao();
+                    repositorioQuestao.Inserir(novaQuestao);                   
                }
 
                CarregarRegistros();
@@ -79,9 +79,36 @@ namespace BrainHub.WinApp.ModuloQuestao
           }
           public override void Deletar()
           {
-               throw new NotImplementedException();
-          }
+               Questao questaoSelecionada = ObterQuestaoSelecionada();
 
+               if (questaoSelecionada == null || !ValidarSeEhPossivelExcluir(questaoSelecionada))
+                    return;
+
+               DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir a questão ({questaoSelecionada.id}){questaoSelecionada.enunciado}?", "Exclusão de questões",
+                MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+               if (opcaoEscolhida == DialogResult.OK)
+               {
+                    repositorioQuestao.Deletar(questaoSelecionada);
+               }
+
+               CarregarRegistros();
+
+               if (opcaoEscolhida == DialogResult.OK)
+                    TelaPrincipalForm.Instancia.AtualizarRodape("Matéria deletada com sucesso!", TipoStatusEnum.Sucesso);
+          }
+          private bool ValidarSeEhPossivelExcluir(Questao questaoSelecionada)
+          {
+               bool EhPossivelExcluir = true;
+
+               if (questaoSelecionada.materia != null)
+               {
+                    MessageBox.Show($"Não é possível excluir uma questão com uma matéria selecionada!","Exclusão de questões",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                    EhPossivelExcluir = false;
+               }
+
+               return EhPossivelExcluir;
+          }
           public override UserControl ObterListagem()
           {
                if (TabelaQuestao == null)
