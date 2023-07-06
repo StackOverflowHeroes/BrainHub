@@ -33,12 +33,17 @@ namespace BrainHub.WinApp.ModuloQuestao
                 new DataGridViewTextBoxColumn()
                 {
                     Name = "enunciado",
-                    HeaderText= "ENUNCIADO"
+                    HeaderText = "ENUNCIADO"
                 },
                 new DataGridViewTextBoxColumn()
                 {
                     Name = "materia",
-                    HeaderText= "MATÉRIA"
+                    HeaderText = "MATÉRIA"
+                },
+                new DataGridViewTextBoxColumn()
+                {
+                     Name = "resposta",
+                     HeaderText = "RESPOSTA"
                 }
 };
 
@@ -59,11 +64,11 @@ namespace BrainHub.WinApp.ModuloQuestao
           {
                TabelaQuestao.Rows.Clear();
 
-               foreach (Questao registro in ListaCompletaDQuestao)
+               foreach (Questao questao in ListaCompletaDQuestao)
                {
-                    string nomeMateria = registro.materia.nome.ToUpper();
+                    string nomeMateria = questao.materia.nome.ToUpper();
 
-                    TabelaQuestao.Rows.Add(registro.id, registro.enunciado, nomeMateria);
+                    TabelaQuestao.Rows.Add(questao.id, questao.enunciado, nomeMateria, questao.resposta);
                }
           }
      }

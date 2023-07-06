@@ -9,7 +9,9 @@ namespace BrainHub.Dominio.ModuloQuestao
      public class Alternativa
      {
           public string tituloResposta;
-          public int qtdAlternativa { get; set; }
+          public string letraAlternativa { get; set; }
+
+          public bool alternativaCorreta { get; set; }
 
           public Alternativa()
           {
@@ -20,15 +22,20 @@ namespace BrainHub.Dominio.ModuloQuestao
                tituloResposta = titulo;
           }
 
-          public override string ToString()
+          public void DefinirAlternativaCorreta()
           {
-               return $"({qtdAlternativa}) - {tituloResposta}";
+               alternativaCorreta = true;
           }
 
-          public override bool Equals(object? obj)
+          public void DefinirAlternativaIncorreta()
           {
-               return obj is Alternativa alternativa &&
-                      tituloResposta == alternativa.tituloResposta;
+               alternativaCorreta = false;
+          }
+
+          
+          public override string ToString()
+          {
+               return $"({letraAlternativa}) - {tituloResposta}";
           }
      }
 }
