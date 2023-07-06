@@ -39,6 +39,7 @@ namespace BrainHub.WinApp.ModuloQuestao
                     questao.id = id;
 
                questao.resposta = resposta;
+               questao.materia.questoes.Add(questao);
                return questao;
           }
 

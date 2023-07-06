@@ -96,11 +96,11 @@ namespace BrainHub.WinApp.ModuloMateria
           {
                bool EhPossivelExcluir = true;
 
-               //if (materiaSelecionada.questoes.Count > 0)
-               //{
-               //    MessageBox.Show("Não é possível excluir uma matéria com questões cadastradas");
-               //    EhPossivelExcluir = false;
-               //}
+               if (materiaSelecionada.questoes.Count > 0)
+               {
+                    MessageBox.Show("Não é possível excluir uma matéria com questões cadastradas", "Exclusão de matérias", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    EhPossivelExcluir = false;
+               }
 
                return EhPossivelExcluir;
           }
@@ -127,8 +127,6 @@ namespace BrainHub.WinApp.ModuloMateria
                }
 
                return materiaSelecionada;
-
-
           }
 
           public override void CarregarRegistros()
