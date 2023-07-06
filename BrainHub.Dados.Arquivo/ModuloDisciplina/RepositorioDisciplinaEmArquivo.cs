@@ -7,6 +7,7 @@ namespace BrainHub.Dados.Arquivo.ModuloDisciplina
         public RepositorioDisciplinaEmArquivo(ContextoDados contexto) : base(contexto)
         {
         }
+      
 
         protected override List<Disciplina> ObterRegistros()
         {
