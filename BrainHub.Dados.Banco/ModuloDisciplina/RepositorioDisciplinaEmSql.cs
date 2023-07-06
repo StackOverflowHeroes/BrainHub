@@ -55,7 +55,7 @@ namespace BrainHub.Dados.Banco.ModuloDisciplina
 
             foreach (Disciplina disciplina in disciplinas)
             {
-                if (disciplina != null)
+                if (carregarAlugueis)
                     CarregarMaterias(disciplina);
             }
 
