@@ -63,7 +63,7 @@ namespace BrainHub.WinApp.ModuloTeste
                 listBoxQuestoes.Items.Add(q);
             }
 
-            if (testeSelecionado != null)
+            if(testeSelecionado.provaRecuperacao == true)
                 checkBoxRecuperacao.Checked = true;
         }
 
