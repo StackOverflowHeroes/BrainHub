@@ -54,9 +54,14 @@ namespace BrainHub.WinApp.ModuloTeste
         {
             tbId.Text = testeSelecionado.id.ToString();
             TextBoxNome.Text = testeSelecionado.nome;
-            numericQuestoes.Text = testeSelecionado.listaQuestoes.ToString();
+            numericQuestoes.Value = testeSelecionado.listaQuestoes.Count;
             cbBoxDisciplina.SelectedItem = testeSelecionado.disciplina;
             cbBoxMateria.SelectedItem = testeSelecionado.materia;
+
+            foreach(Questao q in testeSelecionado.listaQuestoes)
+            {
+                listBoxQuestoes.Items.Add(q);
+            }
 
             if (testeSelecionado != null)
                 checkBoxRecuperacao.Checked = true;
@@ -81,13 +86,13 @@ namespace BrainHub.WinApp.ModuloTeste
             int id = Convert.ToInt32(tbId.Text);
             string nome = TextBoxNome.Text;
             int numeroQuestoes = int.Parse(numericQuestoes.Text);
-            bool recuperacao = checkBoxRecuperacao.Checked;
             Disciplina disciplina = (Disciplina)cbBoxDisciplina.SelectedItem;
             Materia materia = (Materia)cbBoxMateria.SelectedItem;
-            List<Questao> listaQuestoes = new List<Questao>();
-            
+            bool provaRecuperacao = checkBoxRecuperacao.Checked;
+            List<Questao> listaQuestoes = listBoxQuestoes.Items.Cast<Questao>().ToList();
+
             DateTime data = DateTime.Now;
-            Teste teste = new Teste(nome, numeroQuestoes, disciplina, materia, listaQuestoes, recuperacao, data);
+            Teste teste = new Teste(nome, numeroQuestoes, disciplina, materia, listaQuestoes, provaRecuperacao, data);
 
             if (id > 0)
                 teste.id = id;
@@ -127,9 +132,10 @@ namespace BrainHub.WinApp.ModuloTeste
         {
             tbId.Text = 0.ToString();
             TextBoxNome.Text = teste.nome;
-            numericQuestoes.Text = teste.listaQuestoes.ToString();
+            numericQuestoes.Value = 1;
             cbBoxDisciplina.SelectedItem = teste.disciplina;
             cbBoxMateria.SelectedItem = teste.materia;
+            listBoxQuestoes.Items.Clear();
 
             if (teste != null)
                 checkBoxRecuperacao.Checked = true;
@@ -148,7 +154,7 @@ namespace BrainHub.WinApp.ModuloTeste
             }
 
             List<Questao> questoesSorteadas = SortearQuestoesMaterias(materia.questoes, quantidade);
-            questoesSorteadas.ForEach(s => listBoxQuestoes.Items.Add(s.enunciado));
+            questoesSorteadas.ForEach(s => listBoxQuestoes.Items.Add(s));
         }
 
         private void SelecionarQuestoesDisciplina(Disciplina disciplina, int quantidade)
