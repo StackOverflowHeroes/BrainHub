@@ -41,6 +41,12 @@ namespace BrainHub.WinApp.ModuloTeste
             foreach (Teste teste in ListaCompletaDTeste)
             {
                 string serie = "";
+                string materia = "";
+
+                if(teste.materia == null)
+                    materia = string.Empty;
+                else
+                    materia = teste.materia.nome.ToUpper();
 
                 if (teste.serie == SerieEnum.primeiraSerie)
                     serie = "1ª série";
@@ -51,7 +57,7 @@ namespace BrainHub.WinApp.ModuloTeste
                     teste.data.ToShortDateString(),
                     serie,
                     teste.disciplina.nome.ToUpper(),
-                    teste.materia.nome.ToUpper());
+                    materia);
             }
         }
         private void ConfigurarColunas()
