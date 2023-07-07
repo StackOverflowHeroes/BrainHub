@@ -21,6 +21,7 @@ namespace BrainHub.WinApp.ModuloTeste
     {
         private List<Questao> questaoDisponivel;
         private List<Disciplina> ListaCompletaDisciplina;
+        private List<Teste> ListaCompletaTeste;
 
         public TelaTesteForm(List<Disciplina> disciplinas, List<Questao> questoes)
         {
@@ -102,11 +103,41 @@ namespace BrainHub.WinApp.ModuloTeste
             if (listBoxQuestoes.Items.Count < 1)
                 ListaErros.Add("Número mínimo de questões é 1!");
 
+            if (VerificarNomeDuplicado(teste.nome, teste.id))
+                ListaErros.Add("Não é possível cadastrar uma disciplina duas vezes");
+
             if (ListaErros.Count > 0)
             {
                 TelaPrincipalForm.Instancia.AtualizarRodape(ListaErros[0], TipoStatusEnum.Erro);
                 DialogResult = DialogResult.None;
             }
+        }
+
+        private bool VerificarNomeDuplicado(string nome, int id)
+        {
+            bool NomeDuplicado = ListaCompletaTeste.Any(teste => teste.nome.ToLower() == nome.ToLower() && teste.id != id);
+
+            if (NomeDuplicado)
+                return true;
+            else
+                return false;
+        }
+
+        public void ConfigurarDuplicacaoTeste(Teste teste)
+        {
+            tbId.Text = 0.ToString();
+            TextBoxNome.Text = teste.nome;
+            numericQuestoes.Text = teste.listaQuestoes.ToString();
+            cbBoxDisciplina.SelectedItem = teste.disciplina;
+            cbBoxMateria.SelectedItem = teste.materia;
+
+            if (teste != null)
+                checkBoxRecuperacao.Checked = true;
+        }
+
+        public void SalvarListaTestes(List<Teste> listaCompletaTeste)
+        {
+           this.ListaCompletaTeste = listaCompletaTeste;
         }
 
         private void SelecionarQuestoesMateria(Materia materia, int quantidade)

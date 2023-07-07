@@ -34,9 +34,12 @@ namespace BrainHub.WinApp.ModuloTeste
         public override string ToolTipInserir => "Inserir teste";
         public override string ToolTipEditar => "Editar teste";
         public override string ToolTipDeletar => "Deletar teste";
+        public override string ToolTipDuplicar => "Duplicar teste";
         public override bool InserirHabilitado { get { return true; } }
         public override bool EditarHabilitado { get { return true; } }
         public override bool DeletarHabilitado { get { return true; } }
+
+        public override bool DuplicarHabilitado { get { return true; } }
 
 
 
@@ -83,6 +86,7 @@ namespace BrainHub.WinApp.ModuloTeste
             List<Questao> questoes = repositorioQuestao.SelecionarTodos();
 
             TelaTesteForm telaTeste = new TelaTesteForm(disciplinas, questoes);
+            telaTeste.SalvarListaTestes(repositorioTeste.SelecionarTodos());
             telaTeste.Text = "Edição de Testes";
             telaTeste.ConfigurarTela(testeSelecionado);
             DialogResult opcaoEscolhida = telaTeste.ShowDialog();
@@ -110,7 +114,8 @@ namespace BrainHub.WinApp.ModuloTeste
             List<Questao> questoes = repositorioQuestao.SelecionarTodos();
 
             TelaTesteForm telaTeste = new TelaTesteForm(disciplinas, questoes);
-           
+            telaTeste.SalvarListaTestes(repositorioTeste.SelecionarTodos());
+
             DialogResult opcaoEscolhida = telaTeste.ShowDialog();
             if (opcaoEscolhida == DialogResult.OK)
             {
@@ -138,6 +143,39 @@ namespace BrainHub.WinApp.ModuloTeste
         public override string ObterTipoCadastro()
         {
             return "Cadastro de testes";
+        }
+
+        public override void Duplicar()
+        {
+            Teste testeSelecionado = ObterTesteSelecionado();
+            if (testeSelecionado == null)
+            {
+                MessageBox.Show($"Selecione um teste primeiro!",
+                        "Edição de Testes",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            List<Disciplina> disciplinas = repositorioDisciplina.SelecionarTodos();
+            List<Questao> questoes = repositorioQuestao.SelecionarTodos();
+
+            TelaTesteForm telaTeste = new TelaTesteForm(disciplinas, questoes);
+            telaTeste.Text = "Duplicar Teste";
+            telaTeste.ConfigurarDuplicacaoTeste(testeSelecionado);
+            telaTeste.SalvarListaTestes(repositorioTeste.SelecionarTodos());
+            DialogResult opcaoEscolhida = telaTeste.ShowDialog();
+            if (opcaoEscolhida == DialogResult.OK)
+            {
+                Teste teste = telaTeste.ObterTeste();
+                teste.id = 0;
+                repositorioTeste.Inserir(teste);
+            }
+            CarregarRegistros();
+            if (opcaoEscolhida == DialogResult.OK)
+            {
+                TelaPrincipalForm.Instancia.AtualizarRodape($"Teste editado com sucesso!", TipoStatusEnum.Sucesso);
+            }
         }
     }
 }
