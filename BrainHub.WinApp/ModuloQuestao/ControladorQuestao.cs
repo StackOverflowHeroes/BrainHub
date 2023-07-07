@@ -87,7 +87,7 @@ namespace BrainHub.WinApp.ModuloQuestao
                if (questaoSelecionada == null || !ValidarSeEhPossivelExcluir(questaoSelecionada))
                     return;
 
-               DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir a questão ({questaoSelecionada.id}){questaoSelecionada.enunciado}?", "Exclusão de questões",
+               DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir a questão de id {questaoSelecionada.id}?", "Exclusão de questões",
                 MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 
                if (opcaoEscolhida == DialogResult.OK)
