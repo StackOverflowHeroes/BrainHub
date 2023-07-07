@@ -110,7 +110,7 @@ namespace BrainHub.WinApp.ModuloTeste
                 ListaErros.Add("Número mínimo de questões é 1!");
 
             if (VerificarNomeDuplicado(teste.nome, teste.id))
-                ListaErros.Add("Não é possível cadastrar uma disciplina duas vezes");
+                ListaErros.Add("Não é possível cadastrar um teste duas vezes");
 
             if (ListaErros.Count > 0)
             {
@@ -138,7 +138,7 @@ namespace BrainHub.WinApp.ModuloTeste
             cbBoxMateria.SelectedItem = teste.materia;
             listBoxQuestoes.Items.Clear();
 
-            if (teste != null)
+            if (teste.provaRecuperacao == true)
                 checkBoxRecuperacao.Checked = true;
         }
 
@@ -228,6 +228,7 @@ namespace BrainHub.WinApp.ModuloTeste
         private void cbBoxDisciplina_SelectedIndexChanged(object sender, EventArgs e)
         {
             Disciplina disciplinaSelecionada = cbBoxDisciplina.SelectedItem as Disciplina;
+            listBoxQuestoes.Items.Clear();
             CarregarMaterias(disciplinaSelecionada.materias);
         }
     }
