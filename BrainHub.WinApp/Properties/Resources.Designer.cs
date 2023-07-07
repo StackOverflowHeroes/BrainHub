@@ -63,9 +63,9 @@ namespace BrainHub.WinApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap addIcon {
+        internal static System.Drawing.Bitmap adicionar {
             get {
-                object obj = ResourceManager.GetObject("addIcon", resourceCulture);
+                object obj = ResourceManager.GetObject("adicionar", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace BrainHub.WinApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap deleteIcon {
+        internal static System.Drawing.Bitmap deletar {
             get {
-                object obj = ResourceManager.GetObject("deleteIcon", resourceCulture);
+                object obj = ResourceManager.GetObject("deletar", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,9 @@ namespace BrainHub.WinApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap editIcon {
+        internal static System.Drawing.Bitmap editar {
             get {
-                object obj = ResourceManager.GetObject("editIcon", resourceCulture);
+                object obj = ResourceManager.GetObject("editar", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -106,6 +106,16 @@ namespace BrainHub.WinApp.Properties {
         internal static System.Drawing.Bitmap gerar_gabarito {
             get {
                 object obj = ResourceManager.GetObject("gerar_gabarito", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap visualizar_teste {
+            get {
+                object obj = ResourceManager.GetObject("visualizar_teste", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

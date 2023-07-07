@@ -131,7 +131,7 @@
             // 
             btnInserir.DisplayStyle = ToolStripItemDisplayStyle.Image;
             btnInserir.Enabled = false;
-            btnInserir.Image = Properties.Resources.addIcon;
+            btnInserir.Image = Properties.Resources.adicionar;
             btnInserir.ImageScaling = ToolStripItemImageScaling.None;
             btnInserir.ImageTransparentColor = Color.Magenta;
             btnInserir.Name = "btnInserir";
@@ -145,7 +145,7 @@
             // 
             btnEditar.DisplayStyle = ToolStripItemDisplayStyle.Image;
             btnEditar.Enabled = false;
-            btnEditar.Image = Properties.Resources.editIcon;
+            btnEditar.Image = Properties.Resources.editar;
             btnEditar.ImageScaling = ToolStripItemImageScaling.None;
             btnEditar.ImageTransparentColor = Color.Magenta;
             btnEditar.Name = "btnEditar";
@@ -159,7 +159,7 @@
             // 
             btnDeletar.DisplayStyle = ToolStripItemDisplayStyle.Image;
             btnDeletar.Enabled = false;
-            btnDeletar.Image = Properties.Resources.deleteIcon;
+            btnDeletar.Image = Properties.Resources.deletar;
             btnDeletar.ImageScaling = ToolStripItemImageScaling.None;
             btnDeletar.ImageTransparentColor = Color.Magenta;
             btnDeletar.Name = "btnDeletar";
