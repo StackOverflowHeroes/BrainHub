@@ -13,26 +13,31 @@ using System.Windows.Forms;
 
 namespace BrainHub.WinApp.ModuloTeste
 {
-     public partial class TelaDetalhesTesteForm : Form
-     {
+    public partial class TelaDetalhesTesteForm : Form
+    {
 
-          public TelaDetalhesTesteForm()
-          {
-               InitializeComponent();
-               this.ConfigurarDialog();
-          }
+        public TelaDetalhesTesteForm()
+        {
+            InitializeComponent();
+            this.ConfigurarDialog();
+        }
 
-          public void ConfigurarTela(Teste testeSelecionado)
-          {
-               TextBoxTitulo.Text = testeSelecionado.nome;
-               TextBoxDisciplina.Text = testeSelecionado.disciplina.nome;
-               TextBoxMatéria.Text = testeSelecionado.materia.nome;
+        public void ConfigurarTela(Teste testeSelecionado)
+        {
+            string materiaNome = "";
 
-               foreach (Questao q in testeSelecionado.listaQuestoes)
-               {
-                    listBoxQuestoes.Items.Add(q);
-               }
-          }
+            if (testeSelecionado.materia != null)
+                materiaNome = testeSelecionado.materia.nome;
 
-     }
+            TextBoxTitulo.Text = testeSelecionado.nome;
+            TextBoxDisciplina.Text = testeSelecionado.disciplina.nome;
+            TextBoxMatéria.Text = materiaNome;
+
+            foreach (Questao q in testeSelecionado.listaQuestoes)
+            {
+                listBoxQuestoes.Items.Add(q);
+            }
+        }
+
+    }
 }
