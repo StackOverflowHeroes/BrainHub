@@ -10,7 +10,7 @@ namespace BrainHub.Dominio.ModuloTeste
         public string nome { get; set; }
         public int numeroQuestoes { get; set; }
         public Disciplina disciplina { get; set; }
-        public Materia materia { get; set; }
+        public Materia? materia { get; set; }
         public List<Questao> listaQuestoes { get; set; }
         public bool provaRecuperacao { get; set; }
         public SerieEnum serie { get; set; }
@@ -22,7 +22,7 @@ namespace BrainHub.Dominio.ModuloTeste
 
         }
 
-        public Teste(string nome, int numeroQuestoes, Disciplina disciplina, Materia materia, List<Questao> listaQuestoes, bool provaRecuperacao, DateTime data)
+        public Teste(string nome, int numeroQuestoes, Disciplina disciplina, Materia? materia, List<Questao> listaQuestoes, bool provaRecuperacao, DateTime data)
         {
             this.id = id;
             this.nome = nome;
@@ -72,6 +72,17 @@ namespace BrainHub.Dominio.ModuloTeste
                 provaRecuperacao == teste.provaRecuperacao &&
                 EqualityComparer<Materia>.Default.Equals(materia, teste.materia) &&
                 EqualityComparer<Disciplina>.Default.Equals(disciplina, teste.disciplina);
+        }
+
+        public void SortearQuestoes()
+        {
+            List<Questao> ListaCompletaQuestoes = provaRecuperacao ? disciplina.PegarQuestoes() : materia.questoes;
+
+            if (ListaCompletaQuestoes.Count >= numeroQuestoes)
+               listaQuestoes = ListaCompletaQuestoes.Randomize(numeroQuestoes).ToList();
+            else
+                listaQuestoes = ListaCompletaQuestoes.Randomize().ToList();
+
         }
     }
 }

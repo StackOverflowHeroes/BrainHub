@@ -1,5 +1,6 @@
 ﻿
 using BrainHub.Dominio.ModuloMateria;
+using BrainHub.Dominio.ModuloQuestao;
 
 namespace BrainHub.Dominio.ModuloDisciplina
 {
@@ -37,6 +38,13 @@ namespace BrainHub.Dominio.ModuloDisciplina
         public void AdicionarMateria(Materia novaMateria)
         {
             materias.Add(novaMateria);
+        }
+
+        public List<Questao> PegarQuestoes()
+        {
+            List<Questao> ListaCompleta = new List<Questao>();
+            materias.ForEach(materia => ListaCompleta.AddRange(materia.questoes));
+            return ListaCompleta;
         }
     }
 }

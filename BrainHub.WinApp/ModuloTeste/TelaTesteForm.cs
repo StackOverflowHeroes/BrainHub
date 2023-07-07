@@ -82,6 +82,13 @@ namespace BrainHub.WinApp.ModuloTeste
             }
         }
 
+        private void cbBoxDisciplina_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Disciplina disciplinaSelecionada = cbBoxDisciplina.SelectedItem as Disciplina;
+            listBoxQuestoes.Items.Clear();
+            CarregarMaterias(disciplinaSelecionada.materias);
+        }
+
         public Teste ObterTeste()
         {
             int id = Convert.ToInt32(tbId.Text);
@@ -91,8 +98,8 @@ namespace BrainHub.WinApp.ModuloTeste
             Materia materia = (Materia)cbBoxMateria.SelectedItem;
             bool provaRecuperacao = checkBoxRecuperacao.Checked;
             List<Questao> listaQuestoes = listBoxQuestoes.Items.Cast<Questao>().ToList();
-
             DateTime data = DateTime.Now;
+
             Teste teste = new Teste(nome, numeroQuestoes, disciplina, materia, listaQuestoes, provaRecuperacao, data);
 
             if (id > 0)
@@ -147,90 +154,35 @@ namespace BrainHub.WinApp.ModuloTeste
             this.ListaCompletaTeste = listaCompletaTeste;
         }
 
-        private void SelecionarQuestoesMateria(Materia materia, int quantidade)
-        {
-            if (materia.questoes.Count == 0)
-            {
-                MessageBox.Show("Número de questões excede a quantidade cadastrada.");
-            }
-
-            List<Questao> questoesSorteadas = SortearQuestoesMaterias(materia.questoes, quantidade);
-            questoesSorteadas.ForEach(s => listBoxQuestoes.Items.Add(s));
-        }
-
-        private void SelecionarQuestoesDisciplina(Disciplina disciplina, int quantidade)
-        {
-            if (questaoDisponivel.Count >= quantidade)
-            {
-                // List<Questao> questoesSorteadas = SortearQuestao(quantidade);
-                // questoesSorteadas.ForEach(s => listBoxQuestoes.Items.Add(s.enunciado));
-
-            }
-            else
-            {
-                MessageBox.Show("Número de questões excede a quantidade cadastrada.");
-            }
-        }
-
         private void btnSortear_Click(object sender, EventArgs e)
         {
             listBoxQuestoes.Items.Clear();
-            int quantidade = int.Parse(numericQuestoes.Text);
+            Teste teste = ObterTeste();
+            List<string> ListaErros = teste.ValidarErros();
 
-            if (cbBoxMateria.SelectedItem != null)
-            {
-                Materia materiaSelecionada = (Materia)cbBoxMateria.SelectedItem;
-                SelecionarQuestoesMateria(materiaSelecionada, quantidade);
-            }
-            else if (cbBoxDisciplina.SelectedItem != null)
-            {
+            if (listBoxQuestoes.Items.Count < 1)
+                ListaErros.Add("Número mínimo de questões é 1!");
 
-                Disciplina disciplinaSelecionada = (Disciplina)cbBoxDisciplina.SelectedItem;
-                SelecionarQuestoesDisciplina(disciplinaSelecionada, quantidade);
-            }
-            else
+            if (VerificarNomeDuplicado(teste.nome, teste.id))
+                ListaErros.Add("Não é possível cadastrar um teste duas vezes");
+
+            if (ListaErros.Count > 0)
             {
-                MessageBox.Show("Selecione uma disciplina primeiro.");
+                TelaPrincipalForm.Instancia.AtualizarRodape(ListaErros[0], TipoStatusEnum.Erro);
+                DialogResult = DialogResult.None;
             }
+
+            teste.SortearQuestoes();
+
+            foreach(Questao q in teste.listaQuestoes)
+            {
+                listBoxQuestoes.Items.Add(q);
+            }
+
         }
 
-        //private List<Questao> SortearQuestoesMaterias(List<Questao> ListaQuestoesMateria, int quantidade)
-        //{
-        //    List<Questao> questoesSorteadas = new List<Questao>();
 
-        //    Random random = new Random();
-        //    List<Questao> listaCopia = new List<Questao>(ListaQuestoesMateria);
-
-        //    for (int i = 0; i < quantidade; i++)
-        //    {
-        //        int index = random.Next(listaCopia.Count);
-        //        questoesSorteadas.Add(listaCopia[index]);
-        //        listaCopia.RemoveAt(index);
-        //    }
-
-        //    return questoesSorteadas;
-        //}
-
-
-        private List<Questao> SortearQuestoesMaterias(List<Questao> ListaQuestoesMateria, int quantidade)
-        {
-            List<Questao> questoesAleatorias = new List<Questao>();
-
-            while (questoesAleatorias.Count != quantidade)
-            {
-                int random = new Random().Next(0, ListaQuestoesMateria.Count);
-                questoesAleatorias.Add(ListaQuestoesMateria[random]);
-            }
-
-            return questoesAleatorias;
-        }
-
-        private void cbBoxDisciplina_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Disciplina disciplinaSelecionada = cbBoxDisciplina.SelectedItem as Disciplina;
-            listBoxQuestoes.Items.Clear();
-            CarregarMaterias(disciplinaSelecionada.materias);
-        }
+        
     }
 
 
