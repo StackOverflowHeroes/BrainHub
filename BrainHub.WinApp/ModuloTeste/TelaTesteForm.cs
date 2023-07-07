@@ -58,7 +58,7 @@ namespace BrainHub.WinApp.ModuloTeste
             cbBoxDisciplina.SelectedItem = testeSelecionado.disciplina;
             cbBoxMateria.SelectedItem = testeSelecionado.materia;
 
-            foreach(Questao q in testeSelecionado.listaQuestoes)
+            foreach (Questao q in testeSelecionado.listaQuestoes)
             {
                 listBoxQuestoes.Items.Add(q);
             }
@@ -71,13 +71,14 @@ namespace BrainHub.WinApp.ModuloTeste
         {
             if (checkBoxRecuperacao.Checked)
             {
-                cbBoxMateria.Enabled = true;
+                cbBoxMateria.Enabled = false;
+                listBoxQuestoes.Items.Clear();
+                cbBoxMateria.SelectedIndex = -1;
             }
             else
             {
-                listBoxQuestoes.Items.Clear();
-                cbBoxMateria.Enabled = false;
-                cbBoxMateria.SelectedItem = null;
+                cbBoxMateria.Enabled = true;
+                
             }
         }
 
@@ -143,7 +144,7 @@ namespace BrainHub.WinApp.ModuloTeste
 
         public void SalvarListaTestes(List<Teste> listaCompletaTeste)
         {
-           this.ListaCompletaTeste = listaCompletaTeste;
+            this.ListaCompletaTeste = listaCompletaTeste;
         }
 
         private void SelecionarQuestoesMateria(Materia materia, int quantidade)
@@ -215,7 +216,7 @@ namespace BrainHub.WinApp.ModuloTeste
         {
             List<Questao> questoesAleatorias = new List<Questao>();
 
-            while(questoesAleatorias.Count != quantidade)
+            while (questoesAleatorias.Count != quantidade)
             {
                 int random = new Random().Next(0, ListaQuestoesMateria.Count);
                 questoesAleatorias.Add(ListaQuestoesMateria[random]);
