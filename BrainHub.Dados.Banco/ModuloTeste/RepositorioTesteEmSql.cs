@@ -77,5 +77,29 @@ namespace BrainHub.Dados.Banco.ModuloTeste
                                                                 INNER JOIN TBMateria AS M ON T.materia_id = M.id
                                                           WHERE [ID] = @ID";
 
+        protected string sqlInserirQuestoes => @"INSERT INTO [TBTESTE_TBQUESTAO]
+                                                            (TESTE_ID]
+                                                            ,[QUESTAO_ID])
+                                                        VALUES
+                                                            (@TESTE_ID
+                                                            ,QUESTAO_ID)";
+        protected string sqlSelecionarQuestoes => @"SELECT TQ.[TESTE_ID]
+                                                           ,TQ.[QUESTAO_ID]
+                                                           ,Q.[ID] AS QUESTAO_ID
+                                                           ,Q.[MATERIA_ID] AS QUESTAO_MATERIA_ID
+                                                           ,Q.[ENUNCIADO] AS QUESTAO_ENUNCIADO
+                                                           ,Q.[ALTERNATIVACORRETA] AS QUESTAO_ALTERNATIVACORRETA
+                                                           ,M.id AS MATERIA_ID
+                                                           ,M.nome AS MATERIA_NOME
+                                                           ,M.serie AS MATERIA_SERIE
+                                                           ,M.[DISCIPLINA_ID] AS MATERIA_DISCIPLINA_ID
+                                                           ,D.id AS DISCIPLINA_ID
+                                                           ,D.nome AS DISCIPLINA_NOME
+                                                    FROM TBTESTE_QUESTAO AS TQ
+                                                         INNER JOIN [TBQUESTAO] AS Q ON TQ.[QUESTAO_ID] = Q.[ID]
+                                                         INNER JOIN [TBMATERIA] AS M ON Q.[MATERIA_ID] = M.[ID]
+                                                         INNER JOIN [TBDISCIPLINA] AS D ON M.[DISCIPLINA_ID] = D.[ID]
+                                                    WHERE [TESTE_ID] = @ID";
+        
     }
 }

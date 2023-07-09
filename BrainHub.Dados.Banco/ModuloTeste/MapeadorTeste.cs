@@ -2,6 +2,7 @@
 using BrainHub.Dados.Banco.ModuloMateria;
 using BrainHub.Dominio.ModuloDisciplina;
 using BrainHub.Dominio.ModuloMateria;
+using BrainHub.Dominio.ModuloQuestao;
 using BrainHub.Dominio.ModuloTeste;
 using System;
 using System.Collections.Generic;
@@ -36,8 +37,8 @@ namespace BrainHub.Dados.Banco.ModuloTeste
             Materia materia = null;
             if (leitorRegistros["MATERIA_ID"] != DBNull.Value)
                 materia = new MapeadorMateria().ConverterRegistro(leitorRegistros);
-            DateTime data = Convert.ToDateTime(leitorRegistros["DATA"]);
             bool provaRecuperacao = Convert.ToBoolean(leitorRegistros["PROVA_RECUPERACAO"]);
+            DateTime data = Convert.ToDateTime(leitorRegistros["DATA"]);
             
 
             teste.id = id;
@@ -45,10 +46,10 @@ namespace BrainHub.Dados.Banco.ModuloTeste
             teste.numeroQuestoes = numeroQuestoes;
             teste.disciplina = disciplina;
             teste.materia = materia;
-            teste.data = data;
             teste.provaRecuperacao = provaRecuperacao;
+            teste.data = data;
             
-            return new Teste();
+            return teste;
         }
     }
 }
