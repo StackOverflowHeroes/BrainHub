@@ -34,7 +34,7 @@ namespace BrainHub.Dados.Banco.ModuloTeste
                                                                    ,[PROVARECUPERACAO] = @PROVARECUPERACAO
                                                                    ,[DATA] = @DATA
                                                                    ,disciplina_id = @DISCIPLINA_ID
-                                                                   ,materia_id = MATERIA_ID
+                                                                   ,materia_id = @MATERIA_ID
                                                                    ,[SERIE] = @SERIE
                                                                 WHERE
                                                                    [ID] = @ID";
