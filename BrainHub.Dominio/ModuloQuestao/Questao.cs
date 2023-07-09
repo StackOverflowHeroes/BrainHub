@@ -18,11 +18,12 @@ namespace BrainHub.Dominio.ModuloQuestao
           {
 
           }
-          public Questao(string enunciado, Materia materia, int id)
+          public Questao(int id, string enunciado, string resposta, Materia materia)
           {
-               this.enunciado = enunciado;
-               this.materia = materia;
                this.id = id;
+               this.enunciado = enunciado;
+               this.resposta = resposta;
+               this.materia = materia;
                alternativas = new List<Alternativa>();
           }
 
