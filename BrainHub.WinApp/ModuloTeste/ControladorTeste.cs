@@ -208,6 +208,15 @@ namespace BrainHub.WinApp.ModuloTeste
                         MessageBoxIcon.Exclamation);
                 return;
             }
+
+            TelaPDFTesteForm TelaPdfTeste = new TelaPDFTesteForm();
+            TelaPdfTeste.Text = "Gerar PDF";
+            
+            if (TelaPdfTeste.ShowDialog() == DialogResult.OK)
+            {
+
+            }
+
         }
     }
 }
