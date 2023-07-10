@@ -16,7 +16,7 @@ namespace BrainHub.Dominio.ModuloTeste
         private XFont font;
         private double largura = 40;
         private double altura = 40;
-        private const string path = "Compartilhado\\meu_teste.pdf";
+        private string path = "";
 
         public GeradorPDF()
         {
@@ -31,8 +31,17 @@ namespace BrainHub.Dominio.ModuloTeste
         {
             DesenharCabecalho();
             DesenharCorpo();
+            PegarPathArquivo();
             document.Save(path);
 
+        }
+
+        private void PegarPathArquivo()
+        {
+            if (tipo == TipoPDFEnum.PDF_Teste)
+                path = "Compartilhado\\MeuTeste.pdf";
+            else
+                path = "Compartilhado\\MeuTesteGabarito.pdf";
         }
         private void DesenharCabecalho()
         {
@@ -64,7 +73,7 @@ namespace BrainHub.Dominio.ModuloTeste
                 {
                     font = new XFont("Arial", 10, XFontStyle.Regular);
 
-                    if ( alternativa.alternativaCorreta)
+                    if (tipo == TipoPDFEnum.PDF_Gabarito && alternativa.alternativaCorreta)
                     {
                         XFont fontAlternativaCorreta = new XFont("Arial", 12, XFontStyle.Bold);
                         gfx.DrawString("X", fontAlternativaCorreta, XBrushes.Green, largura, altura);
@@ -74,7 +83,7 @@ namespace BrainHub.Dominio.ModuloTeste
 
                     double x = largura;
 
-                    if (alternativa.alternativaCorreta)
+                    if (tipo == TipoPDFEnum.PDF_Gabarito && alternativa.alternativaCorreta)
                     {
                         XFont fontAlternativaCorreta = new XFont("Arial", 10, XFontStyle.Bold);
                         gfx.DrawString(Capitalize(alternativa.tituloResposta), fontAlternativaCorreta, XBrushes.Green, x + 20, altura);
