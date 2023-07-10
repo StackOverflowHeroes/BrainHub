@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace BrainHub.Dados.Banco.ModuloTeste
 {
-    internal class MapeadorTeste : MapeadorBase<Teste>
+    public class MapeadorTeste : MapeadorBase<Teste>
     {
         public override void ConfigurarParametros(SqlCommand comando, Teste registro)
         {
@@ -48,7 +48,7 @@ namespace BrainHub.Dados.Banco.ModuloTeste
             teste.materia = materia;
             teste.provaRecuperacao = provaRecuperacao;
             teste.data = data;
-            
+
             return teste;
         }
     }

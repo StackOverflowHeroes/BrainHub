@@ -1,7 +1,9 @@
 ﻿using BrainHub.Dominio.ModuloDisciplina;
+using BrainHub.Dominio.ModuloQuestao;
 using BrainHub.Dominio.ModuloTeste;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -9,8 +11,8 @@ using System.Threading.Tasks;
 
 namespace BrainHub.Dados.Banco.ModuloTeste
 {
-    internal class RepositorioTesteEmSql : RepositorioSqlBase<Teste, MapeadorTeste>, IRepositorioTeste
-    {
+    public class RepositorioTesteEmSql : RepositorioSqlBase<Teste, MapeadorTeste>, IRepositorioTeste
+    {   
         protected override string sqlInserir => @"INSERT INTO [TBTeste] ( [NOME]
                                                                          ,[NUMEROQUESTOES]
                                                                          ,[PROVARECUPERACAO]
@@ -40,6 +42,9 @@ namespace BrainHub.Dados.Banco.ModuloTeste
                                                                    [ID] = @ID";
 
         protected override string sqlExcluir => @"DELETE FROM TBTeste WHERE [ID] = @ID;";
+
+        protected string sqlExcluirRelacao => @"DELETE FROM [TBTESTE_QUESTAO]
+                                                         WHERE [TESTE_ID] = @ID";
 
         protected override string sqlSelecionarTodos => @"SELECT  T.[ID] AS TESTE_ID
                                                                  ,T.[NOME] AS TESTE_NOME
@@ -78,11 +83,17 @@ namespace BrainHub.Dados.Banco.ModuloTeste
                                                           WHERE [ID] = @ID";
 
         protected string sqlInserirQuestoes => @"INSERT INTO [TBTESTE_QUESTAO]
-                                                            (TESTE_ID]
+                                                            ([TESTE_ID]
                                                             ,[QUESTAO_ID])
                                                         VALUES
                                                             (@TESTE_ID
                                                             ,QUESTAO_ID)";
+        protected string sqlEditarQuestoes => @"UPDATE [TBTESTE_QUESTAO]
+                                                   SET  [TESTE_ID] = @TESTE_ID
+                                                        ,[QUESTAO_ID] = @QUESTAO_ID
+                                                 WHERE TESTE_ID = @ID";
+        protected string sqlExcluirQuestoes => @"DELETE FROM [TBTESTE_QUESTAO]
+                                                       WHERE TESTE_ID = @ID";
         protected string sqlSelecionarQuestoes => @"SELECT TQ.[TESTE_ID]
                                                            ,TQ.[QUESTAO_ID]
                                                            ,Q.[ID] AS QUESTAO_ID
@@ -100,6 +111,53 @@ namespace BrainHub.Dados.Banco.ModuloTeste
                                                          INNER JOIN [TBMATERIA] AS M ON Q.[MATERIA_ID] = M.[ID]
                                                          INNER JOIN [TBDISCIPLINA] AS D ON M.[DISCIPLINA_ID] = D.[ID]
                                                     WHERE [TESTE_ID] = @ID";
+
+        public void CarregarQuestoes(Teste teste)
+        {
+            SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
+            conexaoComBanco.Open();
+
+            SqlCommand comandoSelecionarQuestoes = conexaoComBanco.CreateCommand();
+            comandoSelecionarQuestoes.CommandText = sqlExcluirQuestoes;
+
+            comandoSelecionarQuestoes.Parameters.AddWithValue("ID", teste.id);
+
+            SqlDataReader leitor = comandoSelecionarQuestoes.ExecuteReader();
+            while(leitor.Read())
+            {
+                Questao q = new MapeadorQuestao().ConverterRegistro(leitor);
+                teste.listaQuestoes.Add(q);
+            }
+            conexaoComBanco.Close();
+        }
+        public virtual void ExcluirRelacao(Teste teste)
+        {
+            SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
+            conexaoComBanco.Open();
+
+            SqlCommand comandoExcluir = conexaoComBanco.CreateCommand();
+            comandoExcluir.CommandText = sqlExcluirQuestoes;
+
+            comandoExcluir.Parameters.AddWithValue("ID", teste.id);
+
+            comandoExcluir.ExecuteNonQuery();
+            conexaoComBanco.Close();
+        }
+
+        public void InserirQuestoes(int testeID, int questaoID)
+        {
+            SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
+            conexaoComBanco.Open();
+
+            SqlCommand comandoInserir = conexaoComBanco.CreateCommand();
+            comandoInserir.CommandText = sqlInserirQuestoes;
+
+            comandoInserir.Parameters.AddWithValue("TESTE_ID", testeID);
+            comandoInserir.Parameters.AddWithValue("QUESTAO_ID", questaoID);
+
+            comandoInserir.ExecuteNonQuery();
+            conexaoComBanco.Close();
+        }
         
     }
 }
