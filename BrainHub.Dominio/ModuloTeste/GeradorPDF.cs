@@ -10,13 +10,14 @@ namespace BrainHub.Dominio.ModuloTeste
     {
         public TipoPDFEnum tipo;
         public Teste conteudo;
+        public string path = "";
+
 
         private PdfDocument document = new PdfDocument();
         private XGraphics gfx;
         private XFont font;
         private double largura = 40;
         private double altura = 40;
-        private string path = "";
 
         public GeradorPDF()
         {
@@ -31,18 +32,10 @@ namespace BrainHub.Dominio.ModuloTeste
         {
             DesenharCabecalho();
             DesenharCorpo();
-            PegarPathArquivo();
             document.Save(path);
 
         }
-
-        private void PegarPathArquivo()
-        {
-            if (tipo == TipoPDFEnum.PDF_Teste)
-                path = "Compartilhado\\MeuTeste.pdf";
-            else
-                path = "Compartilhado\\MeuTesteGabarito.pdf";
-        }
+        
         private void DesenharCabecalho()
         {
             gfx.DrawString($"Teste: {conteudo.nome}", font, XBrushes.Black, largura, altura);
