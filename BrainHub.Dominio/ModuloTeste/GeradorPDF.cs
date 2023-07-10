@@ -16,7 +16,7 @@ namespace BrainHub.Dominio.ModuloTeste
         private XFont font;
         private double largura = 40;
         private double altura = 40;
-        private const string path = "Compartilhado\\arquivo_teste.pdf";
+        private const string path = "Compartilhado\\meu_teste.pdf";
 
         public GeradorPDF()
         {
@@ -43,28 +43,62 @@ namespace BrainHub.Dominio.ModuloTeste
 
             if (conteudo.materia != null)
                 gfx.DrawString($"Matéria: {conteudo.materia}", font, XBrushes.Black, largura, altura);
+
             altura += 40;
 
 
         }
         private void DesenharCorpo()
         {
+
+            int contador = 1;
+
             foreach (Questao questao in conteudo.listaQuestoes)
             {
                 font = new XFont("Arial", 11, XFontStyle.Regular);
-                gfx.DrawString($"Questão: {questao.enunciado}", font, XBrushes.Black, largura, altura);
+
+                gfx.DrawString($"QUESTÃO {contador}: {Capitalize(questao.enunciado)} ", font, XBrushes.Black, largura, altura);
                 altura += 20;
 
                 foreach (Alternativa alternativa in questao.alternativas)
                 {
                     font = new XFont("Arial", 10, XFontStyle.Regular);
-                    gfx.DrawString(alternativa.tituloResposta, font, XBrushes.Black, largura, altura);
+
+                    if (tipo == TipoPDFEnum.PDF_Gabarito && alternativa.alternativaCorreta)
+                    {
+                        double y = altura;
+                        double larguraCheck = largura;
+                        XImage image = XImage.FromFile("D:\\Sistema\\Desktop\\BrainHub\\BrainHub.WinApp\\Resources\\circle.png");
+                        gfx.DrawImage(image, larguraCheck - 2, y - 9, 10, 10);
+                    }
+
+                    gfx.DrawString($"{alternativa.letraAlternativa.ToLower()} )", font, XBrushes.Black, largura, altura);
+
+                    double x = largura;
+
+                    if (tipo == TipoPDFEnum.PDF_Gabarito && alternativa.alternativaCorreta)
+                    {
+                        XFont fontAlternativaCorreta = new XFont("Arial", 10, XFontStyle.Bold);
+                        gfx.DrawString(Capitalize(alternativa.tituloResposta), fontAlternativaCorreta, XBrushes.Green, x + 20, altura);
+                    }
+                    else
+                        gfx.DrawString(Capitalize(alternativa.tituloResposta), font, XBrushes.Black, x + 20, altura);
+
                     altura += 20;
                 }
+
                 altura += 20;
+                contador++;
             }
         }
 
+        private string Capitalize(string enunciado)
+        {
+            string primeiraLetra = enunciado.Substring(0, 1).ToUpper();
+            string restoEnunciado = enunciado.Substring(1).ToLower();
+
+            return primeiraLetra + restoEnunciado;
+        }
 
 
     }
