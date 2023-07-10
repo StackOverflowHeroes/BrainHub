@@ -58,7 +58,7 @@ namespace BrainHub.Dominio.ModuloMateria
             return ListaErros;
         }
 
-          public override bool Equals(object? obj)
+        public override bool Equals(object? obj)
           {
                return obj is Materia materia &&
                       id == materia.id &&
@@ -66,5 +66,10 @@ namespace BrainHub.Dominio.ModuloMateria
                       disciplina.Equals(materia.disciplina) &&
                       serie == materia.serie;
           }
-     }
+
+        public void AdicionarQuestoes(Questao questao)
+        {
+            questoes.Add(questao);
+        }
+    }
 }

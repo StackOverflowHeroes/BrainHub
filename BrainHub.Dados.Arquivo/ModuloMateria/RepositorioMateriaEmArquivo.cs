@@ -4,7 +4,7 @@ using BrainHub.Dominio.ModuloQuestao;
 
 namespace BrainHub.Dados.Arquivo.ModuloMateria
 {
-    public class RepositorioMateriaEmArquivo : RepositorioArquivoBase<Materia>, IRepositorioMateria
+    public class RepositorioMateriaEmArquivo : RepositorioArquivoBase<Materia>
     {
         public RepositorioMateriaEmArquivo(ContextoDados contexto) : base(contexto)
         {

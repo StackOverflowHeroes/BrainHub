@@ -4,7 +4,7 @@ using BrainHub.Dominio.ModuloQuestao;
 
 namespace BrainHub.Dados.Arquivo.ModuloDisciplina
 {
-    public class RepositorioDisciplinaEmArquivo : RepositorioArquivoBase<Disciplina>, IRepositorioDisciplina
+    public class RepositorioDisciplinaEmArquivo : RepositorioArquivoBase<Disciplina>
     {
         public RepositorioDisciplinaEmArquivo(ContextoDados contexto) : base(contexto)
         {
@@ -21,7 +21,6 @@ namespace BrainHub.Dados.Arquivo.ModuloDisciplina
 
             return TodasQuestoesDisciplina;
         }
-      
 
         protected override List<Disciplina> ObterRegistros()
         {

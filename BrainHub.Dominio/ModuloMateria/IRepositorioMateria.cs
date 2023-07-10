@@ -1,7 +1,7 @@
 ﻿
 namespace BrainHub.Dominio.ModuloMateria
 {
-    public interface IRepositorioMateria : IRepositorioBase<Materia>
+    public interface IRepositorioMateria : IRepositorioBancoBase<Materia>
     {
     }
 }

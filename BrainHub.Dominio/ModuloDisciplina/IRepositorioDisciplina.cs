@@ -1,7 +1,7 @@
 ﻿
 namespace BrainHub.Dominio.ModuloDisciplina
 {
-    public interface IRepositorioDisciplina : IRepositorioBase<Disciplina>
+    public interface IRepositorioDisciplina : IRepositorioBancoBase<Disciplina>
     {
     }
 }

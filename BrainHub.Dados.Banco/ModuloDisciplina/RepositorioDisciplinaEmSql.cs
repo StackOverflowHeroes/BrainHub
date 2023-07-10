@@ -49,13 +49,13 @@ namespace BrainHub.Dados.Banco.ModuloDisciplina
             return disciplina;
         }
 
-        public List<Disciplina> SelecionarTodos(bool carregarAlugueis = false)
+        public override List<Disciplina> SelecionarTodos(bool carregarDependencias = false)
         {
             List<Disciplina> disciplinas = base.SelecionarTodos();
 
             foreach (Disciplina disciplina in disciplinas)
             {
-                if (carregarAlugueis)
+                if (carregarDependencias)
                     CarregarMaterias(disciplina);
             }
 
@@ -102,5 +102,6 @@ namespace BrainHub.Dados.Banco.ModuloDisciplina
 
             return new Materia(id, nome, disciplina, serie);
         }
+
     }
 }

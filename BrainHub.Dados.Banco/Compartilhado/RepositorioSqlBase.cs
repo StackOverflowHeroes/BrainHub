@@ -87,7 +87,7 @@ namespace BrainHub.Dados.Banco.Compartilhado
             return registro;
         }
 
-        public virtual List<T> SelecionarTodos()
+        public virtual List<T> SelecionarTodos(bool carregarDependencias = false)
         {
             SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
             conexaoComBanco.Open();

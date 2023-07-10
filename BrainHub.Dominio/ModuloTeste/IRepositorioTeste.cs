@@ -1,5 +1,4 @@
 ﻿
-using BrainHub.Dominio.ModuloMateria;
 
 namespace BrainHub.Dominio.ModuloTeste
 {

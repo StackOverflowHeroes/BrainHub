@@ -24,10 +24,10 @@ namespace BrainHub.WinApp
         private int contadorTemporizador = 5;
         private static ContextoDados contexto = new ContextoDados(carregarDados: true);
 
-        private IRepositorioDisciplina repositorioDisciplina = new RepositorioDisciplinaEmArquivo(contexto);
-        private IRepositorioMateria repositorioMateria = new RepositorioMateriaEmArquivo(contexto);
+        private IRepositorioDisciplina repositorioDisciplina = new RepositorioDisciplinaEmSql();
+        private IRepositorioMateria repositorioMateria = new RepositorioMateriaEmSql();
         private IRepositorioTeste repositorioTeste = new RepositorioTesteEmArquivo(contexto);
-        private IRepositorioQuestao repositorioQuestao = new RepositorioQuestaoEmArquivo(contexto);
+        private IRepositorioQuestao repositorioQuestao = new RepositorioQuestaoEmSql();
 
         private static TelaPrincipalForm telaPrincipal;
         public static TelaPrincipalForm Instancia

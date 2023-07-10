@@ -51,13 +51,15 @@ namespace BrainHub.Dominio.ModuloDisciplina
             materias.ForEach(materia => ListaCompleta.AddRange(materia.questoes));
             return ListaCompleta;
         }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Disciplina disciplina &&
+                   id == disciplina.id &&
+                   nome == disciplina.nome;
+        }
+
     }
 
-          public override bool Equals(object? obj)
-          {
-               return obj is Disciplina disciplina &&
-                      id == disciplina.id &&
-                      nome == disciplina.nome;
-          }
-     }
 }
+

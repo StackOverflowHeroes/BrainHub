@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BrainHub.Dados.Arquivo.ModuloQuestao
 {
-     public class RepositorioQuestaoEmArquivo : RepositorioArquivoBase<Questao>, IRepositorioQuestao
+     public class RepositorioQuestaoEmArquivo : RepositorioArquivoBase<Questao>
      {
           public RepositorioQuestaoEmArquivo(ContextoDados contexto) : base(contexto)
           {

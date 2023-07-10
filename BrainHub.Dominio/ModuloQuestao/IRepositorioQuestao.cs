@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BrainHub.Dominio.ModuloQuestao
 {
-     public interface IRepositorioQuestao : IRepositorioBase<Questao>
+     public interface IRepositorioQuestao : IRepositorioBancoBase<Questao>
      {
      }
 }
