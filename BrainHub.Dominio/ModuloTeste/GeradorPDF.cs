@@ -57,26 +57,24 @@ namespace BrainHub.Dominio.ModuloTeste
             {
                 font = new XFont("Arial", 11, XFontStyle.Regular);
 
-                gfx.DrawString($"QUESTÃO {contador}: {Capitalize(questao.enunciado)} ", font, XBrushes.Black, largura, altura);
+                gfx.DrawString($"QUESTÃO {contador}: {Capitalize(questao.enunciado)}?", font, XBrushes.Black, largura, altura);
                 altura += 20;
 
                 foreach (Alternativa alternativa in questao.alternativas)
                 {
                     font = new XFont("Arial", 10, XFontStyle.Regular);
 
-                    if (tipo == TipoPDFEnum.PDF_Gabarito && alternativa.alternativaCorreta)
+                    if ( alternativa.alternativaCorreta)
                     {
-                        double y = altura;
-                        double larguraCheck = largura;
-                        XImage image = XImage.FromFile("D:\\Sistema\\Desktop\\BrainHub\\BrainHub.WinApp\\Resources\\circle.png");
-                        gfx.DrawImage(image, larguraCheck - 2, y - 9, 10, 10);
+                        XFont fontAlternativaCorreta = new XFont("Arial", 12, XFontStyle.Bold);
+                        gfx.DrawString("X", fontAlternativaCorreta, XBrushes.Green, largura, altura);
                     }
 
                     gfx.DrawString($"{alternativa.letraAlternativa.ToLower()} )", font, XBrushes.Black, largura, altura);
 
                     double x = largura;
 
-                    if (tipo == TipoPDFEnum.PDF_Gabarito && alternativa.alternativaCorreta)
+                    if (alternativa.alternativaCorreta)
                     {
                         XFont fontAlternativaCorreta = new XFont("Arial", 10, XFontStyle.Bold);
                         gfx.DrawString(Capitalize(alternativa.tituloResposta), fontAlternativaCorreta, XBrushes.Green, x + 20, altura);

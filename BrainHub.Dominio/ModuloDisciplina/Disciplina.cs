@@ -40,6 +40,11 @@ namespace BrainHub.Dominio.ModuloDisciplina
             materias.Add(novaMateria);
         }
 
+        public override string? ToString()
+        {
+            return $"{nome}";
+        }
+
         public List<Questao> PegarQuestoes()
         {
             List<Questao> ListaCompleta = new List<Questao>();
