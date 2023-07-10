@@ -13,6 +13,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="PdfSharp" Version="1.50.5147" />
+    <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BrainHub.Dados.Arquivo\BrainHub.Dados.Arquivo.csproj" />
     <ProjectReference Include="..\BrainHub.Dados.Banco\BrainHub.Dados.Banco.csproj" />
     <ProjectReference Include="..\BrainHub.Dominio\BrainHub.Dominio.csproj" />
@@ -34,6 +40,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Compartilhado\arquivo_teste.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Compartilhado\BrainHub.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

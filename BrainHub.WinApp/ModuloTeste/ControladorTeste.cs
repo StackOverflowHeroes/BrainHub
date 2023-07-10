@@ -211,10 +211,11 @@ namespace BrainHub.WinApp.ModuloTeste
 
             TelaPDFTesteForm TelaPdfTeste = new TelaPDFTesteForm();
             TelaPdfTeste.Text = "Gerar PDF";
+            TelaPdfTeste.SalvarTesteSelecionado(testeSelecionado);
             
             if (TelaPdfTeste.ShowDialog() == DialogResult.OK)
             {
-
+                MessageBox.Show("OK");
             }
 
         }

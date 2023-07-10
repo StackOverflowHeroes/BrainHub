@@ -76,7 +76,7 @@
             botaoGravar.Name = "botaoGravar";
             botaoGravar.Size = new Size(107, 45);
             botaoGravar.TabIndex = 14;
-            botaoGravar.Text = "Gerar";
+            botaoGravar.Text = "Baixar";
             botaoGravar.UseVisualStyleBackColor = true;
             botaoGravar.Click += GerarPDF_Click;
             // 
