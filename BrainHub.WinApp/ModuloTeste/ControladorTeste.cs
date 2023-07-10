@@ -3,6 +3,7 @@ using BrainHub.Dominio.ModuloDisciplina;
 using BrainHub.Dominio.ModuloMateria;
 using BrainHub.Dominio.ModuloQuestao;
 using BrainHub.Dominio.ModuloTeste;
+using BrainHub.WinApp.Compartilhado;
 using BrainHub.WinApp.ModuloMateria;
 using PartyManager.WinApp.Compartilhado;
 using System;
