@@ -215,7 +215,8 @@ namespace BrainHub.WinApp.ModuloTeste
             
             if (TelaPdfTeste.ShowDialog() == DialogResult.OK)
             {
-                MessageBox.Show("OK");
+                TelaPrincipalForm.Instancia.AtualizarRodape("PDF salvo com sucesso!", TipoStatusEnum.Sucesso);
+
             }
 
         }
