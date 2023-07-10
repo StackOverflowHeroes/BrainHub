@@ -55,5 +55,18 @@ namespace BrainHub.Dominio.ModuloQuestao
 
                return erros;
           }
+
+          public bool TemAlternativa(Alternativa novaAlternativa)
+          {
+               if (alternativas.Contains(novaAlternativa))
+                    return true;
+
+               return false;
+          }
+
+          public void AdicionarAlternativa(Alternativa novaAlternativa)
+          {
+               alternativas.Add(novaAlternativa);
+          }
      }
 }
