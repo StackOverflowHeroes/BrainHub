@@ -177,12 +177,17 @@ namespace BrainHub.Dados.Banco.ModuloQuestao
 
           public override void Editar(int id, Questao registro)
           {
+               foreach (Alternativa alternativa in registro.alternativas)
+               {
+                    DeletarAlternativas(alternativa, registro.id);
+               }
+
                base.Editar(id, registro);
 
                foreach(Alternativa alternativa in registro.alternativas)
                {
-                    EditarAlternativa(alternativa, registro.id);
-               }
+                    InserirAlternativa(alternativa, registro.id);
+               }            
           }
 
           public override void Deletar(Questao registroSelecionado)
