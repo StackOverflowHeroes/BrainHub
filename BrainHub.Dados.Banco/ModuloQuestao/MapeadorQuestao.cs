@@ -1,4 +1,6 @@
 ﻿using BrainHub.Dados.Banco.ModuloMateria;
+using BrainHub.Dominio.Compartilhado;
+using BrainHub.Dominio.ModuloDisciplina;
 using BrainHub.Dominio.ModuloMateria;
 using BrainHub.Dominio.ModuloQuestao;
 using System;
@@ -18,6 +20,14 @@ namespace BrainHub.Dados.Banco.ModuloQuestao
                comando.Parameters.AddWithValue("MATERIA_ID", registro.materia.id);
                comando.Parameters.AddWithValue("RESPOSTA", registro.resposta);
           }
+          public virtual void ConfigurarParametroAlternativa(SqlCommand comando, Alternativa registro, int id)
+          {
+               comando.Parameters.AddWithValue("ID", registro.id.ToString());
+               comando.Parameters.AddWithValue("QUESTAO_ID", id.ToString());
+               comando.Parameters.AddWithValue("TITULO", registro.tituloResposta);
+               comando.Parameters.AddWithValue("LETRA", registro.letraAlternativa);
+               comando.Parameters.AddWithValue("CORRETA", registro.alternativaCorreta);
+          }
 
           public override Questao ConverterRegistro(SqlDataReader leitorRegistros)
           {
@@ -25,21 +35,26 @@ namespace BrainHub.Dados.Banco.ModuloQuestao
                string enunciado = Convert.ToString(leitorRegistros["QUESTAO_ENUNCIADO"])!;
                string resposta = Convert.ToString(leitorRegistros["QUESTAO_RESPOSTA"])!;
 
-               Materia materia = new MapeadorMateria().ConverterRegistro(leitorRegistros);
+               int id_disciplina = Convert.ToInt32(leitorRegistros["DISCIPLINA_ID"]);
+               string nome_disciplina = Convert.ToString(leitorRegistros["DISCIPLINA_NOME"]);
+
+               Disciplina disciplina = new Disciplina(id_disciplina,nome_disciplina);
+
+
+               int id_materia = Convert.ToInt32(leitorRegistros["MATERIA_ID"]);
+               string nome_materia = Convert.ToString(leitorRegistros["MATERIA_NOME"]);
+
+               SerieEnum serie;
+
+               if (Convert.ToInt32(leitorRegistros["MATERIA_SERIE"]) == 1)
+                    serie = SerieEnum.primeiraSerie;
+               else
+                    serie = SerieEnum.segundaSerie;
+
+               Materia materia = new Materia(id_materia, nome_materia, disciplina, serie);
 
                return new Questao(id, enunciado, resposta, materia);
           }
 
-          public Alternativa ConverterAlternativa(SqlDataReader leitorAlternativa)
-          {
-               int id = Convert.ToInt32(leitorAlternativa["ALTERNATIVA_ID"]);
-               string tituloResposta = Convert.ToString(leitorAlternativa["ALTERNATIVA_RESPOSTA"]);
-               string letraAlternativa = Convert.ToString(leitorAlternativa["ALTERNATIVA_LETRA"]);
-               bool alternativaCorreta = Convert.ToBoolean(leitorAlternativa["ALTERNATIVA_CORRETA"]);
-
-               Questao questao = ConverterRegistro(leitorAlternativa);
-
-               return new Alternativa(tituloResposta, letraAlternativa, alternativaCorreta, questao);
-          }
      }
 }

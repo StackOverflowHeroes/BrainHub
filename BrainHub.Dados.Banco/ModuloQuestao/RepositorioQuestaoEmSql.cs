@@ -1,4 +1,6 @@
-﻿using BrainHub.Dominio.ModuloQuestao;
+﻿using BrainHub.Dominio.ModuloDisciplina;
+using BrainHub.Dominio.ModuloMateria;
+using BrainHub.Dominio.ModuloQuestao;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace BrainHub.Dados.Banco.ModuloQuestao
 {
-     public class RepositorioQuestaoEmSql : RepositorioSqlBase<Questao, MapeadorQuestao>
+     public class RepositorioQuestaoEmSql : RepositorioSqlBase<Questao, MapeadorQuestao>, IRepositorioQuestao
      {
-          protected override string sqlInserir => 
-               
+          protected override string sqlInserir =>
+
                @"INSERT INTO [TBQuestao] 
                ( 
                          ENUNCIADO, 
@@ -92,9 +94,21 @@ namespace BrainHub.Dados.Banco.ModuloQuestao
                WHERE
                     Q.ID = @ID";
 
+          private string sqlEditarAlternativa =>
+
+               @"UPDATE [TBAlternativa] 
+                    SET
+                         QUESTAO_ID = @QUESTAO_ID,
+                         TITULO = @TITULO,
+                         LETRA = @LETRA,
+                         CORRETA = @CORRETA
+
+                    WHERE
+                         ID = @ID";
+
           private string sqlInserirAlternativa =>
 
-               @"INSERT INTO [TBAlternativa] 
+     @"INSERT INTO [TBAlternativa] 
                ( 
                          QUESTAO_ID, 
                          TITULO, 
@@ -122,8 +136,7 @@ namespace BrainHub.Dados.Banco.ModuloQuestao
                           A.ID AS ALTERNATIVA_ID,  
                           A.TITULO AS ALTERNATIVA_TITULO,  
                           A.LETRA AS ALTERNATIVA_LETRA, 
-                          A.CORRETA AS ALTERNATIVA_CORRETA, 
-                          A.QUESTAO_ID AS QUESTAO_ID,  
+                          A.CORRETA AS ALTERNATIVA_CORRETA,
 
                           Q.ENUNCIADO AS QUESTAO_ENUNCIADO,  
                           Q.RESPOSTA AS QUESTAO_RESPOSTA,
@@ -133,7 +146,8 @@ namespace BrainHub.Dados.Banco.ModuloQuestao
                           M.SERIE AS MATERIA_SERIE,
                           M.DISCIPLINA_ID AS DISCIPLINA_ID, 
 
-                          D.NOME AS DISCIPLINA_NOME
+                          D.NOME AS DISCIPLINA_NOME,
+                          D.ID AS DISCIPLINA_ID
 
                      FROM
                           [TBAlternativa] AS A
@@ -149,193 +163,145 @@ namespace BrainHub.Dados.Banco.ModuloQuestao
 
                WHERE
 
-                    A.QUESTAO_ID    = @QUESTAO_ID AND
-                    Q.MATERIA_ID    = @MATERIA_ID AND
-                    M.DISCIPLINA_ID = @DISCICPLINA_ID";
+                    A.QUESTAO_ID    = @QUESTAO_ID";
 
-          public void Inserir(Questao questao, List<Alternativa> alternativas)
+          public override void Inserir(Questao novoRegistro)
           {
-               SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
-               conexaoComBanco.Open();
+               base.Inserir(novoRegistro);
 
-               SqlCommand comandoInserir = conexaoComBanco.CreateCommand();
-               comandoInserir.CommandText = sqlInserir;
-
-               MapeadorQuestao mapeador = new MapeadorQuestao();
-               mapeador.ConfigurarParametros(comandoInserir, questao);
-
-               object id = comandoInserir.ExecuteScalar();
-
-               questao.id = Convert.ToInt32(id);
-
-               conexaoComBanco.Close();
-
-               foreach (Alternativa alternativa in alternativas)
+               foreach (Alternativa alternativa in novoRegistro.alternativas)
                {
-                    if (questao.alternativas.Contains(alternativa) == false)
-                    {
-                         AdicionarAlternativa(alternativa, questao);
-                    }
+                    InserirAlternativa(alternativa, novoRegistro.id);
                }
           }
 
-          public void Editar(int id, Questao questao, List<Alternativa> alternativas)
+          public override void Editar(int id, Questao registro)
           {
-               foreach (Alternativa alternativaParaAdicionar in alternativas)
+               base.Editar(id, registro);
+
+               foreach(Alternativa alternativa in registro.alternativas)
                {
-                    if (questao.TemAlternativa(alternativaParaAdicionar))
-                         continue;
-
-                    AdicionarAlternativa(alternativaParaAdicionar, questao);
-                    questao.AdicionarAlternativa(alternativaParaAdicionar);
+                    EditarAlternativa(alternativa, registro.id);
                }
+          }
 
+          public override void Deletar(Questao registroSelecionado)
+          {
+               base.Deletar(registroSelecionado);
+
+               foreach(Alternativa alternativa in registroSelecionado.alternativas)
+               {
+                    DeletarAlternativas(alternativa, registroSelecionado.id);
+               }
+          }
+
+          private void DeletarAlternativas(Alternativa alternativa, int id_questao)
+          {
                SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
                conexaoComBanco.Open();
 
-               SqlCommand comandoEditar = conexaoComBanco.CreateCommand();
-               comandoEditar.CommandText = sqlEditar;
+               SqlCommand comandoExcluirAlternativa = conexaoComBanco.CreateCommand();
+               comandoExcluirAlternativa.CommandText = sqlExcluirAlternativa;
 
                MapeadorQuestao mapeador = new MapeadorQuestao();
-               mapeador.ConfigurarParametros(comandoEditar, questao);
+               mapeador.ConfigurarParametroAlternativa(comandoExcluirAlternativa, alternativa, id_questao);
 
-               comandoEditar.ExecuteNonQuery();
+               object id = comandoExcluirAlternativa.ExecuteScalar();
+               
+               alternativa.id = Convert.ToInt32(id);
 
                conexaoComBanco.Close();
           }
 
-          public override void Deletar(Questao questao)
+          private void EditarAlternativa(Alternativa alternativa, int id_questao)
           {
-               ExcluirAlternativa(questao);
-
                SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
-
-               SqlCommand comandoExclusao = new SqlCommand(sqlExcluir, conexaoComBanco);
-
-               comandoExclusao.Parameters.AddWithValue("ID", questao.id);
-
                conexaoComBanco.Open();
 
-               int numeroRegistrosExcluidos = comandoExclusao.ExecuteNonQuery();
+               SqlCommand comandoEditarAlternativa = conexaoComBanco.CreateCommand();
+               comandoEditarAlternativa.CommandText = sqlEditarAlternativa;
+
+               MapeadorQuestao mapeador = new MapeadorQuestao();
+               mapeador.ConfigurarParametroAlternativa(comandoEditarAlternativa, alternativa, id_questao);
+
+               object id = comandoEditarAlternativa.ExecuteScalar();
+               alternativa.id = Convert.ToInt32(id);
 
                conexaoComBanco.Close();
+          }
+
+          public List<Questao> SelecionarTodos(bool carregarAlternativa = false)
+          {
+               List<Questao> listaQuestoes = base.SelecionarTodos();
+
+               foreach (Questao questao in listaQuestoes)
+               {
+                    if (carregarAlternativa)
+                         CarregarAlternativas(questao);
+               }
+
+
+               return listaQuestoes;
           }
 
           public override Questao SelecionarPorId(int id)
           {
-               SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
-               conexaoComBanco.Open();
-
-               SqlCommand comandoSelecionarPorId = conexaoComBanco.CreateCommand();
-               comandoSelecionarPorId.CommandText = sqlSelecionarPorId;
-
-               comandoSelecionarPorId.Parameters.AddWithValue("ID", id);
-
-               SqlDataReader leitorTemas = comandoSelecionarPorId.ExecuteReader();
-
-               Questao questao = null;
-
-               if (leitorTemas.Read())
-               {
-                    MapeadorQuestao mapeador = new MapeadorQuestao();
-                    questao = mapeador.ConverterRegistro(leitorTemas);
-               }
-
-               conexaoComBanco.Close();
+               Questao questao = base.SelecionarPorId(id);
 
                if (questao != null)
-               {
-                    SelecionarAlternativas(questao);
-               }
+                    CarregarAlternativas(questao);
 
                return questao;
           }
 
-          public List<Questao> SelecionarTodos(bool carregarItens = false, bool carregarAlugueis = false)
+          private void CarregarAlternativas(Questao questao)
           {
                SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
                conexaoComBanco.Open();
 
-               SqlCommand comandoSelecionarTodos = conexaoComBanco.CreateCommand();
-               comandoSelecionarTodos.CommandText = sqlSelecionarTodos;
+               SqlCommand comandoCarregarAlternativas = conexaoComBanco.CreateCommand();
+               comandoCarregarAlternativas.CommandText = sqlSelecionarAlternativas;
 
-               SqlDataReader leitorTemas = comandoSelecionarTodos.ExecuteReader();
+               comandoCarregarAlternativas.Parameters.AddWithValue("QUESTAO_ID", questao.id);
 
-               List<Questao> questoes = new List<Questao>();
+               SqlDataReader leitorMateria = comandoCarregarAlternativas.ExecuteReader();
 
-               while (leitorTemas.Read())
+               while (leitorMateria.Read())
                {
-                    MapeadorQuestao mapeador = new MapeadorQuestao();
-                    Questao questao = mapeador.ConverterRegistro(leitorTemas);
-
-                    if (carregarItens)
-                         SelecionarAlternativas(questao);
-
-                    questoes.Add(questao);
-               }
-
-               conexaoComBanco.Close();
-
-               return questoes;
-          }
-
-          private void AdicionarAlternativa(Alternativa alternativa, Questao questao)
-          {
-               SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
-               conexaoComBanco.Open();
-
-               SqlCommand comandoInserir = conexaoComBanco.CreateCommand();
-               comandoInserir.CommandText = sqlInserirAlternativa;
-
-               comandoInserir.Parameters.AddWithValue("QUESTAO_ID", questao.id);
-               comandoInserir.Parameters.AddWithValue("TITULO", alternativa.tituloResposta);
-               comandoInserir.Parameters.AddWithValue("LETRA", alternativa.letraAlternativa);
-               comandoInserir.Parameters.AddWithValue("CORRETA", alternativa.alternativaCorreta);
-
-               comandoInserir.ExecuteNonQuery();
-
-               conexaoComBanco.Close();
-          }
-
-          private void SelecionarAlternativas(Questao questao)
-          {
-               SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
-               conexaoComBanco.Open();
-
-               SqlCommand comandoSelecionarAlternativas = conexaoComBanco.CreateCommand();
-               comandoSelecionarAlternativas.CommandText = sqlSelecionarAlternativas;
-
-               comandoSelecionarAlternativas.Parameters.AddWithValue("QUESTAO_ID", questao.id);
-               comandoSelecionarAlternativas.Parameters.AddWithValue("MATERIA_ID", questao.materia.id);
-               comandoSelecionarAlternativas.Parameters.AddWithValue("DISCIPLINA_ID", questao.materia.disciplina.id);
-
-               SqlDataReader leitorAlternativa = comandoSelecionarAlternativas.ExecuteReader();
-
-               while (leitorAlternativa.Read())
-               {
-                    MapeadorQuestao mapeador = new MapeadorQuestao();
-
-                    Alternativa alternativa = mapeador.ConverterAlternativa(leitorAlternativa);
+                    Alternativa alternativa = ConverterAlternativa(questao, leitorMateria);
 
                     questao.AdicionarAlternativa(alternativa);
                }
 
                conexaoComBanco.Close();
+
           }
 
-          private void ExcluirAlternativa(Questao questao)
+          private void InserirAlternativa(Alternativa alternativa, int id_questao)
           {
                SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
-
-               SqlCommand comandoExclusao = new SqlCommand(sqlExcluirAlternativa, conexaoComBanco);
-
-               comandoExclusao.Parameters.AddWithValue("QUESTAO_ID", questao.id);
-
                conexaoComBanco.Open();
-               comandoExclusao.ExecuteNonQuery();
+
+               SqlCommand comandoInserirAlternativa = conexaoComBanco.CreateCommand();
+               comandoInserirAlternativa.CommandText = sqlInserirAlternativa;
+
+               MapeadorQuestao mapeador = new MapeadorQuestao();
+               mapeador.ConfigurarParametroAlternativa(comandoInserirAlternativa, alternativa, id_questao);
+
+               object id = comandoInserirAlternativa.ExecuteScalar();
+               alternativa.id = Convert.ToInt32(id);
 
                conexaoComBanco.Close();
           }
 
+          private Alternativa ConverterAlternativa(Questao questao, SqlDataReader leitorAlternativa)
+          {
+               int id = Convert.ToInt32(leitorAlternativa["ALTERNATIVA_ID"]);
+               string tituloResposta = Convert.ToString(leitorAlternativa["ALTERNATIVA_TITULO"]);
+               string letraAlternativa = Convert.ToString(leitorAlternativa["ALTERNATIVA_LETRA"]);
+               bool alternativaCorreta = Convert.ToBoolean(leitorAlternativa["ALTERNATIVA_CORRETA"]);
+
+               return new Alternativa(id, tituloResposta, letraAlternativa, alternativaCorreta, questao);
+          }
      }
 }

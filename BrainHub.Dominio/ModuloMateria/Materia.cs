@@ -57,5 +57,14 @@ namespace BrainHub.Dominio.ModuloMateria
 
             return ListaErros;
         }
-    }
+
+          public override bool Equals(object? obj)
+          {
+               return obj is Materia materia &&
+                      id == materia.id &&
+                      nome == materia.nome &&
+                      disciplina.Equals(materia.disciplina) &&
+                      serie == materia.serie;
+          }
+     }
 }

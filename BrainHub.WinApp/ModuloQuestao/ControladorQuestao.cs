@@ -64,21 +64,22 @@ namespace BrainHub.WinApp.ModuloQuestao
                if (questaoSelecionada == null)
                     return;
 
-               TelaQuestao.PopularComboBoxMateria(repositorioMateria.SelecionarTodos());
-               TelaQuestao.ConfigurarTela(questaoSelecionada);
+               TelaQuestao.PopularComboBoxMateria(repositorioMateria.SelecionarTodos());        
                TelaQuestao.PegarListaQuestoes(repositorioQuestao.SelecionarTodos());
+               TelaQuestao.ConfigurarTela(questaoSelecionada);
                DialogResult opcaoEscolhida = TelaQuestao.ShowDialog();
 
                if (opcaoEscolhida == DialogResult.OK)
                {
                     Questao questaoEditada = TelaQuestao.ObterQuestao();
                     repositorioQuestao.Editar(questaoEditada.id, questaoEditada);
+
                }
 
                CarregarRegistros();
 
                if (opcaoEscolhida == DialogResult.OK)
-                    TelaPrincipalForm.Instancia.AtualizarRodape("Matéria editada com sucesso!", TipoStatusEnum.Sucesso);
+                    TelaPrincipalForm.Instancia.AtualizarRodape("Questão editada com sucesso!", TipoStatusEnum.Sucesso);
           }
           public override void Deletar()
           {

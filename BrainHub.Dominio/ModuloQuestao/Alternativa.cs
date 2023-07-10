@@ -18,13 +18,18 @@ namespace BrainHub.Dominio.ModuloQuestao
           {
 
           }
-          public Alternativa(string tituloResposta, string letraAlternativa, bool alternativaCorreta, Questao questao)
+          public Alternativa(int id, string tituloResposta, string letraAlternativa, bool alternativaCorreta, Questao questao)
           {
-
+               this.id = id;
                this.tituloResposta = tituloResposta;
                this.letraAlternativa = letraAlternativa;
                this.alternativaCorreta = alternativaCorreta;
                this.questao = questao;          
+          }
+
+          public Alternativa(string tituloResposta)
+          {
+               this.tituloResposta = tituloResposta;
           }
 
           public void DefinirAlternativaCorreta()

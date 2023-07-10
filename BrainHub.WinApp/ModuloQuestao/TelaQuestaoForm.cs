@@ -33,7 +33,8 @@ namespace BrainHub.WinApp.ModuloQuestao
                Materia? materia = ComboBoxMateria.SelectedItem as Materia;
                List<Alternativa> alternativas = ObterListaAlternativas();
                DefinirAlternativaCorreta(alternativas);
-               Questao questao = new Questao(enunciado, materia, id);
+               
+               Questao questao = new Questao(id, enunciado, resposta, materia);
 
                if (id > 0)
                     questao.id = id;
