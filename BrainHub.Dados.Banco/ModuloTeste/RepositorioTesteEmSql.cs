@@ -123,11 +123,11 @@ namespace BrainHub.Dados.Banco.ModuloTeste
             comandoSelecionarQuestoes.Parameters.AddWithValue("ID", teste.id);
 
             SqlDataReader leitor = comandoSelecionarQuestoes.ExecuteReader();
-            while(leitor.Read())
-            {
-                Questao q = new MapeadorQuestao().ConverterRegistro(leitor);
-                teste.listaQuestoes.Add(q);
-            }
+            //while(leitor.Read())
+            //{
+            //    //Questao q = new MapeadorQuestao().ConverterRegistro(leitor);
+            //    teste.listaQuestoes.Add(q);
+            //}
             conexaoComBanco.Close();
         }
         public virtual void ExcluirRelacao(Teste teste)

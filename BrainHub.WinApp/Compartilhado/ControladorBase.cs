@@ -2,34 +2,39 @@
 
 namespace BrainHub.WinApp.Compartilhado
 {
-     public abstract class ControladorBase
-     {
-          public abstract string ToolTipInserir { get; }
-          public abstract string ToolTipEditar { get; }
-          public abstract string ToolTipDeletar { get; }
-          public virtual string ToolTipDuplicar { get { return "Duplicar"; } }
-          public virtual string ToolTipVisualizarTeste { get { return "Visualizar"; } }
-          public virtual bool InserirHabilitado { get { return false; } }
-          public virtual bool EditarHabilitado { get { return false; } }
-          public virtual bool DeletarHabilitado { get { return false; } }
-          public virtual bool VisualizarTesteHabilitado { get { return false; } }
-          public virtual bool DuplicarHabilitado { get { return false; } }
+    public abstract class ControladorBase
+    {
+        public abstract string ToolTipInserir { get; }
+        public abstract string ToolTipEditar { get; }
+        public abstract string ToolTipDeletar { get; }
+        public virtual string ToolTipDuplicar { get { return "Duplicar"; } }
+        public virtual string ToolTipVisualizarTeste { get { return "Visualizar"; } }
+        public virtual string ToolTipGerarGabarito => "Gerar gabarito";
+        public virtual bool InserirHabilitado { get { return false; } }
+        public virtual bool EditarHabilitado { get { return false; } }
+        public virtual bool DeletarHabilitado { get { return false; } }
+        public virtual bool VisualizarTesteHabilitado { get { return false; } }
+        public virtual bool DuplicarHabilitado { get { return false; } }
+        public virtual bool GerarGabaritoHabilitado { get { return true; } }
 
-          public abstract void Inserir();
 
-          public abstract void Editar();
+        public abstract void Inserir();
 
-          public abstract void Deletar();
+        public abstract void Editar();
 
-          public virtual void Duplicar() { }
+        public abstract void Deletar();
 
-          public virtual void VisualizarTeste() { }
+        public virtual void Duplicar() { }
 
-          public abstract void CarregarRegistros();
+        public virtual void VisualizarTeste() { }
+        
+        public virtual void ExibirGabarito() { }
 
-          public abstract UserControl ObterListagem();
+        public abstract void CarregarRegistros();
 
-          public abstract string ObterTipoCadastro();
+        public abstract UserControl ObterListagem();
 
-     }
+        public abstract string ObterTipoCadastro();
+
+    }
 }
