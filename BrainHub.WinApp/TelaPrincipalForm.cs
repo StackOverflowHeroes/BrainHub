@@ -86,7 +86,6 @@ namespace BrainHub.WinApp
             btnDeletar.ToolTipText = controlador.ToolTipDeletar;
             btnDuplicarTeste.ToolTipText = controlador.ToolTipDuplicar;
             btnVisualizar.ToolTipText = controlador.ToolTipVisualizarTeste;
-            btnGerarGabarito.ToolTipText = controlador.ToolTipGerarGabarito;
         }
 
         private void ConfigurarBarraFerramentas(ControladorBase controlador)
@@ -111,7 +110,6 @@ namespace BrainHub.WinApp
             btnDeletar.Enabled = controlador.DeletarHabilitado;
             btnDuplicarTeste.Enabled = controlador.DuplicarHabilitado;
             btnVisualizar.Enabled = controlador.VisualizarTesteHabilitado;
-            btnGerarGabarito.Enabled = controlador.GerarGabaritoHabilitado;
         }
 
         private void ConfigurarTelaPrincipal(ControladorBase controladorBase)

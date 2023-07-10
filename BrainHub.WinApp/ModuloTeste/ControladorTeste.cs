@@ -3,6 +3,7 @@ using BrainHub.Dominio.ModuloDisciplina;
 using BrainHub.Dominio.ModuloMateria;
 using BrainHub.Dominio.ModuloQuestao;
 using BrainHub.Dominio.ModuloTeste;
+using BrainHub.WinApp.Compartilhado;
 using BrainHub.WinApp.ModuloMateria;
 using PartyManager.WinApp.Compartilhado;
 using System;
@@ -29,6 +30,7 @@ namespace BrainHub.WinApp.ModuloTeste
             this.repositorioDisciplina = repositorioDisciplina;
             this.repositorioTeste = repositorioTeste;
             this.repositorioQuestao = repositorioQuestao;
+
         }
 
         public override string ToolTipInserir => "Inserir teste";
@@ -196,12 +198,6 @@ namespace BrainHub.WinApp.ModuloTeste
             telaDetalheTeste.ConfigurarTela(testeSelecionado);
             telaDetalheTeste.ShowDialog();
         }
-        public override void ExibirGabarito()
-        {
-            Teste testeSelecionado = ObterTesteSelecionado();
-            TelaGabaritoForm telaGabarito = new TelaGabaritoForm();
-            telaGabarito.VisualizarTeste(testeSelecionado);
-            telaGabarito.ShowDialog();
-        }
+
     }
 }
