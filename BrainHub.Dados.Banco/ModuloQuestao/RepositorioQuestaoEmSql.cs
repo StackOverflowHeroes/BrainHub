@@ -191,13 +191,12 @@ namespace BrainHub.Dados.Banco.ModuloQuestao
           }
 
           public override void Deletar(Questao registroSelecionado)
-          {
-               base.Deletar(registroSelecionado);
-
+          {             
                foreach(Alternativa alternativa in registroSelecionado.alternativas)
                {
                     DeletarAlternativas(alternativa, registroSelecionado.id);
                }
+               base.Deletar(registroSelecionado);
           }
 
           private void DeletarAlternativas(Alternativa alternativa, int id_questao)
