@@ -73,6 +73,16 @@ namespace BrainHub.WinApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap circle {
+            get {
+                object obj = ResourceManager.GetObject("circle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap deletar {
             get {
                 object obj = ResourceManager.GetObject("deletar", resourceCulture);
@@ -106,6 +116,16 @@ namespace BrainHub.WinApp.Properties {
         internal static System.Drawing.Bitmap gerar_gabarito {
             get {
                 object obj = ResourceManager.GetObject("gerar_gabarito", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pdf_icon {
+            get {
+                object obj = ResourceManager.GetObject("pdf_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -1,5 +1,6 @@
 ﻿
 using BrainHub.Dominio.ModuloMateria;
+using BrainHub.Dominio.ModuloQuestao;
 
 namespace BrainHub.Dominio.ModuloDisciplina
 {
@@ -38,6 +39,19 @@ namespace BrainHub.Dominio.ModuloDisciplina
         {
             materias.Add(novaMateria);
         }
+
+        public override string? ToString()
+        {
+            return $"{nome}";
+        }
+
+        public List<Questao> PegarQuestoes()
+        {
+            List<Questao> ListaCompleta = new List<Questao>();
+            materias.ForEach(materia => ListaCompleta.AddRange(materia.questoes));
+            return ListaCompleta;
+        }
+    }
 
           public override bool Equals(object? obj)
           {
