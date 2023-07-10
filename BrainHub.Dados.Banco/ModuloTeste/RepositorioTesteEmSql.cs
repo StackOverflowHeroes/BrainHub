@@ -77,7 +77,7 @@ namespace BrainHub.Dados.Banco.ModuloTeste
                                                                 INNER JOIN TBMateria AS M ON T.materia_id = M.id
                                                           WHERE [ID] = @ID";
 
-        protected string sqlInserirQuestoes => @"INSERT INTO [TBTESTE_TBQUESTAO]
+        protected string sqlInserirQuestoes => @"INSERT INTO [TBTESTE_QUESTAO]
                                                             (TESTE_ID]
                                                             ,[QUESTAO_ID])
                                                         VALUES
