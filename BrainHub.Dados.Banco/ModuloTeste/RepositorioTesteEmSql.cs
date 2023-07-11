@@ -82,7 +82,7 @@ namespace BrainHub.Dados.Banco.ModuloTeste
                                                                  ,M.[DISCIPLINA_ID] AS MATERIA_DISCIPLINA_ID
                                                           FROM [TBTESTE] AS T 
                                                                 INNER JOIN TBDisciplina AS D ON T.disciplina_id = D.id
-                                                                INNER JOIN TBMateria AS M ON T.materia_id = M.id
+                                                                LEFT JOIN TBMateria AS M ON T.materia_id = M.id
                                                           WHERE T.[ID] = @ID";
 
         protected string sqlInserirQuestoes => @"INSERT INTO [TBTESTE_QUESTAO]
