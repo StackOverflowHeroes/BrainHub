@@ -26,8 +26,9 @@ namespace BrainHub.Dominio.ModuloQuestao
                this.alternativaCorreta = alternativaCorreta;
                this.questao = questao;          
           }
+        
 
-          public Alternativa(string tituloResposta)
+        public Alternativa(string tituloResposta)
           {
                this.tituloResposta = tituloResposta;
           }

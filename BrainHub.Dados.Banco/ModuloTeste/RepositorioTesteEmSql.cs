@@ -158,24 +158,6 @@ namespace BrainHub.Dados.Banco.ModuloTeste
             }
             
         }
-        public void SelecionarAlternativas(Questao questao)
-        {
-            SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
-            conexaoComBanco.Open();
-
-            SqlCommand comandoSelecionarAlternativas = conexaoComBanco.CreateCommand();
-            comandoSelecionarAlternativas.CommandText = sqlSelecionarAlternativas;
-
-            comandoSelecionarAlternativas.Parameters.AddWithValue("ID", questao.id);
-
-            SqlDataReader leitor = comandoSelecionarAlternativas.ExecuteReader();
-            while (leitor.Read())
-            {
-                Questao q = new MapeadorQuestao().ConverterRegistroAlternativa(leitor);
-                questao.alternativas.Add(q);
-            }
-            conexaoComBanco.Close();
-        }
         public void CarregarQuestoes(Teste teste)
         {
             SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
@@ -190,9 +172,28 @@ namespace BrainHub.Dados.Banco.ModuloTeste
             while (leitor.Read())
             {
                 Questao q = new MapeadorQuestao().ConverterRegistro(leitor);
+                CarregarAlternativas(q);
                 teste.listaQuestoes.Add(q);
             }
             conexaoComBanco.Close();
+        }
+        public void CarregarAlternativas(Questao questao)
+        {
+            SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
+            conexaoComBanco.Open();
+
+            SqlCommand comandoSelecionarAlternativas = conexaoComBanco.CreateCommand();
+            comandoSelecionarAlternativas.CommandText = sqlSelecionarAlternativas;
+
+            comandoSelecionarAlternativas.Parameters.AddWithValue("QUESTAO_ID", questao.id);
+            SqlDataReader leitor = comandoSelecionarAlternativas.ExecuteReader();
+            while (leitor.Read())
+            {
+                Alternativa alternativa = new MapeadorQuestao().ConverterRegistroAlternativas(questao, leitor);
+                questao.alternativas.Add(alternativa);
+            }
+            conexaoComBanco.Close();
+            
         }
         public virtual void ExcluirRelacao(Teste teste)
         {
