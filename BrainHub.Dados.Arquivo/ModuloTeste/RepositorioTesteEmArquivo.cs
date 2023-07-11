@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BrainHub.Dados.Arquivo.ModuloTeste
 {
-    public class RepositorioTesteEmArquivo : RepositorioArquivoBase<Teste>, IRepositorioTeste
+    public class RepositorioTesteEmArquivo : RepositorioArquivoBase<Teste>
     {
         public RepositorioTesteEmArquivo(ContextoDados contexto) : base(contexto)
         {

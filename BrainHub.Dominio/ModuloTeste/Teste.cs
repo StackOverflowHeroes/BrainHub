@@ -11,7 +11,7 @@ namespace BrainHub.Dominio.ModuloTeste
         public int numeroQuestoes { get; set; }
         public Disciplina disciplina { get; set; }
         public Materia? materia { get; set; }
-        public List<Questao> listaQuestoes { get; set; }
+        public List<Questao> listaQuestoes = new List<Questao>();
         public bool provaRecuperacao { get; set; }
         public SerieEnum serie { get; set; }
 

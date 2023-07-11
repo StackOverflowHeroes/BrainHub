@@ -5,6 +5,7 @@ using BrainHub.Dados.Arquivo.ModuloTeste;
 using BrainHub.Dados.Banco.ModuloDisciplina;
 using BrainHub.Dados.Banco.ModuloMateria;
 using BrainHub.Dados.Banco.ModuloQuestao;
+using BrainHub.Dados.Banco.ModuloTeste;
 using BrainHub.Dominio.ModuloDisciplina;
 using BrainHub.Dominio.ModuloMateria;
 using BrainHub.Dominio.ModuloQuestao;
@@ -26,7 +27,7 @@ namespace BrainHub.WinApp
 
         private IRepositorioDisciplina repositorioDisciplina = new RepositorioDisciplinaEmSql();
         private IRepositorioMateria repositorioMateria = new RepositorioMateriaEmSql();
-        private IRepositorioTeste repositorioTeste = new RepositorioTesteEmArquivo(contexto);
+        private IRepositorioTeste repositorioTeste = new RepositorioTesteEmSql();
         private IRepositorioQuestao repositorioQuestao = new RepositorioQuestaoEmSql();
 
         private static TelaPrincipalForm telaPrincipal;

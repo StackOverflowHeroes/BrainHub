@@ -88,8 +88,8 @@ namespace BrainHub.WinApp.ModuloTeste
             }
             List<Disciplina> disciplinas = repositorioDisciplina.SelecionarTodos();
             List<Questao> questoes = repositorioQuestao.SelecionarTodos();
-
-            TelaTesteForm telaTeste = new TelaTesteForm(disciplinas, questoes);
+            List<Materia> materias = repositorioMateria.SelecionarTodos(true);
+            TelaTesteForm telaTeste = new TelaTesteForm(disciplinas, questoes, materias);
             telaTeste.SalvarListaTestes(repositorioTeste.SelecionarTodos());
             telaTeste.Text = "Edição de Testes";
             telaTeste.ConfigurarTela(testeSelecionado);
@@ -114,10 +114,11 @@ namespace BrainHub.WinApp.ModuloTeste
 
         public override void Inserir()
         {
-            List<Disciplina> disciplinas = repositorioDisciplina.SelecionarTodos();
+            List<Materia> materias = repositorioMateria.SelecionarTodos(true);
+            List<Disciplina> disciplinas = repositorioDisciplina.SelecionarTodos(true);
             List<Questao> questoes = repositorioQuestao.SelecionarTodos();
 
-            TelaTesteForm telaTeste = new TelaTesteForm(disciplinas, questoes);
+            TelaTesteForm telaTeste = new TelaTesteForm(disciplinas, questoes, materias);
             telaTeste.SalvarListaTestes(repositorioTeste.SelecionarTodos());
 
             DialogResult opcaoEscolhida = telaTeste.ShowDialog();
@@ -162,8 +163,8 @@ namespace BrainHub.WinApp.ModuloTeste
 
             List<Disciplina> disciplinas = repositorioDisciplina.SelecionarTodos();
             List<Questao> questoes = repositorioQuestao.SelecionarTodos();
-
-            TelaTesteForm telaTeste = new TelaTesteForm(disciplinas, questoes);
+            List<Materia> materias = repositorioMateria.SelecionarTodos(true);
+            TelaTesteForm telaTeste = new TelaTesteForm(disciplinas, questoes, materias);
             telaTeste.Text = "Duplicar Teste";
             telaTeste.ConfigurarDuplicacaoTeste(testeSelecionado);
             telaTeste.SalvarListaTestes(repositorioTeste.SelecionarTodos());

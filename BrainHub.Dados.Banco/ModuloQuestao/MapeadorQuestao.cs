@@ -56,5 +56,27 @@ namespace BrainHub.Dados.Banco.ModuloQuestao
                return new Questao(id, enunciado, resposta, materia);
           }
 
-     }
+        private Alternativa ConverterRegistroAlternativa(SqlDataReader leitor)
+        {
+
+            int id = Convert.ToInt32(leitor["QUESTAO_ID"]);
+            bool alternativacorreta = Convert.ToBoolean(leitor["ALTERNATIVA_CORRETA"]);
+            string letraalternativa = Convert.ToString(leitor["ALTERNATIVA_LETRA"])!;
+            string tituloresposta = Convert.ToString(leitor["ALTERNATIVA_TITULO"])!;
+            int id_questao = Convert.ToInt32(leitor["QUESTAO_ID"]);
+            int id_alternativa = Convert.ToInt32(leitor["ALTERNATIVA_ID"]);
+
+            //Alternativa alternativa = new Alternativa(id, tituloresposta, letraalternativa, alternativacorreta, Questao questao);
+
+
+            //if (Convert.ToInt32(leitor["MATERIA_SERIE"]) == 1)
+            //    serie = SerieEnum.primeiraSerie;
+            //else
+            //    serie = SerieEnum.segundaSerie;
+
+            //Materia materia = new Materia(id_materia, nome_materia, disciplina, serie);
+
+            //return new Questao(id, enunciado, resposta, materia);
+        }
+    }
 }

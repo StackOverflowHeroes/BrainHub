@@ -20,9 +20,9 @@ namespace BrainHub.Dados.Banco.ModuloTeste
             comando.Parameters.AddWithValue("ID", registro.id);
             comando.Parameters.AddWithValue("NOME", registro.nome);
             comando.Parameters.AddWithValue("NUMERO_QUESTOES", registro.numeroQuestoes);
-            comando.Parameters.AddWithValue("PROVA_RECUPERACAO", SqlDbType.Bit).Value = registro.provaRecuperacao;
+            comando.Parameters.AddWithValue("PROVARECUPERACAO", SqlDbType.Bit).Value = registro.provaRecuperacao ? 1 : 0;
             comando.Parameters.AddWithValue("SERIE", registro.serie);
-            comando.Parameters.AddWithValue("DATA", registro.data);          
+            comando.Parameters.AddWithValue("TESTE_DATA", registro.data);          
             comando.Parameters.AddWithValue("DISCIPLINA_ID", registro.disciplina.id);
             comando.Parameters.AddWithValue("MATERIA_ID", registro.materia == null ? DBNull.Value : registro.materia.id);
         }
@@ -38,7 +38,7 @@ namespace BrainHub.Dados.Banco.ModuloTeste
             if (leitorRegistros["MATERIA_ID"] != DBNull.Value)
                 materia = new MapeadorMateria().ConverterRegistro(leitorRegistros);
             bool provaRecuperacao = Convert.ToBoolean(leitorRegistros["PROVA_RECUPERACAO"]);
-            DateTime data = Convert.ToDateTime(leitorRegistros["DATA"]);
+            DateTime data = Convert.ToDateTime(leitorRegistros["TESTE_DATA"]);
             
 
             teste.id = id;

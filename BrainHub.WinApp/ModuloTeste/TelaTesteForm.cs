@@ -22,14 +22,16 @@ namespace BrainHub.WinApp.ModuloTeste
         private List<Questao> questaoDisponivel;
         private List<Disciplina> ListaCompletaDisciplina;
         private List<Teste> ListaCompletaTeste;
+        private List<Materia> materias;
 
-        public TelaTesteForm(List<Disciplina> disciplinas, List<Questao> questoes)
+        public TelaTesteForm(List<Disciplina> disciplinas, List<Questao> questoes, List<Materia> materias)
         {
             InitializeComponent();
             this.ConfigurarDialog();
             CarregarDisciplina(disciplinas);
             this.ListaCompletaDisciplina = disciplinas;
             this.questaoDisponivel = questoes;
+            this.materias = materias;
         }
 
         public void CarregarDisciplina(List<Disciplina> disciplinas)
@@ -86,7 +88,15 @@ namespace BrainHub.WinApp.ModuloTeste
         {
             Disciplina disciplinaSelecionada = cbBoxDisciplina.SelectedItem as Disciplina;
             listBoxQuestoes.Items.Clear();
-            CarregarMaterias(disciplinaSelecionada.materias);
+            List<Materia> novaListaMaterias = new List<Materia>();
+            foreach(Materia materia in materias)
+            {
+                if(materia.disciplina.id == disciplinaSelecionada.id)
+                {
+                    novaListaMaterias.Add(materia);
+                }
+            }
+            CarregarMaterias(novaListaMaterias);
         }
 
         public Teste ObterTeste()
